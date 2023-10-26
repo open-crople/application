@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+{% block section %}
+    <div class="centered-table">
+        <table class="buy_items_table">
+            <tr>
+                <td> Picture </td>
+                <td> Picture </td>
+                <td> Picture </td>
+                <td> Picture </td>
+            </tr>
+            <tr>
+                <td> Item Name </td>
+                <td> Item Name </td>
+                <td> Item Name </td>
+                <td> Item Name </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td> Picture </td>
+                <td> Picture </td>
+                <td> Picture </td>
+                <td> Picture </td>
+            </tr><br><br>
+            <tr>
+                <td> Item Name </td>
+                <td> Item Name </td>
+                <td> Item Name </td>
+                <td> Item Name </td>
+            </tr>
+        </table>
+    </div>
+    <div class="horizontal-container">
+    <img src="{{ url_for('static', filename='images/pagenation.png') }}" alt="페이지네이션">
+    <form>
+        <button><a href="/reg_items"> + 상품등록</a></button>        
+    </form>
+    </div>
+
+{% endblock section %}

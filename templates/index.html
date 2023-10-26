@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" />
+    <script type="text/javascript" defer src="{{ url_for('static', filename='main.js') }}"></script>
+</head>
+<body>
+    <nav class="navbar">
+        
+            <div class="navbar__logo1">
+                <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="로고1"></a>
+            </div>
+            <ul class="navbar__menu">
+                <li><a href="/">상품구매</a></li>
+                <li><a href="/rent_items_list">물건대여</a></li>
+            </ul>
+        
+            <div class="navbar__search">
+                <input type="text" placeholder="검색어 입력">
+                <button type="submit">검색</button>
+            </div>
+            <div class="navbar__logo2">
+                <a href="/mypage"><img src="{{ url_for('static', filename='images/mypage.jpg') }}" alt="로고2"></a>
+            </div>
+        
+    </nav>
+<section>
+    {% block section %}
+        
+    {% endblock section %}
+</section>
+</body>
+</html>
