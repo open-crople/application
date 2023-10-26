@@ -22,6 +22,10 @@ def view_mypage():
 def reg_reviews():
     return render_template("reg_reviews.html")
 
+@application.route("/reg_items")
+def reg_items():
+    return render_template("/reg_items.html")
+
 
 @application.route("/submit_item_post", methods=['POST'])
 def reg_item_submit_post():
