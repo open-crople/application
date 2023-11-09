@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+{% block section %}
+<h1>상품 등록이 완료되었습니다.</h1>
+<p>
+    상품명: {{data.name}}<br><br>
+    가격: {{data.price}}원<br><br>
+    상품 이미지
+</p>
+<img src="{{img_path}}"/><br><br>
+<p>
+    판매지역: {{data.addr}}<br><br>
+    상품키워드: {{data.keyword}}<br><br>
+    상태:
+    {% if data['status']=="new" %}
+    새 상품
+    {% endif %}
+    {% if data['status']=="lnew" %}
+    미개봉 중고
+    {% endif %}
+    {% if data['status']=="used" %}
+    중고
+    {% endif %}
+    <br><br>
+    상세 설명: {{data.explain}}<br><br>
+</p>
+{% endblock section %}

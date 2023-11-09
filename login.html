@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<link rel="stylesheet" href="../static/login.css">
+  <title>login_page</title>
+     
+
+
+</head>
+<body>
+  <div class="loginblock">
+      <!--교수님꺼 보고 추가함-->
+       {% with mesg = get_flashed_messages() %}
+      {% if mesg != [] %}
+        <script>alert("{{ mesg[0] }}")</script>
+      {% endif %}
+    {% endwith %}
+    <form action="#" method="POST"> <!--action#은 교수님꺼 보고 추가함-->
+      <div class="logoblock"><a href="/">
+          <img src="../static/images/logo.png" class="logo-image"></a></div>
+      <div class="input id">
+        <img src="../static/images/userid.png"class="image">
+        <input type="text" class="text-field" name="id" placeholder="아이디" required>
+        <img src="../static/images/eyeopen.png" style="display: hidden; opacity: 0;"class="image">
+        <div class="div-block"></div>
+      </div>
+      <div class="input password">
+        <img src="../static/images/userpassword.png"   class="image"> 
+        <input type="password" class="text-field" placeholder="비밀번호" name="pw" required>
+        <img src="../static/images/eyeopen.png"  class="image">
+      </div>
+      <div class="loginsubmit">
+        <input type="submit" value="로그인"  class="submit-button">
+      </div>
+      <div class="loginbottom">
+        <p class="text-block">아이디 찾기</p>
+        <p class="text-block">비밀번호 찾기</p>
+        <p class="text-block"><a href="/signup" style=" color: black; text-decoration: none;">회원가입</a></p>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

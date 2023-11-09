@@ -1,0 +1,184 @@
+{% extends "index.html" %}
+
+{% block section %}
+<style>
+.mypage-table:not(.profile-table){
+	width: 80%;
+	height: 1000px;
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+
+.mypage-table #logout, .mypage-table #show_review, .seller #pause_rent, .buyer #review{
+	float: right;
+	background-color: #00462A;
+	width: 100px;
+	height: 40px;
+	border-radius: 3px;
+	color: #fff;
+	font-size: 15px;
+	border: none;
+	cursor: pointer;
+}
+.mypage-table #show_review{
+	margin-top: 20px;
+}
+.mypage-table #next{
+	float: right;
+	width: 10%;
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+.mypage-table #next img{
+	width: 40px;
+}
+
+.mypage-table .user{
+	font-size: 30px;
+	padding: 10px;
+}
+
+.mypage-table th, .mypage-table td{
+	text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.mypage-table th:not(.profile-table th){
+	font-size: 25px;
+	vertical-align: top;
+	padding-top: 20px;
+}
+
+.profile-table{
+	width: 80%;
+	height: 200px;
+	float: left;
+	border: 2px solid #00462A;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+.profile-table img{
+	height: 20px;
+	width: 20px;
+}
+
+.seller, .buyer{
+	box-sizing: border-box;
+	width: 80%;
+	height: 250px;
+	border: 2px solid #00462A;
+	border-radius: 10px;
+	padding-right: 30px;
+    padding-left: 30px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	float: left;
+}
+
+.seller #status, .buyer #status{
+	font-size: 20px;
+	font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.seller #date, .buyer #date{
+	color: #8f8f8f;
+    margin-bottom: 15px;
+}
+
+.seller #name, .seller #price,
+.buyer #name, .buyer #price{
+	font-size: 20px;
+	line-height: 50%;
+    margin-bottom: 15px;
+}
+
+.seller img, .buyer img{
+	float: left;
+	width: 100px;
+	height: 150px;
+	margin-right: 20px;
+}
+</style>
+    <link rel="stylesheet" href="../static/mypage_style.css">
+		<table class="mypage-table">
+			<tr>
+				<td colspan="2"><spark class="user">The greatest</spark> 님 반가워요
+				<button id="logout">로그아웃</button></td>
+			</tr>
+			<tr>
+				<th>정보</th>
+				<td>
+					<table class="profile-table">
+						<tr>
+                            <th><img src="../static/images/userid.png"> 아이디</th>
+							<td>The greatest</td>
+						</tr>
+						<tr>
+							<th><img src="../static/images/email.png"> 이메일 주소</th>
+							<td>showman@ewhain.net</td>
+						</tr>
+						<tr>
+							<th><img src="../static/images/phone.png"> 오픈채팅방 링크</th>
+							<td>https://open.kakao.com/o/snixxkDe</td>
+						</tr>
+						<tr>
+							<th><img src="../static/images/member.png"> 단과대학 및 학과</th>
+							<td>엘텍공과대학 컴퓨터공학과</td>
+						</tr>
+					</table>
+                        <button id="show_review"><a href="/review" style=" color: white; text-decoration: none;">리뷰보기</a></button>
+				</td>
+			</tr>
+			<tr>
+				<th>판매내역</th>
+				<td>
+					<div class="seller">
+						<p id="status">판매완료</p>
+						<img src="../static/images/demian.jpg" alt="image">
+						<p id="date">10.13 판매</p>
+						<p id="name">헤르만 헤세, 데미안</p>
+						<p id="price">5,000원</p>
+					</div>
+					<div class="seller">
+						<p id="status">대여중</p>
+						<img src="../static/images/labcoat.jpg" alt="image">
+						<p id="date">10.13 판매</p>
+						<p id="name">공대 실험복 빌려드려용</p>
+						<p id="price">3,000원</p>
+						<button id="pause_rent">대여 중지</button>
+					</div>
+					<button id="next"><img src="../static/images/next.png"></button>
+				</td>
+			</tr>
+			<tr>
+				<th>구매내역</th>
+				<td>
+					<div class="buyer">
+						<p id="status">대여완료</p>
+						<img src="../static/images/calculator.jpeg" alt="image">
+						<p id="date">10.9-10.10 대여</p>
+						<p id="name">공학용 계산기</p>
+						<p id="price">2,000원</p>
+						<button id="review">리뷰쓰기</button>
+					</div>
+					<div class="buyer">
+						<p id="status">구매완료</p>
+						<img src="../static/images/cat.jpg" alt="image">
+						<p id="date">10.1 구매</p>
+						<p id="name">고양이 키링 10cm</p>
+						<p id="price">3,000원</p>
+						<button id="review">리뷰쓰기</button>
+					</div>
+					<button id="next"><img src="../static/images/next.png"></button>
+				</td>
+			</tr>
+		</table>
+{% endblock section %}

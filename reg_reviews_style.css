@@ -1,0 +1,125 @@
+.container {
+            min-height: calc(100vh - 30px);
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+    
+.review-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10%;
+            margin-right: 10%;
+            width: 80%;  
+        }
+
+      
+.image-container {
+            flex: 0.2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 5%;
+            width: 200px;
+            height: 200px;
+            border: 2px solid #D9D9D9;
+            border-radius: 4px;
+            border-collapse: collapse;
+        }
+        
+ .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+ .text-container {
+            flex: 0.8;
+            text-align: justify;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+ .star-rating .star img {
+    width: 7%;
+    height: 7%;
+    object-fit: contain;
+    padding: 0.5%;
+    margin-top: 2%;
+    filter: grayscale(1);
+}
+
+.star-rating .star img:hover,
+.star-rating .star.active img {
+    filter: grayscale(0);
+}
+
+    
+.review-table {
+          width: 80%;
+          margin: 0 auto;
+          margin-top: 2%;
+          border-collapse: collapse;
+        }
+
+.review-table th, .review-table td {
+          text-align: left;
+          padding: 20px;
+          border-bottom: 1px solid #D9D9D9;
+        }
+
+.review-table th {
+          font-size: 20px;
+          vertical-align: top;
+        }
+
+.review-table input[type="text"],
+.review-table textarea {
+          width: calc(100% - 12px);
+          height: 40px;
+          border-radius: 3px;
+          border: 1px solid #D9D9D9;
+          padding: 5px;
+          box-sizing: border-box;
+        }
+
+.review-table textarea {
+          height: 80px;
+          resize: none;
+        }
+    
+.buttons-container {
+        position: fixed;
+        display: flex;
+        align-items: center;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background-color: #f8f8f8;
+        justify-content: center;
+        padding: 10px 20px;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 1; /* 다른 요소 위에 표시되도록 설정합니다. */
+      }
+
+.buttons-container button {
+        margin: 7%;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        width: 20%;
+      }
+    
+#submitReview {
+          background-color: #00462A; /* 여기에 원하는 색상 코드를 넣어주세요 */
+          color: #FFFFFF; /* 텍스트 색상을 지정합니다. */
+        }
+    
+#cancelReview {
+          background-color: #6F4F28; /* 여기에 원하는 색상 코드를 넣어주세요 */
+          color: #FFFFFF; /* 텍스트 색상을 지정합니다. */
+        }

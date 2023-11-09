@@ -1,0 +1,75 @@
+.headBuyRent {
+    margin-left: 100px;
+    margin-top: 10px;
+}
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.product {
+    width: 18%;
+    height:150px;
+    margin: 20px 20px 30px 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.product img {
+    max-width: 100%;
+    height: 100%;
+}
+.product-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.addProductButton {
+    display: inline-block;
+    background-color: #00462A;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 0 80px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+.irr-buying {
+    border: 2px solid #00462A;
+    border-radius: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+.irr-renting {
+    border: 2px solid #00462A;
+    border-radius: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+.more-link {
+    border-top: 2px solid #00462A;
+    padding-top: 20px;
+    margin-top: 20px;
+    text-align: center;
+    float: center;
+}
+
+.more-link a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+.more-link a:hover {
+    color: #6F4F28;
+    font-weight: bold;
+}

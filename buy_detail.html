@@ -1,0 +1,67 @@
+{% extends "index.html" %}
+
+{% block section %}
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='buy_detail_style.css')}}">
+    <script>
+        
+     function openBigPicture() {
+        window.open("big_picture.html", "_blank");
+    }
+        
+     function realbuying() {
+         if (confirm("구매를 확정하시겠습니까?")) {
+                alert("구매가 확정되었습니다.");
+            } else {
+                alert("구매가 취소되었습니다.");
+            }
+     }
+    </script>
+</head>
+
+<body>
+    <section>
+    <div class="upper_section">
+        
+    <div class="buy_detail_info item_img">
+        <img src="{{ url_for('static', filename='images/ex_calculator.jpeg')}}" alt="공학용계산기" style="width:20% height:20%">
+            <img src="{{ url_for('static', filename='images/big_picture.jpeg')}}" id="big_picture" onclick="openBigPicture()">
+    </div>
+
+
+    <div class="buy_detail_info info">
+        <div class="item_name bold_title">공학용 계산기</div><br><br>
+      
+        <div class="buy_detail_content">
+        가격    : <span id="cost">1000원</span><br>
+        상품상태 : <span id="status">새상품</span><br>
+        판매자  : <span id="seller">차은우</span><br>
+        판매지역 : <span id="sell_area">이화여대</span><br>
+        전달방식 : <span id="sell_way">직거래</span><br><br>
+        </div>
+    </div>
+        <div class="buy_detail_info"><sub>#공대 #계산기</sub></div>
+    </div>
+    <br><br><br>
+    </section>
+    
+    
+    <section>
+    <hr size="5px" align="center" color="#00462A" padding="20px">
+        
+    <div class="down_section">  
+    <div class="bold_title" style="margin-right:auto;">상품정보</div>
+         <form>
+            <button class="btn_right" style="display:inline-block; margin-right:0px;"><a href="/review"> 리뷰보기 </a></button>
+            <button class="btn_right" style="display:inline-block;" onclick="realbuying()"><a> 구매하기 </a></button>   
+        </form>
+    </div>
+        
+    <div id="down_section_box">
+        <pre>
+철회로 인해 한번도 안썼습니다..
+        </pre>
+    </div>
+    </section>
+</body>
+{% endblock section %}
