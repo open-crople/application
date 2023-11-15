@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash
-#from flask import redirect, url_for, session
+from flask import redirect, url_for, session
 from database import DBhandler
 import hashlib
 import sys
@@ -15,6 +15,7 @@ DB = DBhandler()
 @application.route("/")
 def hello():
     return render_template("buy_items_list.html")
+    #return redirect(url_for('view_list'))
 
 
 @application.route("/rent_items_list")
@@ -45,6 +46,27 @@ def reg_items():
 @application.route("/login")
 def login():
     return render_template("/login.html")
+
+
+@application.route("/login_confirm", methods=['POST'])
+def login_user():
+    id_ = request.form['id']
+    pw = request.form['pw']
+    pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
+    if DB.find_user(id_, pw_hash):
+        session['id'] = id_
+        #return redirect(url_for('view_list'))
+        return render_template("buy_items_list.html")
+    else:
+        flash("Wrong ID of PW!")
+        return render_template("login.html")
+
+
+@application.route("/logout")
+def logout_user():
+    session.clear()
+    #return redirect(url_for('half_list'))
+    return render_template("buy_items_list.html")
 
 
 @application.route("/signup")
@@ -91,7 +113,8 @@ def reg_item_submit_post():
     data = request.form
     DB.insert_item(data['name'], data, image_file.filename)
 
-    return render_template("submit_item_result.html", data=data, img_path="static/images/{}".format(image_file.filename))
+    return render_template("submit_item_result.html", data=data, 
+                           img_path="static/images/{}".format(image_file.filename))
 
 
 if __name__ == "__main__":
