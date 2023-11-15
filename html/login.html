@@ -4,9 +4,6 @@
   <meta charset="utf-8">
 <link rel="stylesheet" href="../static/login.css">
   <title>login_page</title>
-     
-
-
 </head>
 <body>
   <div class="loginblock">
@@ -16,7 +13,7 @@
         <script>alert("{{ mesg[0] }}")</script>
       {% endif %}
     {% endwith %}
-    <form action="#" method="POST"> <!--action#은 교수님꺼 보고 추가함-->
+    <form action="/login_confirm" method="POST"> <!--action#은 교수님꺼 보고 추가함-->
       <div class="logoblock"><a href="/">
           <img src="../static/images/logo.png" class="logo-image"></a></div>
       <div class="input id">
