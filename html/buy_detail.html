@@ -22,27 +22,33 @@
 <body>
     <section>
     <div class="upper_section">
-        
-    <div class="buy_detail_info item_img">
-        <img src="{{ url_for('static', filename='images/ex_calculator.jpeg')}}" alt="공학용계산기" style="width:20% height:20%">
-            <img src="{{ url_for('static', filename='images/big_picture.jpeg')}}" id="big_picture" onclick="openBigPicture()">
-    </div>
-
-
-    <div class="buy_detail_info info">
-        <div class="item_name bold_title">공학용 계산기</div><br><br>
-      
-        <div class="buy_detail_content">
-        가격    : <span id="cost">1000원</span><br>
-        상품상태 : <span id="status">새상품</span><br>
-        판매자  : <span id="seller">차은우</span><br>
-        판매지역 : <span id="sell_area">이화여대</span><br>
-        전달방식 : <span id="sell_way">직거래</span><br><br>
+            
+        <div class="buy_detail_info item_img">
+            <img src="{{ url_for('static', filename='images/ex_calculator.jpeg')}}" alt="공학용계산기" style="width:200px height:200px">
+          <form>
+                <input type="button" class="big_picture" onclick="big_picture()">
+            </form>
         </div>
-    </div>
-        <div class="buy_detail_info"><sub>#공대 #계산기</sub></div>
-    </div>
-    <br><br><br>
+      <!-- 
+        <img src="{{ url_for('static', filename='images/big_picture.jpeg')}}" id="big_picture" onclick="openBigPicture()">-->
+
+
+            <div class="buy_detail_info info">
+                <div class="upper_right_upper" style="display:flex;">     
+                    <div class="item_name bold_title" style="float:left; margin-right:8px;">공학용 계산기</div>
+                    <div style="float:left;"><sub>#공대 #계산기</sub></div>
+                </div><br>
+
+                <div class="buy_detail_content">
+                가격    : <span id="cost">1000원</span><br>
+                상품상태 : <span id="status">새상품</span><br>
+                판매자  : <span id="seller">차</span><br>
+                판매지역 : <span id="sell_area">이화여대</span><br>
+                전달방식 : <span id="sell_way">직거래</span><br><br>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
     </section>
     
     
