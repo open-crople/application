@@ -1,0 +1,80 @@
+{% extends "index.html" %}
+
+{% block section %}
+<link rel="stylesheet" href="../static/reg_items_style.css">
+
+		  <form action="/submit_item_post" enctype="multipart/form-data" method="post">
+			<table class="form-table">
+			  <tr>
+				<th><label for="name">상품명</label></th>
+				<td><input type="text" name="name" id="name" placeholder="상품명을 입력해주세요" required /></td>
+			  </tr>
+			  <tr>
+				<th><label for="price">가격</label></th>
+				<td><input type="text" name="price" id="price" placeholder="가격을 입력해주세요 ex) 1000" required /></td>
+			  </tr>
+			  <tr>
+				<th><label for="img">상품 이미지</label></th>
+				<td><input type="file" name="file" /></td>
+			  </tr>
+			  <tr>
+				<th><label for="addr">판매지역</label></th>
+				<td><input type="text" name="addr" id="addr" placeholder="판매 지역을 입력해주세요 ex) 이화여대, 북아현동" required /></td>
+			  </tr>
+			  <tr>
+				<th><label for="keyword">상품 키워드 </label></th>
+				<td id="key"><input type="text" name="keyword" id="keyword" placeholder="상품 키워드를 입력해주세요" required />
+				<button id="plusButton" type="button" onclick="addTag()">+</button><br><br></td>
+			  </tr>
+			  <tr>
+				<th>
+				  <label for="status">상태</label>
+				</th>
+				<td>
+				  <input type="radio" id="new" name="status" value="new" required />
+				  <label for="new">새 상품</label>
+				  <input type="radio" id="lnew" name="status" value="lnew" required />
+				  <label for="lnew">미개봉 중고</label>
+				  <input type="radio" id="used" name="status" value="used" required />
+				  <label for="used">중고</label>
+				</td>
+			  </tr>
+			  <tr>
+				<th><label for="explaiiin">상세 설명 </label></th>
+				<td><textarea id="explain" name="explain" rows="4" cols="80" placeholder="상세 설명을 입력해주세요"></textarea></td>
+			  </tr>
+			  <tr>
+				<th>
+				  <label for="send">전달 방식</label>
+				</th>
+				<td>
+				  <input type="radio" id="direct" name="send" value="direct" required />
+				  <label for="direct">직거래</label>
+				  <input type="radio" id="delivery" name="send" value="delivery" required />
+				  <label for="delivery">배송</label>
+				</td>
+			  </tr>
+			</table>
+			<div id="submitButtonContainer">
+			  <input id="submitButton" type="submit" value="등록하기" />
+			</div>
+		  </form>
+		  <script>
+			var keyword_box=document.getElementById("key");
+			var newTag=document.createElement("label");
+			function addTag(){
+				var newTag=document.createElement("label");
+				var delete_button=document.createElement("button");
+				delete_button.type="button";
+				delete_button.addEventListener("click",deleteTag);
+				newTag.id="hashtag";
+				newTag.innerHTML="#"+document.getElementsByTagName("form")[0].keyword.value;
+				delete_button.innerHTML="X";
+				keyword_box.appendChild(newTag);
+				newTag.appendChild(delete_button);
+			}
+			function deleteTag(){
+				keyword_box.removeChild(this.parentNode);
+			}
+		  </script>
+{% endblock section %}

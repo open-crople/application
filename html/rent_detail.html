@@ -1,0 +1,69 @@
+{% extends "index.html" %}
+
+{% block section %}
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='rent_detail_style.css')}}">
+    <script>
+        
+     function openBigPicture() {
+        window.open("big_picture.html", "_blank");
+    }
+        
+     function realbuying() {
+         if (confirm("대여를 확정하시겠습니까?")) {
+                alert("대여가 확정되었습니다.");
+            } else {
+                alert("대여가 취소되었습니다.");
+            }
+     }
+    </script>
+
+</head>
+
+<body>
+    <section>
+    <div class="upper_section">
+        
+    <div class="buy_detail_info item_img">
+        <img src="{{ url_for('static', filename='images/ex_calculator.jpeg')}}" alt="공학용계산기" style="width:20% height:20%">
+            <img src="{{ url_for('static', filename='images/big_picture.jpeg')}}" id="big_picture" onclick="openBigPicture()">
+    </div>
+
+
+    <div class="buy_detail_info info">
+        <div class="item_name bold_title">나시카</div><br><br>
+      
+        <div class="buy_detail_content">
+        가격    : <span id="cost">10000원/일</span><br>
+        대여자  : <span id="seller">강동원</span><br>
+        대여지역 : <span id="sell_area">이화여대</span><br>
+        전달방식 : <span id="sell_way">직거래</span><br><br>
+        </div>
+    </div>
+        <div class="buy_detail_info"><sub>#공연</sub></div>
+    </div>
+    <br><br><br>
+    </section>
+    
+    
+    <section>
+    <hr size="5px" align="center" color="#00462A" padding="20px">
+        
+    <div class="down_section">  
+    <div class="bold_title" style="margin-right:auto;">상품정보</div>
+         <form>  
+            <button class="btn_right" style="display:inline-block; margin-right:0px;"><a href="/review"> 리뷰보기 </a></button>
+            <button class="btn_right" style="display:inline-block;" onclick="realbuying()"><a> 대여하기 </a></button>      
+        </form>
+    </div>
+        
+    <div id="down_section_box">
+        <pre>
+나시카 대여합니다. 대여비는 하루 1만원입니다.
+보증금은 3만원이고, 하자없으면 즉시 돌려드립니다.
+시간은 최대한 맞춰드립니다~
+        </pre>
+    </div>
+    </section>
+</body>
+{% endblock section %}

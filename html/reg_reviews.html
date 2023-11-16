@@ -1,0 +1,40 @@
+{% extends "index.html" %}
+{% block section %}
+<link rel="stylesheet" href="../static/reg_reviews_style.css">
+<div class="container">
+    <div class="review-container">
+        <div class="image-container">
+            <img src="../static/images/calculator.png" alt="공학용계산기">
+        </div>
+        <div class="text-container">
+            <p>&nbsp공학용 계산기</p>
+            <div class="star-rating">
+                <span class="star"><img src="../static/images/flowerAfter.png" alt="배꽃 이미지"></span>
+                <span class="star"><img src="../static/images/flowerAfter.png" alt="배꽃 이미지"></span>
+                <span class="star"><img src="../static/images/flowerAfter.png" alt="배꽃 이미지"></span>
+                <span class="star"><img src="../static/images/flowerAfter.png" alt="배꽃 이미지"></span>
+                <span class="star"><img src="../static/images/flowerAfter.png" alt="배꽃 이미지"></span>
+            </div>
+        </div>
+        </div>
+        <table class="review-table">
+      <tr>
+        <th><label for="reviewTitle">리뷰 제목</label></th>
+        <td><input type="text" name="reviewTitle" id="reviewTitle" placeholder="리뷰 제목을 입력해주세요" required /></td>
+      </tr>
+      <tr>
+        <th><label for="reviewText">리뷰 작성</label></th>
+        <td><textarea id="reviewText" name="reviewText" rows="4" cols="80" placeholder="리뷰를 작성해주세요"></textarea></td>
+      </tr>
+    <tr>
+      <th><label for="reviewImage">상품 이미지</label></th>
+      <td><input type="file" name="reviewImage" id="reviewImage" accept="image/*" /></td>
+     </tr>
+        </table>
+</div>
+<div class="buttons-container">
+      <button type="button1" id="submitReview">거래 리뷰 작성하기</button>
+      <button type="button2" id="cancelReview">취소하기</button>
+</div>
+    
+{% endblock section %}

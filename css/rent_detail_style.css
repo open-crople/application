@@ -1,0 +1,93 @@
+  * {
+        box-sizing: border-box;
+        }
+        
+        section {
+            margin-bottom:0;
+            margin-left:5.5%;
+            margin-right:5.5%;
+        }
+        
+        .item_img {
+            position:relative;
+            border:2px solid #ccc;
+            padding:5px;
+            border-radius:5px;
+            margin-right:15px;
+        }
+        
+        .bold_title {
+            font-size:25px;
+            font-weight:bold;
+        }
+        
+        .buy_detail_info {
+            float:left;
+            display:inline-block;
+        }
+        
+        .buy_detail_info sub {
+            color:gray;
+        }    
+        
+        .info {
+            margin-right:10px;
+            margin-left:40px;
+        }
+        
+        .buy_detail_content {
+            line-height:200%;
+        }
+        
+        .upper_section{
+            display:inline-block;
+            width:900px;
+        }
+        
+        .down_section {
+            display:flex;
+            align-items:center;
+            padding:5px;
+        }
+       
+        .btn_right {
+            display: inline-block;
+            background-color: #00462A;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .btn_right:hover {
+            background-color: #6F4F28;
+        }
+
+        .btn_right a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        #down_section_box {
+            width:border-box;
+            height:300px;
+            border:2px solid #00462A;
+            padding:10px;
+            margin-bottom:2%;
+            overflow:scroll;
+        }
+        
+        #big_picture {
+            position:absolute;
+            width:25px;
+            height:25px;
+            bottom:3%;
+            right:3%;
+        }
+        

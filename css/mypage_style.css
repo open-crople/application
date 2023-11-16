@@ -1,0 +1,99 @@
+.mypage-table:not(.profile-table){
+	width: 80%;
+	height: 1000px;
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+
+.mypage-table #logout, .mypage-table #show_review, .seller #pause_rent, .buyer #review{
+	float: right;
+	background-color: #00462A;
+	width: 100px;
+	height: 40px;
+	border-radius: 3px;
+	color: #fff;
+	font-size: 15px;
+	border: none;
+	cursor: pointer;
+}
+.mypage-table #show_review{
+	margin-top: 20px;
+}
+.mypage-table #next{
+	float: right;
+	width: 10%;
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+.mypage-table #next img{
+	width: 40px;
+}
+
+.mypage-table .user{
+	font-size: 30px;
+	padding: 10px;
+}
+
+.mypage-table th, .mypage-table td{
+	text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.mypage-table th:not(.profile-table th){
+	font-size: 25px;
+	vertical-align: top;
+	padding-top: 20px;
+}
+
+.profile-table{
+	width: 80%;
+	height: 200px;
+	float: left;
+	border: 2px solid #00462A;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+.profile-table img{
+	height: 20px;
+	width: 20px;
+}
+
+.seller, .buyer{
+	box-sizing: border-box;
+	width: 80%;
+	height: 250px;
+	border: 2px solid #00462A;
+	border-radius: 10px;
+	padding-right: 30px;
+    padding-left: 30px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	float: left;
+}
+
+.seller #status, .buyer #status{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.seller #date, .buyer #date{
+	color: #8f8f8f;
+}
+
+.seller #name, .seller #price,
+.buyer #name, .buyer #price{
+	font-size: 20px;
+	line-height: 50%;
+}
+
+.seller img, .buyer img{
+	float: left;
+	width: 100px;
+	height: 150px;
+	margin-right: 20px;
+}

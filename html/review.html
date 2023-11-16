@@ -1,0 +1,165 @@
+{% extends "index.html" %}
+
+
+{% block section %} 
+<style media="screen">
+      *{padding:0;margin:0;}
+      .menu{text-decoration:none;font-size:40px;}
+      /* 바디 구성 */
+      .table_review {
+        padding:20px;
+      }
+      .all_review>td,th{
+        border:none;
+      }
+      /* 화면 구성 */
+      #full {
+        width: 1400px;
+        background-color: grey;
+      }
+      #screen_left {
+        width: 600px;
+        height: 850px;
+        float: left;
+        padding:20px;
+      }
+      #screen_right {
+        width: 650px;
+        height: 850px;
+        float: left;
+        padding:20px;
+        margin-left:20px;
+      }
+</style>
+
+    <div id="full">
+      <div id="screen_left" style="margin-left:120px;">
+        <article><br><br>
+          <h2>판매자 리뷰</h2><br>
+          <table class="table_review" style="background-color:#D9D9D9; text-align:center;">
+            <tr class="center">
+              <th>사용자 총 평점</th>
+              <th width="130px">전체 리뷰 수</th>
+              <th>정보</th>
+            </tr>
+            <tr height="30px">
+              <td class="center"><img src="{{ url_for('static', filename='images/star.png') }}"></td>
+              <td class="center"><img src="{{ url_for('static', filename='images/reviewicon.png') }}"></td>
+              <td style="padding:10px;" rowspan="2">
+                <ul style="list-style:none; text-align:left;">
+                  <li><b>이메일: </b><a href="mailto:example@ewhain.net">example@ewhain.net</a></li>
+                  <li><b>오픈채팅: </b><a href="https://open.kakao.com/o/gDArYOMf">https://open.kakao.com/o/gDArYOMf</a></li>
+                  <li><b>학과: </b>엘텍공과대학 - 컴퓨터공학과</li>
+                </ul>
+              </td>
+            </tr>
+            <tr height="30px" class="center">
+              <td><b>4.8</b>/5</td>
+              <td><b>13</b></td>
+            </tr>
+          </table>
+        </article>
+        <br><br>
+        <!--BEST 리뷰-->
+        <article><br>
+          <h2>BEST 리뷰</h2><br>
+          <table border="1" class="best_review">
+            <tr>
+              <td width="70px" style="text-align:center; vertical-align:top;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
+              <td>
+                <img src="{{ url_for('static', filename='images/realstar.png') }}"><span style="font-size:25px;"><b> 5</b></span><br>
+                아이디명 23.08.23.<br>
+                제목: 채고에요
+              </td>
+              <td rowspan="4"><iframe height="150" width="150"></iframe></td>
+            </tr>
+            <tr>
+              <td style="padding:20px; text-align:left; vertical-align:top;" height="100px" width="500px" colspan="2">상품 상태도 너무 좋고 판매자도 친절합니다!</td>
+            </tr>
+          </table><br>
+          <table border="1" class="best_review">
+            <tr>
+              <td width="70px" style="text-align:center; vertical-align:top;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
+              <td>
+                <img src="{{ url_for('static', filename='images/realstar.png') }}"><span style="font-size:25px;"><b> 5</b></span><br>
+                아이디명 23.08.23.<br>
+                제목: 채고에요
+              </td>
+              <td rowspan="4"><iframe height="150" width="150"></iframe></td>
+            </tr>
+            <tr>
+              <td style="padding:20px; text-align:left; vertical-align:top;" height="100px" width="500px" colspan="2">상품 상태도 너무 좋고 판매자도 친절합니다!</td>
+            </tr>
+          </table>
+        </article>
+      </div>
+      </div>
+      <div id="screen_right">
+        <br><br>
+        <table>
+          <tr>
+              <td width=250px style="font-size:20px;"><b>리뷰 13건</b></td>
+            <td style="padding:10px;"><a href=""><b>랭킹순</b></a></td>
+            <td style="padding:10px;">최신순</td>
+            <td style="padding:10px;">평점 높은순</td>
+            <td style="padding:10px;">평점 낮은순</td>
+          </tr>
+        </table><br>
+        <table>
+          <tr>
+            <td><a href="" style="padding:0px 40px 0px 40px; text-decoration-color:black;"><b>전체보기</b></a></td>
+            <td style="padding:0px 40px 0px 40px;">포토/동영상</td>
+            <td style="padding:0px 40px 0px 40px;">한달사용리뷰</td>
+            <td style="padding:0px 40px 0px 40px;">재구매</td>
+          </tr>
+        </table><br>
+
+        <table border="1" class="all_review">
+          <tr>
+            <td width="70px" style="text-align:center; vertical-align:top;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
+            <td>
+              <img src="{{ url_for('static', filename='images/realstar.png') }}"><span style="font-size:25px;"><b> 5</b></span><br>
+              아이디명 23.08.23.<br>
+              제목: 채고에요
+            </td>
+            <td rowspan="2"><iframe height="120" width="120"></iframe></td>
+            <td style="padding:0px 10px 0px 10px;" rowspan="2"><img src="{{ url_for('static', filename='images/thumbsup.png') }}" alt="추천 버튼"><span style="font-size:20px;"><b> 2</b></span></td>
+          </tr>
+          <tr>
+            <td style="padding:20px; text-align:left; vertical-align:top;" height="100px" width="380px" colspan="2">상품 상태도 너무 좋고 판매자도 친절합니다!</td>
+          </tr>
+        </table><br>
+        <table border="1" class="all_review">
+          <tr>
+            <td width="70px" style="text-align:center; vertical-align:top;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
+            <td>
+              <img src="{{ url_for('static', filename='images/realstar.png') }}"><span style="font-size:25px;"><b> 5</b></span><br>
+              아이디명 23.08.23.<br>
+              제목: 채고에요
+            </td>
+            <td rowspan="2"><iframe height="120" width="120"></iframe></td>
+            <td style="padding:0px 10px 0px 10px;" rowspan="2"><img src="{{ url_for('static', filename='images/thumbsup.png') }}" alt="추천 버튼"><span style="font-size:20px;"><b> 2</b></span></td>
+          </tr>
+          <tr>
+            <td style="padding:20px; text-align:left; vertical-align:top;" height="100px" width="380px" colspan="2">상품 상태도 너무 좋고 판매자도 친절합니다!</td>
+          </tr>
+        </table><br>
+        <table border="1" class="all_review">
+          <tr>
+            <td width="70px" style="text-align:center; vertical-align:top;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
+            <td>
+              <img src="{{ url_for('static', filename='images/realstar.png') }}"><span style="font-size:25px;"><b> 5</b></span><br>
+              아이디명 23.08.23.<br>
+              제목: 채고에요
+            </td>
+            <td rowspan="2"><iframe height="120" width="120"></iframe></td>
+            <td style="padding:0px 10px 0px 10px;" rowspan="2"><img src="{{ url_for('static', filename='images/thumbsup.png') }}" alt="추천 버튼"><span style="font-size:20px;"><b> 2</b></span></td>
+          </tr>
+          <tr>
+            <td style="padding:20px; text-align:left; vertical-align:top;" height="100px" width="380px" colspan="2">상품 상태도 너무 좋고 판매자도 친절합니다!</td>
+          </tr>
+        </table>
+      </div>
+{% endblock section %}
+
+  

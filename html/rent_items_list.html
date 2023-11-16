@@ -1,0 +1,62 @@
+{% extends "index.html" %}
+{% block section %}
+    <title>Rent List</title>
+    <link rel="stylesheet" href="../static/rent_items_list_style.css">
+
+    <h2>상품 목록</h2>
+    <br>
+    <div class="date-selection" style="margin-left:8%">
+        <h4 class="borrowingDate">&#91;희망 대여기간&#93;</h4>
+        <label for="startDate">시작:</label>
+        <input type="date" id="startDate" required>
+        <label for="endDate">끝:</label>
+        <input type="date" id="endDate" required>
+    </div>
+    <div class="product-container">
+        <div class="product">
+            <a href="/rent_detail">
+                <img src="{{ url_for('static', filename='images/product1.jpg')}}" alt="상품 1"></a>
+            <div class="product-name">충전기 거치대</div>
+        </div>
+        <div class="product">
+            <img src="{{ url_for('static', filename='images/product2.jpg')}}" alt="상품 2">
+            <div class="product-name">앰플</div>
+        </div>
+        <div class="product">
+            <img src="{{ url_for('static', filename='images/product3.jpg')}}" alt="상품 3">
+            <div class="product-name">괄사</div>
+        </div>
+        <div class="product">
+            <img src="{{ url_for('static', filename='images/product4.jpg')}}" alt="상품 4">
+            <div class="product-name">방향제</div>
+        </div>
+        <div class="product">
+            <img src="product5.jpg" alt="상품 5">
+            <div class="product-name">상품 5</div>
+        </div>
+        <div class="product">
+            <img src="product6.jpg" alt="상품 6">
+            <div class="product-name">상품 6</div>
+        </div>
+        <div class="product">
+            <img src="product7.jpg" alt="상품 7">
+            <div class="product-name">상품 7</div>
+        </div>
+        <div class="product">
+            <img src="product8.jpg" alt="상품 8">
+            <div class="product-name">상품 8</div>
+        </div>
+    </div>
+    
+    <br>
+    <br>
+    
+    <div class="pagenationAndButton">
+        <div class="pagenation">
+            <img src="{{ url_for('static', filename='images/pagenation.png')}}" alt="페이지네이션">
+        </div>
+        <form>
+            <button class="addProductButton"><a href="/reg_items">+ 상품등록</a></button>
+        </form>
+    </div>
+{% endblock section %}
