@@ -23,7 +23,11 @@
             </a>
         </div>
          <ul class="navbar__menu" style="margin=0">
+             {% if session['id'] %}
+            <li><a href="/logout" style="margin-left:0;padding: 0; font-size: 20px; font-weight:bolder;"><b>{{session['id']}}님 반갑습니다!<br></b>로그아웃</a></li>
+            {% else %}
             <li><a href="/login" style="margin-left:0;padding: 0; font-size: 25px; font-weight:bolder;">로그인</a></li>
+            {% endif %}
         </ul>
         <div class="navbar__logo2">
             <a href="/mypage"><img src="{{ url_for('static', filename='images/mypage.png') }}" alt="로고2" style="width:60%"></a>
