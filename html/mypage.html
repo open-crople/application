@@ -110,8 +110,9 @@
     <link rel="stylesheet" href="../static/mypage_style.css">
 		<table class="mypage-table">
 			<tr>
-				<td colspan="2"><spark class="user">The greatest</spark> 님 반가워요
-				<button id="logout">로그아웃</button></td>
+                {% if session['id'] %}
+				<td colspan="2"><spark class="user">{{session['id']}}</spark> 님 반가워요
+                    <button id="logout"><a href="/logout" style="color:white; text-decoration:none;">로그아웃</a></button></td>
 			</tr>
 			<tr>
 				<th>정보</th>
@@ -119,21 +120,22 @@
 					<table class="profile-table">
 						<tr>
                             <th><img src="../static/images/userid.png"> 아이디</th>
-							<td>The greatest</td>
+							<td>{{session['id']}}</td>
 						</tr>
 						<tr>
 							<th><img src="../static/images/email.png"> 이메일 주소</th>
-							<td>showman@ewhain.net</td>
+							<td><a href="mailto:{{ session['email'] }}" style="text-decoration:none;">{{ session['email'] }}</a></td>
 						</tr>
 						<tr>
 							<th><img src="../static/images/phone.png"> 오픈채팅방 링크</th>
-							<td>https://open.kakao.com/o/snixxkDe</td>
+							<td><a href="{{session['openkakao']}}" style="text-decoration:none;">{{session['openkakao']}}</a></td>
 						</tr>
 						<tr>
 							<th><img src="../static/images/member.png"> 단과대학 및 학과</th>
-							<td>엘텍공과대학 컴퓨터공학과</td>
+							<td>{{session['department']}}</td>
 						</tr>
 					</table>
+                    {% endif %}
                         <button id="show_review"><a href="/review" style=" color: white; text-decoration: none;">리뷰보기</a></button>
 				</td>
 			</tr>
