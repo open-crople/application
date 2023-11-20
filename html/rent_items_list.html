@@ -13,27 +13,30 @@
             <input type="date" id="endDate" required>
     </div>
     
-    <div class="product-container">
-        {% for key, value in datas %}
+    {% if total > 0 %}
+        <div class="product-container">
+            {% for key, value in datas %}
                 <div class="product">
-                    <a onclick="location.href='/rent_detail/{{key}}';">
+                    <a onclick="location.href='/rent_detail_testing/{{key}}';">
                         <img src="{{ url_for('static', filename='images/' + value.img_path) }}" alt="상품 1">
                     </a>
                     <div class="product-name">{{ key }}</div>
                 </div>
-        {% endfor %}
-    </div>
+            {% endfor %}              
+        </div>
+
         <form>
             <button class="addProductButton" onClick="handleButtonClick()" style="float:right; margin-right: 10%;">
             {% if session['id'] %}
-                <a href="/reg_items">+ 상품등록</a>
+                <a href="/reg_rent_items">+ 상품등록</a>
             {% else %}
                 <a href="/login">+ 상품등록</a>
             {% endif %}
             </button>
         </form>
-
-
+    {% else %}
+        <p>등록된 상품이 없습니다. </p>
+    {% endif %}
         <script>
             function handleButtonClick() {
                 {% if not session['id'] %}
