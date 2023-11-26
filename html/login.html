@@ -27,8 +27,8 @@
       </div>
       <div class="input password">
         <img src="../static/images/userpassword.png"   class="image"> 
-        <input type="password" class="text-field" placeholder="비밀번호" name="pw" required>
-        <img src="../static/images/eyeopen.png"  class="image">
+        <input type="password" class="text-field" placeholder="비밀번호" name="pw" id="password" required>
+        <img src="../static/images/eyeopen.png" onclick="togglePasswordVisibility()" class="eyeblock image">
       </div>
       <div class="loginsubmit">
         <input type="submit" value="로그인"  class="submit-button">
@@ -40,5 +40,23 @@
       </div>
     </form>
   </div>
+    <script>
+        function togglePasswordVisibility() {
+            var passwordField = document.getElementById('password');
+            var eyeIcons = document.querySelectorAll('.eyeblock');
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcons.forEach(function (icon) {
+                    icon.src = '../static/images/eyeopen.png';
+                });
+            } else {
+                passwordField.type = 'password';
+                eyeIcons.forEach(function (icon) {
+                    icon.src = '../static/images/eyeblock.png';
+                });
+            }
+        }
+    </script>
 </body>
 </html>
