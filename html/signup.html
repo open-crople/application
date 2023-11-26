@@ -27,18 +27,19 @@
       <div class="formblock">
         <div class="inputblock id signup">
           <img src="../static/images/userid.png" class="image">
-          <input type="text" class="text-field signup_idtext " name="id" placeholder="아이디"  required>
-          <button id="button-duplicate">중복확인</button>
+          <input type="text" class="text-field" name="id" placeholder="아이디"  required>
+          <div class="div-block"></div>
         </div>
         <div class="inputblock password signup">
           <img src="../static/images/userpassword.png" class="image">
-          <input type="password" class="text-field"  name="pw" placeholder="비밀번호" required="">
-          <img src="../static/images/eyeopen.png"  class="image">
+          <input type="password" class="text-field"  name="pw" id="password" placeholder="비밀번호" required="">
+          <img src="../static/images/eyeblock.png" onclick="togglePasswordVisibility('password')" class="eyeblockpassword image">
         </div>
         <div class="inputblock password signup third">
           <img src="../static/images/security.png" alt="" class="image">
-          <input type="text" class="text-field"  name="password_check"  placeholder="비밀번호 재입력" required>
-          <div class="div-block"></div>
+          <input type="text" class="text-field"  name="password_check" id="password_check" placeholder="비밀번호 재입력" required>
+         <img src="../static/images/eyeblock.png" onclick="togglePasswordVisibility('password_check')" class="eyeblockpassword_check image">
+          <!--<div class="div-block"></div>-->
         </div>
       </div>
       <div class="formblock" style="margin-top: 20px;">
@@ -67,5 +68,46 @@
     
   </div>
   
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#button-duplicate").click(function () {
+            var user_id = $("input[name='id']").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/check_duplicate_id",
+                data: { id: user_id },
+                success: function (response) {
+                    if (response.status === 'duplicate') {
+                        alert("이미 사용 중인 아이디입니다.");
+                    } else {
+                        alert("사용 가능한 아이디입니다.");
+                    }
+                }
+            });
+        });
+    });
+    
+  
+        function togglePasswordVisibility(id) {
+            var passwordField = document.getElementById(id);
+            var eyeIcons = document.querySelectorAll('.eyeblock'+id);
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcons.forEach(function (icon) {
+                    icon.src = '../static/images/eyeopen.png';
+                });
+            } else {
+                passwordField.type = 'password';
+                eyeIcons.forEach(function (icon) {
+                    icon.src = '../static/images/eyeblock.png';
+                });
+            }
+        }
+  
+</script>
 </body>
 </html>
