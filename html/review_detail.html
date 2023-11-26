@@ -1,37 +1,67 @@
-{{% extends "index.html" %}
+{% extends "index.html" %}
 {% block section %}
-  <table border="1" style="padding:100px;">
+<style>
+    .rate-label {
+    font-size: 25px; /* Increase the star size */
+    color: #F0D74A; /* Set star color to yellow */
+    margin-top: -5px; /* Move stars upward by adjusting margin */
+}
+    </style>
+  <table class="review_detail" style="padding:100px;">
     <tr>
-      <td style="text-align:center;"><iframe height="580" width="580" style="background-color:#D9D9D9;"></iframe></td>
-      <td>
-        <table style="padding:20px;">
+      <td class="review_img" style="text-align:center;"><img height="580" width="580" style="background-color:#D9D9D9;" src="{{ url_for('static', filename='images/' + data.img_path) }}"></td>
+      <td class="review_text">
+        <table style="padding:20px;" width="100%">
           <tr>
-            <td width="70px" style="text-align:center; vertical-align:top;"><img src="images/user.png"></td>
+            <td width="10%" style="text-align:left;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
             <td colspan="2">
-              <img src="images/realstar.png"><span style="font-size:25px;"><b> 5</b></span><br>
-              아이디명ㅣ 23.08.23
+              <button class="close"><a href="/review">x</a></button>
+              {% set rate_as_int = data.rate | int %}
+                {% for _ in range(rate_as_int) %}
+                    <label class="rate-label" for="rate{{ loop.index }}">★</label>
+                {% endfor %} 
+            <span style="font-size:25px;"><b> {{data.rate}}</b></span><br>
+              아이디명ㅣ {{data.writer}}<br><br>
             </td>
           <tr><td colspan="3"><hr></td></tr>
           <tr>
-            <td colspan="3" style="padding:20px;">제목: 완전 예뻐요 잘 쓸게용~~ </td>
+            <td colspan="3" style="padding:20px;">제목: {{data.title}} </td>
           </tr>
           <tr><td colspan="3"><hr></td></tr>
           <tr>
-            <td height="300px" colspan="3" style="padding:20px; text-align:left; vertical-align:top;">제가 생각했던 것처럼 색깔 너무 예쁘고 맘에 들어요,, 안에 신발이랑 라켓, 이것저것 별거 다 들어가요!
-              다른 분들은 귀여운 키링도 받으셨던데 저는 없어서 아쉽긴 하네요 ㅠㅠ 그래도 신발주머니 보내주셔서 감사합니다!-!
-              해외배송이라 시간이 조금 걸렸지만, 만족스럽네요 :) 잘 쓰겠습니당~~.</td>
+            <td height="300px" colspan="3" style="padding:20px; text-align:left; vertical-align:top;">{{data.text}}</td>
           </tr>
           <tr><td colspan="3"><hr></td></tr>
           <tr>
             <td colspan="2" style="padding:20px;">리뷰가 도움이 되었나요?</td>
-            <td width="50px" style="padding:20px;"><img src="images/thumbsup.png" alt="추천 버튼"><span style="font-size:20px;"><b> 2</b></span></td>
+            <td width="15%" style="padding:20px;"><img src="{{ url_for('static', filename='images/thumbsup.png') }}" alt="추천 버튼"><span style="font-size:20px;"><b> 2</b></span></td>
         </table>
       </td>
     </tr>
   </table>
-{% endblock section %}sup.png" alt="추천 버튼"><span style="font-size:20px;"><b> 2</b></span></td>
-        </table>
-      </td>
-    </tr>
-  </table>
+<style>
+    table.review_detail{
+        width: 80%;
+        margin-left: 10%;
+    }
+    td.review_img{
+        width: 50%;
+        border: 1px solid #00462A;
+    }
+    td.review_text{
+        width: 50%;
+        border: 1px solid #00462A;
+    }
+    button.close{
+        float: right;
+	    width: 10%;
+	    border: none;
+	    background: none;
+	    cursor: pointer;
+    }
+    button.close a{
+        font-size: 30px;
+        text-decoration: none;
+    }
+</style>
 {% endblock section %}
