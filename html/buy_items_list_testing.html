@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+{% block section %}
+    <title>Buy List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='buy_items_list_style.css')}}">
+
+    <h2>상품 목록</h2>
+    <br>
+    <br>
+    {% if total > 0 %}
+        <div class="product-container">
+            {% for key, value in datas %}
+                <div class="product">
+                    <a onclick="location.href='/buy_detail/{{key}}';">
+                        <img src="{{ url_for('static', filename='images/' + value.img_path) }}" alt="상품 1">
+                    </a>
+                    <div class="product-name">{{ key }}</div>
+                </div>
+            {% endfor %}              
+        </div>
+        <br>
+        <br>
+        <form>
+            <button class="addProductButton" onClick="handleButtonClick()" style="float:right; margin-right: 10%;">
+            {% if session['id'] %}
+                <a href="/reg_items">+ 상품등록</a>
+            {% else %}
+                <a href="/login">+ 상품등록</a>
+            {% endif %}
+            </button>
+        </form>
+        <br><br>
+
+        <div class="page-wrap" >
+            <div class="page-nation">
+                <ul>
+                    <li>
+                    {% for i in range(page_count)%}
+                        <a href="{{url_for('view_list', page=i)}}" color="black">{{i+1}}</a>
+                    {% endfor %} </li>
+                </ul>
+            </div>
+        </div>
+    {% else %}
+        <p>등록된 상품이 없습니다. </p>
+    {% endif %}
+        <br>
+         <script>
+            function handleButtonClick() {
+                {% if not session['id'] %}
+                    alert('로그인을 먼저하세요!');
+                {% else %}
+                    window.location.href = '/reg_items';
+                {% endif %}
+            }
+        </script>
+
+{% endblock section %}
