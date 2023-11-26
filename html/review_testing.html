@@ -1,0 +1,149 @@
+{% extends "index.html" %}
+
+{% block section %} 
+    <title>Review</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='review_style.css')}}">
+
+    <div class="full">
+        <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+                <td width=250px style="font-size:20px;"><b>리뷰 {{total}}건</b></td>
+                <td style="padding:10px;"><a href=""><b>랭킹순</b></a></td>
+                <td style="padding:10px;">최신순</td>
+                <td style="padding:10px;">평점 높은순</td>
+                <td style="padding:10px;">평점 낮은순</td>
+            </tr>
+        </table><br>
+          
+        <table style="margin-left: auto; margin-right: auto; width:50%">
+         <tr>
+            <td><a href="" style="padding:0px 40px 0px 40px; text-decoration-color:black;"><b>전체보기</b></a></td>
+            <td>포토/동영상</td>
+            <td style="padding:0px 40px 0px 40px;" style="padding:0px 40px 0px 40px;">한달사용리뷰</td>
+            <td style="padding:0px 40px 0px 40px;">재구매</td>
+         </tr>
+        </table>      
+    </div><br>
+
+    <div id="screen">
+        <br><br>
+        <br>
+        
+    
+        <div style="display: flex;
+    flex-wrap: wrap;
+    justify-content: center; width:100%"> 
+            
+        {% if total > 0 %}
+        {% for key, value in row1 %}
+        <div style="width:40% margin:10px;" >
+            
+        
+        <table border="1" class="all_review" style="float:left;" >
+          <tr>
+            <td width="70px" style="text-align:center; vertical-align:top;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
+            <td>
+                {% set rate_as_int = value.rate | int %}
+                {% for _ in range(rate_as_int) %}
+                    <label class="rate-label" for="rate{{ loop.index }}" style="color:#F0D74A">★</label>
+                {% endfor %} 
+                <span style="font-size:25px;"><b> {{value.rate}}</b></span><br>
+                아이디명: {{value.writer}}<br>
+                제목: {{value.title}}
+            </td>
+              
+            <td rowspan="2" onclick="location.href='/view_review_detail/{{key}}/';"><img height="120" width="120" src="{{ url_for('static', filename='images/' + value.img_path) }}"></td>
+            <td style="padding:0px 10px 0px 10px;" rowspan="2" ><img src="{{ url_for('static', filename='images/thumbsup.png') }}" alt="추천 버튼"><span style="font-size:20px;"><b> 2</b></span></td>
+          </tr>
+          <tr>
+            <td style="padding:20px; text-align:left; vertical-align:top;" height="100px" width="380px" colspan="2">{{value.text}}</td>
+          </tr>
+        </table>
+        </div>
+        <br>
+          {% endfor %}
+            <br>
+    {% for key, value in row2 %}
+        <div style="width:40% margin:10px;" >
+            
+        
+        <table border="1" class="all_review" style="float:left;" >
+          <tr>
+            <td width="70px" style="text-align:center; vertical-align:top;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
+            <td>
+                {% set rate_as_int = value.rate | int %}
+                {% for _ in range(rate_as_int) %}
+                    <label class="rate-label" for="rate{{ loop.index }}" style="color:#F0D74A">★</label>
+                {% endfor %} 
+                <span style="font-size:25px;"><b> {{value.rate}}</b></span><br>
+                아이디명: {{value.writer}}<br>
+                제목: {{value.title}}
+            </td>
+
+              
+            <td rowspan="2" onclick="location.href='/view_review_detail/{{key}}/';"><img height="120" width="120" src="{{ url_for('static', filename='images/' + value.img_path) }}"></td>
+            <td style="padding:0px 10px 0px 10px;" rowspan="2" ><img src="{{ url_for('static', filename='images/thumbsup.png') }}" alt="추천 버튼"><span style="font-size:20px;"><b> 2</b></span></td>
+          </tr>
+          <tr>
+            <td style="padding:20px; text-align:left; vertical-align:top;" height="100px" width="380px" colspan="2">{{value.text}}</td>
+          </tr>
+        </table>
+        </div>
+        <br>
+          {% endfor %}
+            <br>
+         {% for key, value in row3 %}
+        <div style="width:40% margin:10px;" >
+            
+        
+        <table border="1" class="all_review" style="float:left;" >
+          <tr>
+            <td width="70px" style="text-align:center; vertical-align:top;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
+            <td>
+                {% set rate_as_int = value.rate | int %}
+                {% for _ in range(rate_as_int) %}
+                    <label class="rate-label" for="rate{{ loop.index }}" style="color:#F0D74A">★</label>
+                {% endfor %} 
+                <span style="font-size:25px;"><b> {{value.rate}}</b></span><br>
+                아이디명: {{value.writer}}<br>
+                제목: {{value.title}}
+            </td>
+              
+            <td rowspan="2" onclick="location.href='/view_review_detail/{{key}}/';"><img height="120" width="120" src="{{ url_for('static', filename='images/' + value.img_path) }}"></td>
+            <td style="padding:0px 10px 0px 10px;" rowspan="2" ><img src="{{ url_for('static', filename='images/thumbsup.png') }}" alt="추천 버튼"><span style="font-size:20px;"><b> 2</b></span></td>
+          </tr>
+          <tr>
+            <td style="padding:20px; text-align:left; vertical-align:top;" height="100px" width="380px" colspan="2">{{value.text}}</td>
+          </tr>
+        </table>
+        </div>
+        <br>
+          {% endfor %}   
+            
+            
+        </div>  
+          
+          <div class="page-wrap">
+         <div class="page-nation">
+         <ul>
+         <li>
+         {% for i in range(page_count)%}
+         <a href="{{url_for('view_review_testing', page=i)}}" color="black">{{i+1}}</a>
+         {% endfor %}
+         </li>
+         </ul>
+         </div>
+        </div>
+        {% else %}
+        <p>
+         등록된 리뷰가 없습니다.
+        </p>
+        {% endif %}
+</div>
+<br>
+{% endblock section %}
+
+
+
+  
+
