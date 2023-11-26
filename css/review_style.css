@@ -1,0 +1,70 @@
+
+.full {
+    padding: 0;
+    margin: 0;
+}
+
+.menu {
+    text-decoration: none;
+    font-size: 40px;
+} /* 바디 구성 */
+.table_review {
+    padding: 20px;
+}
+.all_review > td,
+th {
+    border: none;
+
+} 
+/*
+.twoline {
+    width:45%;
+    margin:3%;
+}
+*/
+/* 화면 구성 */
+.full {
+    width: 100%;
+    text-align:center;
+}
+#screen {
+    width: 100%;
+    height: auto;
+    float: center;
+    margin: 0 auto;
+}
+
+
+
+.page-nation li {
+    list-style: none;
+}
+.page-wrap {
+    text-align: center;
+    font-size: 0;
+}
+.page-nation {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.page-nation a {
+    display: block;
+    margin: 0 3px;
+    float: left;
+    border: 1px solid #e6e6e6;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background-color: #fff;
+    font-size: 13px;
+    color: #00462a;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.rate-label {
+    color: #F0D74A; /* Change the star color to yellow */
+}
