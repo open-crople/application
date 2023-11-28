@@ -1,14 +1,21 @@
-/* index_style.css */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+li a:hover {
+    color: #6F4F28;
+}
+
+.navbar__menu li a.active {
+    color: #6F4F28 !important;
+}
+
 .navbar {
-    border-bottom: 2px solid #00462A; 
-    color: #00462A; 
+    border-bottom: 2px solid #00462A;  
     display: flex;
+    color: #00462A;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 50px;
@@ -28,8 +35,8 @@
 }
 
 .navbar__menu a {
-    text-decoration: none;
-    color: #00462A; 
+    text-decoration: none; 
+    color: #00462A;
     font-size: 16px;
     font-weight: 500;
 }

@@ -1,67 +1,50 @@
 {% extends "index.html" %}
 {% block section %}
-
-    <title>Rent List</title>
-    <link rel="stylesheet" href="../static/rent_items_list_style.css">
+    <title>Buy List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='buy_items_list_style.css')}}">
 
     <h2>상품 목록</h2>
     <br>
-    
-    <form action="{{ url_for('view_rent_list') }}" method="GET">
-
-
-
-    <div class="date-selection" style="margin-left:8%">
-        <h4 class="borrowingDate">&#91;희망 대여기간&#93;</h4>
-        <label for="startDate">시작:</label>
-        <input type="date" name="period_start" id="startDate" required>
-        <label for="endDate">끝:</label>
-        <input type="date" name="period_end" id="endDate" required>
-        <button type="submit" id="search">검색</button>
-    </div>
-
-</form>
-
-    
+    <br>
     {% if total > 0 %}
         <div class="product-container">
             {% for key, value in datas %}
                 <div class="product">
-                    <a onclick="location.href='/rent_detail/{{key}}';">
+                    <a onclick="location.href='/buy_detail/{{key}}';">
                         <img src="{{ url_for('static', filename='images/' + value.img_path) }}" alt="상품 1">
                     </a>
                     <div class="product-name">{{ key }}</div>
                 </div>
             {% endfor %}              
         </div>
-        
+        <br>
         <br>
         <form>
             <button class="addProductButton" onClick="handleButtonClick()" style="float:right; margin-right: 10%;">
             {% if session['id'] %}
-                <a href="/reg_rent_items">+ 상품등록</a>
+                <a href="/reg_items">+ 상품등록</a>
             {% else %}
                 <a href="/login">+ 상품등록</a>
             {% endif %}
             </button>
         </form>
-<br><br><br>
+        <br><br>
 
         <div class="page-wrap" >
             <div class="page-nation">
                 <ul>
                     <li>
                     {% for i in range(page_count)%}
-                        <a href="{{url_for('view_rent_list', page=i)}}" color="black">{{i+1}}</a>
+                        <a href="{{url_for('view_list', page=i)}}" color="black">{{i+1}}</a>
                     {% endfor %} </li>
                 </ul>
             </div>
         </div>
-<br>
     {% else %}
         <p>등록된 상품이 없습니다. </p>
     {% endif %}
-        <script>
+        <br>
+         <script>
             function handleButtonClick() {
                 {% if not session['id'] %}
                     alert('로그인을 먼저하세요!');
@@ -70,5 +53,5 @@
                 {% endif %}
             }
         </script>
-         
+
 {% endblock section %}

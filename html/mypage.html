@@ -4,7 +4,6 @@
 <style>
 .mypage-table:not(.profile-table){
 	width: 80%;
-	height: 1000px;
 	border-collapse: collapse;
 	margin: 0 auto;
 }
@@ -50,6 +49,7 @@
 	font-size: 25px;
 	vertical-align: top;
 	padding-top: 20px;
+    width: 20%;
 }
 
 .profile-table{
@@ -58,8 +58,8 @@
 	float: left;
 	border: 2px solid #00462A;
 	border-radius: 10px;
-	margin-bottom: 20px;
-	margin-top: 20px;
+	/*margin-bottom: 20px;
+	margin-top: 20px;*/
 }
 
 .profile-table img{
@@ -105,7 +105,12 @@
 	width: 100px;
 	height: 150px;
 	margin-right: 20px;
+    cursor: pointer;
 }
+.scroll-container {
+        max-height: 300px; 
+        overflow-y: auto;
+    }
 </style>
     <link rel="stylesheet" href="../static/mypage_style.css">
 		<table class="mypage-table">
@@ -135,20 +140,31 @@
 							<td>{{session['department']}}</td>
 						</tr>
 					</table>
-                    {% endif %}
+                    
                         <button id="show_review"><a href="/review" style=" color: white; text-decoration: none;">리뷰보기</a></button>
 				</td>
 			</tr>
+            {% else %}
+            <h3 style="text-align:center;">
+                 원활한 마이페이지 이용을 위해, 로그인을 먼저 해주시기 바랍니다.
+                </h3>
+            {% endif %}
 			<tr>
-				<th>판매내역</th>
+				<th>판매물품</th>
 				<td>
-					<div class="seller">
-						<p id="status">판매완료</p>
-						<img src="../static/images/demian.jpg" alt="image">
-						<p id="date">10.13 판매</p>
-						<p id="name">헤르만 헤세, 데미안</p>
-						<p id="price">5,000원</p>
-					</div>
+                    <div  class="scroll-container">
+                    {% for key, value in datas %}
+                        {% if value.seller==session['id'] %}
+					        <div class="seller">
+					            <br><br>
+                                <a onclick="location.href='/buy_detail/{{key}}';">
+						            <img src="{{ url_for('static', filename='images/' + value.img_path) }}" alt="image">
+                                </a>
+                                <p id="name">{{key}}</p>
+						        <p id="price">{{value.price}}원</p>
+					        </div>
+                        {% endif %}
+                    <!--
 					<div class="seller">
 						<p id="status">대여중</p>
 						<img src="../static/images/labcoat.jpg" alt="image">
@@ -157,30 +173,70 @@
 						<p id="price">3,000원</p>
 						<button id="pause_rent">대여 중지</button>
 					</div>
-					<button id="next"><img src="../static/images/next.png"></button>
+                    <button id="next"><img src="../static/images/next.png"></button>
+                    -->
+                    {% endfor %}
+                    </div>
 				</td>
 			</tr>
 			<tr>
-				<th>구매내역</th>
+				<th>대여물품</th>
 				<td>
-					<div class="buyer">
-						<p id="status">대여완료</p>
-						<img src="../static/images/calculator.jpeg" alt="image">
-						<p id="date">10.9-10.10 대여</p>
-						<p id="name">공학용 계산기</p>
-						<p id="price">2,000원</p>
-						<button id="review">리뷰쓰기</button>
-					</div>
+                    <div class="scroll-container">
+                    {% for key, value in rent_datas %}   
+                        {% if value.seller==session['id'] %}
+					        <div class="buyer">
+						        <br><br>
+                                <a onclick="location.href='/rent_detail/{{key}}';">
+						            <img src="{{ url_for('static', filename='images/' + value.img_path) }}" alt="image">
+                                </a>
+						        <p id="name">{{key}}</p>
+						        <p id="price">{{value.price}}원</p>
+					        </div>
+                        {% endif %}
+                        <!--
 					<div class="buyer">
 						<p id="status">구매완료</p>
 						<img src="../static/images/cat.jpg" alt="image">
 						<p id="date">10.1 구매</p>
 						<p id="name">고양이 키링 10cm</p>
 						<p id="price">3,000원</p>
-						<button id="review">리뷰쓰기</button>
+                        <a href="/reg_reviews"><button id="review">리뷰쓰기</button></a>
 					</div>
-					<button id="next"><img src="../static/images/next.png"></button>
+                    </div>
+					<button id="next"><img src="../static/images/next.png"></button>-->
+                    {% endfor %}
+                    </div>
+				</td>
+			</tr>
+            <tr>
+				<th>대여내역</th>
+				<td>
+                    <div class="scroll-container">
+                     {% for key, value in rent_list_datas %}   
+                    
+					<div class="buyer">
+						<br><br>
+						<img src="{{ url_for('static', filename='images/' + value.img_path) }}" alt="image">
+						<p id="name">{{key}}</p>
+						<p id="price">{{value.price}}원</p><br><br><br>
+                        <a href="/reg_review_init/{{key}}/"><button id="review">리뷰쓰기</button></a>
+					</div>
+                        <!--
+					<div class="buyer">
+						<p id="status">구매완료</p>
+						<img src="../static/images/cat.jpg" alt="image">
+						<p id="date">10.1 구매</p>
+						<p id="name">고양이 키링 10cm</p>
+						<p id="price">3,000원</p>
+                        <a href="/reg_reviews"><button id="review">리뷰쓰기</button></a>
+					</div>
+                    </div>
+					<button id="next"><img src="../static/images/next.png"></button>-->
+                        {% endfor %}
+                    </div>
 				</td>
 			</tr>
 		</table>
+
 {% endblock section %}

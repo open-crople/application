@@ -4,13 +4,7 @@
 {% block section %} 
     <title>Review</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='review_style.css')}}">
-    <style>
-    .rate-label {
-    font-size: 25px; /* Increase the star size */
-    color: #F0D74A; /* Set star color to yellow */
-    margin-top: -5px; /* Move stars upward by adjusting margin */
-}
-    </style>
+
     <div id="full">
       <div id="screen_left">
         <article><br><br>
@@ -98,11 +92,7 @@
           <tr>
             <td width="70px" style="text-align:center; vertical-align:top;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
             <td>
-                {% set rate_as_int = value.rate | int %}
-                {% for _ in range(rate_as_int) %}
-                    <label class="rate-label" for="rate{{ loop.index }}">★</label>
-                {% endfor %}
-                <span style="font-size:25px;"><b> {{value.rate}}</b></span><br>
+              <img src="{{ url_for('static', filename='images/realstar.png') }}"><span style="font-size:25px;"><b> {{value.rate}}</b></span><br>
               아이디명: {{value.writer}}<br>
               제목: {{value.title}}
             </td>
@@ -121,11 +111,7 @@
           <tr>
             <td width="70px" style="text-align:center; vertical-align:top;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
             <td>
-                {% set rate_as_int = value.rate | int %}
-                {% for _ in range(rate_as_int) %}
-                    <label class="rate-label" for="rate{{ loop.index }}">★</label>
-                {% endfor %}
-                <span style="font-size:25px;"><b> {{value.rate}}</b></span><br>
+              <img src="{{ url_for('static', filename='images/realstar.png') }}"><span style="font-size:25px;"><b> {{value.rate}}</b></span><br>
               아이디명: {{value.writer}}<br>
               제목: {{value.title}}
             </td>
@@ -143,11 +129,7 @@
           <tr>
             <td width="70px" style="text-align:center; vertical-align:top;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
             <td>
-                {% set rate_as_int = value.rate | int %}
-                {% for _ in range(rate_as_int) %}
-                    <label class="rate-label" for="rate{{ loop.index }}">★</label>
-                {% endfor %}
-                <span style="font-size:25px;"><b> {{value.rate}}</b></span><br>
+              <img src="{{ url_for('static', filename='images/realstar.png') }}"><span style="font-size:25px;"><b> {{value.rate}}</b></span><br>
               아이디명: {{value.writer}}<br>
               제목: {{value.title}}
             </td>
@@ -181,3 +163,4 @@
 {% endblock section %}
 
   
+

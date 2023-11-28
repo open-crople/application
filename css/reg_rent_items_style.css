@@ -82,3 +82,7 @@
 .form-table textarea {
     height: 80px;
 }
+.form-table label[for="direct"],
+.form-table label[for="delivery"]{
+	margin-right: 40px;
+}

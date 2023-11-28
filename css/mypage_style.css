@@ -1,6 +1,5 @@
 .mypage-table:not(.profile-table){
 	width: 80%;
-	height: 1000px;
 	border-collapse: collapse;
 	margin: 0 auto;
 }

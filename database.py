@@ -19,7 +19,8 @@ class DBhandler:
             "keyword": data["keyword"],
             "explain": data["explain"],
             "img_path": img_path,
-            "seller": sessionid
+            "seller": sessionid,
+            "openkakao": data['openkakao']
         }
         self.db.child("item").child(name).set(item_info)
         print(data, img_path)
@@ -30,11 +31,13 @@ class DBhandler:
             "price": data["price"],
             "addr": data['addr'],
             "send": data['send'],
-            "period": data['period'],
+            "period-start": data['period-start'],
+            "period-end": data['period-end'],
             "keyword": data["keyword"],
             "explain": data["explain"],
             "img_path": img_path,
-            "seller": sessionid
+            "seller": sessionid,
+            "openkakao": data['openkakao']
         }
         self.db.child("rent_item").child(name).set(item_info)
         print(data, img_path)
@@ -94,16 +97,6 @@ class DBhandler:
         items = self.db.child("item").get().val()
         return items
 
-    def get_rent_item_byname(self, name):
-        items = self.db.child("rent_item").get()
-        target_value = ""
-        print("###########", name)
-        for res in items.each():
-            key_value = res.key()
-            if key_value == name:
-                target_value = res.val()
-        return target_value
-
     def get_rent_items(self):
         items = self.db.child("rent_item").get().val()
         return items
@@ -117,3 +110,110 @@ class DBhandler:
             if key_value == name:
                 target_value = res.val()
         return target_value
+
+    def get_rent_item_byname(self, name):
+        items = self.db.child("rent_item").get()
+        target_value = ""
+        print("###########", name)
+        for res in items.each():
+            key_value = res.key()
+            if key_value == name:
+                target_value = res.val()
+        return target_value
+    
+    def get_rent_list_byid(self, user_id):
+        items = self.db.child("rent_list").get()
+        target_value = ""
+        print("###########", user_id)
+        for res in items.each():
+            key_value = res.key()
+            if key_value == user_id:
+                target_value = res.val()
+        return target_value
+
+    def reg_review(self, data, img_path):
+        review_info = {
+            "title": data['reviewTitle'],
+            "text": data['reviewText'],
+            "img_path": img_path,
+            "writer": data['writer'],
+            "rate": data['reviewStar'],
+            "seller":data['seller']
+        }
+        self.db.child("review").child(data['name']).set(review_info)
+        print(data, img_path)
+        return True
+
+    def get_reviews(self):
+        reviews = self.db.child("review").get().val()
+        return reviews
+
+    def get_review_byname(self, name):
+        reviews = self.db.child("review").get()
+        target_value = ""
+
+        for res in reviews.each():
+            key_value = res.key()
+            if key_value == name:
+                target_value = res.val()
+
+        return target_value
+
+    def get_heart_byname(self, uid, name):
+        hearts = self.db.child("heart").child(uid).get()
+        target_value = ""
+        if hearts.val() == None:
+            return target_value
+
+        for res in hearts.each():
+            key_value = res.key()
+
+            if key_value == name:
+                target_value = res.val()
+        return target_value
+
+
+    def update_rent_list(self, data, user_id, isRent, item):
+        rent_info = {
+            "borrow": isRent,
+            "price": data['price'],
+            "seller": data['seller'],
+            "img_path": data['img_path']
+            #"address" : data['address'],
+            #"deliveryMethod" : data['deliveryMethod']
+        }
+        self.db.child("rent_list").child(user_id).child(item).set(rent_info)
+        print(rent_info)
+        return True
+    
+    def update_buy_list(self, data, user_id, isBuy, item):
+        buy_info = {
+            "buy": isBuy,
+            "price": data['price'],
+            "seller": data['seller'],
+            "img_path": data['img_path']
+        }
+        self.db.child("buy_list").child(user_id).child(item).set(buy_info)
+        print(buy_info)
+        return True
+
+    def reg_review(self, data, img_path):
+        review_info = {
+            "title": data['reviewTitle'],
+            "text": data['reviewText'],
+            "img_path": img_path,
+            "writer": data['writer'],
+            "rate": data['reviewStar'],
+            "seller":data['seller']
+        }
+        self.db.child("review").child(data['name']).set(review_info)
+        print(data, img_path)
+        return True
+
+    def update_heart(self, user_id, isHeart, item):
+        heart_info = {
+            "interested": isHeart
+        }
+        self.db.child("heart").child(user_id).child(item).set(heart_info)
+        return True
+    

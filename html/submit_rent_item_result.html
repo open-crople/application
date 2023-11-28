@@ -10,9 +10,10 @@
 </p>
 <img src="{{img_path}}"/><br><br>
 <p>
-    판매지역: {{data.addr}}<br><br>
+    전달장소: {{data.addr}}<br><br>
     상품키워드: {{data.keyword}}<br><br>
-    상태: {{data.status}}
+    대여가능기간: {{ data['period-start'] }} ~ {{ data['period-end'] }}<br><br>
+    판매방식: {{data.send}}
     <br><br>
     상세 설명: {{data.explain}}<br><br>
 </p>

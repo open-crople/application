@@ -2,7 +2,7 @@
 
 {% block section %}
 <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='rent_detail_style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='buy_detail_style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
@@ -14,19 +14,18 @@
      function realbuying() {
           $.ajax({
             type: 'POST',
-            url: '/update_rent/{{name}}/',
+            url: '/update_buy/{{name}}/',
             data: {
                 price : '{{data.price}}',
                 seller: '{{data.seller}}',
                 img_path: '{{data.img_path}}',
-                isRent: "Y"
+                isBuy: "Y"
             },
             success: function (response) {
                 alert(response['msg']);
                 window.open("{{data.openkakao}}") <!-- 판매자 오픈톡 링크로 바꿔야함-->
             }
         });
-          
      }
     
      function disableScroll() {
@@ -40,13 +39,13 @@
         }   
         
      $(function(){
-      $("#rent-confirm").click(function(){
+      $("#confirm").click(function(){
           realbuying(); //모달 닫기 함수 호출
           modalClose();
           disableScroll();
           //컨펌 이벤트 처리
       });
-      $("#modal-open").click(function(){   
+      $("#modal-open").click(function(){        
           {% if session['id'] %}
               $("#popup").css('display','flex').hide().fadeIn();
               //팝업을 flex속성으로 바꿔준 후 hide()로 숨기고 다시 fadeIn()으로 효과
@@ -56,7 +55,7 @@
                window.location.href='/login';
            {% endif %}
       });
-      $("#rent-close").click(function(){
+      $("#close").click(function(){
           modalClose(); //모달 닫기 함수 호출
           disableScroll();
       });
@@ -130,22 +129,32 @@
     });
         
     </script>
+    <style>
+     #heart {
+            color: grey;
+            font-size: 50px;
+            margin-top: 10%;
+        }
 
+        #heart.red {
+            color: red;
+        }
+        
+    </style>
 </head>
 
 <body>
- <section>
+    <section>
     <div class="upper_section">
-            
+        
         <div class="buy_detail_info item_img" style = "width: 40%; height: 300px; margin-left: 0; margin-right: 0; margin-bottom: 5%; position: relative; overflow: hidden; align-items: center;">
             <img src="{{ url_for('static', filename='images/' + data.img_path) }}" alt="{{ key }}" style="width: 100%; max-height: 100%; object-fit: contain; position: abosolute;" >
-                <form>
+             <form>
                   <button type="button" class="big_picture" id="img-bigger";>확대</button>
                 </form>
         </div>
         
-        
-            <!--사진 확대창 -->    
+    <!--사진 확대창 -->    
         <div class="container">
           <div class="img-wrap" id="img-popup">
             <div class="img-popup">
@@ -159,20 +168,19 @@
           </div>
         </div>
         
-        
-     
-         <div class="buy_detail_info info">
+
+    <div class="buy_detail_info info">
         <div class="upper_right_upper" style="display:flex;">
             <div class="item_name bold_title" style="float:left; margin-right:8px; margin-top: 10%;">{{ name }}</div>
             <div style="float:left; margin-top: 10%;"><sub>#{{data.keyword}}</sub></div>
         </div>
         <br>
         <div class="buy_detail_content">
-        가격    : <span id="cost">{{data.price}}원</span><br> 
-        대여자  : <span id="seller">{{data.seller}}</span><br>
-        대여지역 : <span id="sell_area">{{data.addr}}</span><br>
-        대여가능기간 : <span id="period">{{ data['period-start'] }} ~ {{ data['period-end'] }}</span><br>
-        전달방식 : <span id="sell_way">{{data.send}}</span>
+        가격    : <span id="cost">{{data.price}}원</span><br>
+        상품상태 : <span id="status">{{data.status}}</span><br>     
+        판매자  : <span id="seller">{{data.seller}}</span><br>
+        판매지역 : <span id="sell_area">{{data.addr}}</span><br>
+        전달방식 : <span id="sell_way">{{data.send}}</span><br>
         </div>
         
         <div>
@@ -191,9 +199,9 @@
         
     <div class="down_section">  
     <div class="bold_title" style="margin-right:auto;">상품정보</div>
-         <form>  
+         <form>
             <button type="button" class="btn_right" style="display:inline-block; margin-right:0px;"><a href="/review"> 리뷰보기 </a></button>
-            <button type="button" class="btn_right" id="modal-open" style="display:inline-block;"><a> 대여하기 </a></button>      
+            <button type="button" class="btn_right" id="modal-open" style="display:inline-block;"><a> 구매하기 </a></button>   
         </form>
     </div>
         
@@ -204,7 +212,7 @@
     </div>
     </section>
     
-     <!--팝업 만들기-->
+    <!--팝업 만들기-->
 
     <div class="container">
       <div class="popup-wrap" id="popup">
@@ -220,26 +228,19 @@
               </div>
                  <br><br><br>
               <div class="body-contentbox">
-                <p>대여를 확정하시겠습니까?</p>
+                <p>구매를 확정하시겠습니까?</p>
               </div>
             </div>
           </div>
           <div class="popup-foot">
-              <!--
-            <form action="{{ url_for('update_rent', name=key) }}" enctype="multipart/form-data" method="post">
-                <input type="hidden" name="price" value="{{data.price}}">
-                <input type="hidden" name="seller" value="{{data.seller}}">
-                <input type="hidden" name="address" value="{{data.addr}}">
-                <input type="hidden" name="period" value="{{data['period-start']}} ~ {{data['period-end']}}">
-                <input type="hidden" name="deliveryMethod" value="{{data.send}}">-->
-            <span class="pop-btn confirm" id="rent-confirm">예</span>
-             <!--</form>-->
-            <span class="pop-btn close" id="rent-close">아니오</span>
+            <span class="pop-btn confirm" id="confirm">예</span>
+            <span class="pop-btn close" id="close">아니오</span>
           </div>
         </div>
       </div>
     </div>
-
-
 </body>
+
+
 {% endblock section %}
+
