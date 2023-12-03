@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+{% block section %}
+    <title>Review</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='review_by_photo_style.css')}}">
+
+    
+        <table style="margin-right: auto; ">
+            <tr>
+                <td width=60% style="font-size:20px;"><b>리뷰 {{total}}건</b></td>
+                <td><a href="{{ url_for('view_review', page=page, sort='photo') }}" class="sorting {% if current_sort == 'photo' %}sort_active{% endif %}">포토/동영상</a></td>
+                <td><a href="{{ url_for('view_review', page=page, sort='latest') }}" class="sorting {% if current_sort == 'latest' %}sort_active{% endif %}">최신순</a></td>
+                <td><a href="{{ url_for('view_review', page=page, sort='highest') }}" class="sorting {% if current_sort == 'highest' %}sort_active{% endif %}">평점 높은순</a></td>
+                <td><a href="{{ url_for('view_review', page=page, sort='lowest') }}" class="sorting {% if current_sort == 'lowest' %}sort_active{% endif %}">평점 낮은순</a></td>
+
+            </tr>
+        </table><br>
+          
+             
+    <br>
+
+    <br>
+    <br>
+    <!--데이터베이스에서 불러온 리뷰 데이터를 출력-->
+    {% if total > 0 %}
+        <div class="product-container">
+            {% for key, value in datas %}
+                <div class="product">
+                    <a onclick="location.href='/view_review_detail/{{key}}';">
+                        <img src="{{ url_for('static', filename='images/' + value.img_path) }}" alt="상품 1">
+                    </a>
+                    <div class="product-name">{{ value.title }}</div>
+                </div>
+            {% endfor %}              
+        </div>
+    
+        <br>
+        <br>
+        
+        <!--페이지네이션-->
+        <div class="page-wrap" >
+            <div class="page-nation">
+                <ul>
+                    <li>
+                    {% for i in range(page_count)%}
+                        <a href="{{url_for('view_review', page=i, sort=current_sort)}}" color="black" {% if page == i %}class="active"{% endif %}>{{i+1}}</a>
+                    {% endfor %} </li>
+                </ul>
+            </div>
+        </div>
+    {% else %}
+        <p>등록된 상품이 없습니다. </p>
+    {% endif %}
+        <br>
+        
+
+{% endblock section %}
