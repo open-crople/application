@@ -24,6 +24,8 @@ li a:hover {
 .navbar__menu {
     list-style: none;
     display: flex;
+    justify-content: flex-start;
+    margin-left:-20%;
 }
 
 .navbar__menu li {
@@ -91,7 +93,7 @@ li a:hover {
 }
 
 .navbar__logo1 a {
-    font-size: 36px; 
+    font-size: 20px; 
 }
 
 .navbar__menu a {
