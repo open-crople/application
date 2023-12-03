@@ -2,9 +2,9 @@
 {% block section %}
 <style>
     .rate-label {
-    font-size: 25px; /* Increase the star size */
-    color: #F0D74A; /* Set star color to yellow */
-    margin-top: -5px; /* Move stars upward by adjusting margin */
+    font-size: 25px; 
+    color: #F0D74A; 
+    margin-top: -5px; 
 }
     </style>
   <table class="review_detail" style="padding:100px;">
@@ -21,11 +21,11 @@
                     <label class="rate-label" for="rate{{ loop.index }}">★</label>
                 {% endfor %} 
             <span style="font-size:25px;"><b> {{data.rate}}</b></span><br>
-              아이디명ㅣ {{data.writer}}<br><br>
+              아이디명ㅣ {{data.writer}}  <span style="font-size:13px; color: #9f9f9f;">{{data.date}}</span><br><br>
             </td>
           <tr><td colspan="3"><hr></td></tr>
           <tr>
-            <td colspan="3" style="padding:20px;">제목: {{data.title}} </td>
+            <td colspan="3" style="padding:20px;">상품명: {{data.item}}<br><br>제목: {{data.title}}</td>
           </tr>
           <tr><td colspan="3"><hr></td></tr>
           <tr>
