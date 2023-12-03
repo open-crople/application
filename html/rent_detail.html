@@ -22,8 +22,7 @@
                 isRent: "Y"
             },
             success: function (response) {
-                alert(response['msg']);
-                window.open("{{data.openkakao}}") <!-- 판매자 오픈톡 링크로 바꿔야함-->
+                window.open("{{data.openkakao}}")
             }
         });
           
@@ -193,7 +192,12 @@
     <div class="bold_title" style="margin-right:auto;">상품정보</div>
          <form>  
             <button type="button" class="btn_right" style="display:inline-block; margin-right:0px;"><a href="/review"> 리뷰보기 </a></button>
-            <button type="button" class="btn_right" id="modal-open" style="display:inline-block;"><a> 대여하기 </a></button>      
+             {% if session['id']==data.seller %}
+                 <button type="button" class="btn_right" disabled style="background-color: #CCCCCC; cursor: not-allowed; 
+                                        color: #fff; cursor: pointer;">대여하기</button>
+             {% else %}
+            <button type="button" class="btn_right" id="modal-open" style="display:inline-block;"><a> 대여하기 </a></button>
+             {% endif %}
         </form>
     </div>
         
@@ -215,7 +219,7 @@
           <div class="popup-body">
             <div class="body-content">
               <div class="body-titlebox">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="로고1" style="width:25%; margin:10px;" >
+                <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="로고1" style="width:25%; margin:10px;" >
 
               </div>
                  <br><br><br>
