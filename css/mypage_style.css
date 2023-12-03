@@ -1,98 +1,89 @@
-.mypage-table:not(.profile-table){
-	width: 80%;
-	border-collapse: collapse;
-	margin: 0 auto;
+#submitButtonContainer {
+	display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.mypage-table #logout, .mypage-table #show_review, .seller #pause_rent, .buyer #review{
-	float: right;
+#submitButton {
+    background-color: #00462A;
+    width: 40%;
+    height: 40px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+#plusButton{
 	background-color: #00462A;
-	width: 100px;
+	width: 40px;
 	height: 40px;
 	border-radius: 3px;
 	color: #fff;
-	font-size: 15px;
+	font-size: 20px;
 	border: none;
 	cursor: pointer;
 }
-.mypage-table #show_review{
-	margin-top: 20px;
-}
-.mypage-table #next{
-	float: right;
-	width: 10%;
-	border: none;
-	background: none;
-	cursor: pointer;
+
+.form-table {
+    width: 80%;
+	height: 700px;
+    margin: 0 auto;
+    border-collapse: collapse;
 }
 
-.mypage-table #next img{
-	width: 40px;
-}
-
-.mypage-table .user{
-	font-size: 30px;
-	padding: 10px;
-}
-
-.mypage-table th, .mypage-table td{
-	text-align: left;
+.form-table th, .form-table td{
+    text-align: left;
     padding: 10px;
     border-bottom: 1px solid #ccc;
 }
 
-.mypage-table th:not(.profile-table th){
-	font-size: 25px;
-	vertical-align: top;
-	padding-top: 20px;
+.form-table label[for="new"],
+.form-table label[for="lnew"],
+.form-table label[for="used"]{
+	margin-right: 40px;
 }
 
-.profile-table{
-	width: 80%;
-	height: 200px;
-	float: left;
-	border: 2px solid #00462A;
-	border-radius: 10px;
-	margin-bottom: 20px;
-	margin-top: 20px;
+.form-table label[for="direct"],
+.form-table label[for="delivery"]{
+	margin-right: 40px;
 }
 
-.profile-table img{
-	height: 20px;
-	width: 20px;
-}
-
-.seller, .buyer{
-	box-sizing: border-box;
-	width: 80%;
-	height: 250px;
-	border: 2px solid #00462A;
-	border-radius: 10px;
-	padding-right: 30px;
-    padding-left: 30px;
-	margin-bottom: 20px;
-	margin-top: 20px;
-	float: left;
-}
-
-.seller #status, .buyer #status{
-	font-size: 20px;
-	font-weight: bold;
-}
-
-.seller #date, .buyer #date{
-	color: #8f8f8f;
-}
-
-.seller #name, .seller #price,
-.buyer #name, .buyer #price{
-	font-size: 20px;
-	line-height: 50%;
-}
-
-.seller img, .buyer img{
-	float: left;
-	width: 100px;
-	height: 150px;
+.form-table #hashtag {
+	padding: 6px;
+	background-color: #d9d9d9;
+	border-radius: 20px;
 	margin-right: 20px;
+}
+
+.form-table #hashtag button{
+	border: none;
+	background: none;
+}
+
+.form-table th {
+    font-size: 20px;
+      
+}
+
+.form-table input[type="text"]:not(input[name="keyword"]),
+.form-table textarea{
+    width: 100%;
+    height: 40px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.form-table input[name="keyword"]{
+	width: 50%;
+    height: 40px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.form-table textarea {
+    height: 80px;
 }
