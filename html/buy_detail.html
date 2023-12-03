@@ -3,54 +3,233 @@
 {% block section %}
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='buy_detail_style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
         
-     function openBigPicture() {
-        window.open("big_picture.html", "_blank");
+     
+    $(document).ready(function () {
+        checkConfirmStatus();
+    });
+
+    function checkConfirmStatus() {
+        // AJAX를 사용하여 confirm 값을 가져옴
+        $.ajax({
+            type: 'GET',
+            url: '/get_confirm/{{name}}/', // confirm 값을 가져오는 API 엔드포인트 URL
+            success: function (response) {
+                let confirmValue = response['confirm'];
+
+                // confirm 값이 1이면 버튼을 비활성화
+                if (confirmValue === 1) {
+                    disableButton();
+                }
+            }
+        });
+    }
+
+    function disableButton() {
+        $('#modal-open').prop('disabled', true);
+    }    
+        
+        
+    function btnDisabled()  {
+      const target = document.getElementById('modal-open');
+      target.disabled = true;
+    }
+     function realbuying() {
+          $.ajax({
+            type: 'POST',
+            url: '/update_buy/{{name}}/',
+            data: {
+                price : '{{data.price}}',
+                seller: '{{data.seller}}',
+                img_path: '{{data.img_path}}',
+                isBuy: "Y"
+                },
+                success: function (response) {    
+                    changeConfirm(name);
+                    btnDisabled();
+                    disableScroll();
+                    window.open("{{data.openkakao}}"); 
+                    
+            }
+          });    
+        }
+        
+        
+    function changeConfirm() {
+          $.ajax({
+            type: 'POST',
+            url: '/confirm_buying/{{name}}/'
+            
+          });    
+        }
+     
+     function disableScroll() {
+    // body 요소의 overflow를 hidden으로 변경하여 스크롤 비활성화
+        document.body.style.overflow = 'hidden';
+    }
+
+     function enableScroll() {
+        // body 요소의 overflow를 다시 visible로 변경하여 스크롤 활성화
+         document.body.style.overflow = 'visible';
+        }   
+        
+     $(function(){
+      $("#confirm").click(function(){
+          realbuying();//모달 닫기 함수 호출
+          modalClose();
+          btnDisabled();
+          disableScroll();
+          //컨펌 이벤트 처리
+      });
+      $("#modal-open").click(function(){        
+          {% if session['id'] %}
+              $("#popup").css('display','flex').hide().fadeIn();
+              //팝업을 flex속성으로 바꿔준 후 hide()로 숨기고 다시 fadeIn()으로 효과
+              disableScroll();
+           {% else %}
+               alert('로그인을 먼저하세요!');
+               window.location.href='/login';
+           {% endif %}
+      });
+      $("#close").click(function(){
+          modalClose(); //모달 닫기 함수 호출
+          disableScroll();
+      });
+      function modalClose(){
+          $("#popup").fadeOut(); //페이드아웃 효과
+      }
+      $("#img-bigger").click(function(){        
+         $("#img-popup").css('display','flex').hide().fadeIn();
+         disableScroll();
+          //팝업을 flex속성으로 바꿔준 후 hide()로 숨기고 다시 fadeIn()으로 효과
+      });
+      $("#img-close").click(function(){
+          imgmodalClose(); //모달 닫기 함수 호출
+          enableScroll();
+      });
+      function imgmodalClose(){
+          $("#img-popup").fadeOut(); //페이드아웃 효과
+      }
+    });
+        
+      function showHeart() {
+        $.ajax({
+            type: 'GET',
+            url: '/show_heart/{{name}}/',
+            data: {},
+            success: function (response){
+                let my_heart = response['my_heart'];
+                if (my_heart['interested'] == 'Y'){
+                    $("#heart").css("color", "red");
+                    $("#heart").attr("onclick", "unlike()");
+                }
+                else {
+                    $("#heart").css("color", "grey");
+                    $("#heart").attr("onclick", "like()");
+                }
+                //alert("showheart!")
+            }
+        });
     }
         
-     function realbuying() {
-         if (confirm("구매를 확정하시겠습니까?")) {
-                alert("구매가 확정되었습니다.");
-            } else {
-                alert("구매가 취소되었습니다.");
+    function like(){
+        $.ajax({
+            type: 'POST',
+            url: '/like/{{name}}/',
+            data: {
+                interested : "Y"
+            },
+            success: function (response) {
+                alert(response['msg']);
+                window.location.reload()
             }
-     }
+        });
+    }
+        
+     function unlike(){
+        $.ajax({
+            type: 'POST',
+            url: '/unlike/{{name}}/',
+            data: {
+                interested : "N"
+            },
+            success: function (response) {
+                alert(response['msg']);
+                window.location.reload()
+            }
+        });
+    }
+    
+    $(document).ready(function () {
+        showHeart();
+    });
         
     </script>
+    <style>
+     #heart {
+            color: grey;
+            font-size: 50px;
+            margin-top: 10%;
+        }
+
+        #heart.red {
+            color: red;
+        }
+        
+    </style>
 </head>
 
 <body>
     <section>
     <div class="upper_section">
-            
-        <div class="buy_detail_info item_img">
-            <img src="{{ url_for('static', filename='images/ex_calculator.jpeg')}}" alt="상품 이미지" style="width:200px height:200px">
-          <form>
-                <input type="button" class="big_picture" onclick="big_picture()">
-            </form>
+        
+        <div class="buy_detail_info item_img" style = "width: 40%; height: 300px; margin-left: 0; margin-right: 0; margin-bottom: 5%; position: relative; overflow: hidden; align-items: center;">
+            <img src="{{ url_for('static', filename='images/' + data.img_path) }}" alt="{{ key }}" style="width: 100%; max-height: 100%; object-fit: contain; position: abosolute;" >
+             <form>
+                  <button type="button" class="big_picture" id="img-bigger";>확대</button>
+                </form>
         </div>
-      <!-- 
-        <img src="{{ url_for('static', filename='images/big_picture.jpeg')}}" id="big_picture" onclick="openBigPicture()">-->
+        
+    <!--사진 확대창 -->    
+        <div class="container">
+          <div class="img-wrap" id="img-popup">
+            <div class="img-popup">
+              <div class="img-popup-head">
+                   <span class="img-close" id="img-close">X</span>
+              </div>
+              <div class="img-popup-body">
+                    <img src="{{ url_for('static', filename='images/' + data.img_path) }}" alt="{{ key }}" style="max-height:70vh;">     
+              </div>
+            </div>
+          </div>
+        </div>
+        
 
-
-            <div class="buy_detail_info info">
-                <div class="upper_right_upper" style="display:flex;">     
-                    <div class="item_name bold_title" style="float:left; margin-right:8px;">공학용 계산기</div>
-                    <div style="float:left;"><sub>#공대 #계산기</sub></div>
-                </div><br>
-
-                <div class="buy_detail_content">
-                가격    : <span id="cost">1000원</span><br>
-                상품상태 : <span id="status">새상품</span><br>
-                판매자  : <span id="seller">차</span><br>
-                판매지역 : <span id="sell_area">이화여대</span><br>
-                전달방식 : <span id="sell_way">직거래</span><br><br>
+    <div class="buy_detail_info info">
+        <div class="upper_right_upper" style="display:flex;">
+            <div class="item_name bold_title" style="float:left; margin-right:8px; margin-top: 10%;">{{ name }}</div>
+            <div style="float:left; margin-top: 10%;"><sub>#{{data.keyword}}</sub></div>
+        </div>
+        <br>
+        <div class="buy_detail_content">
+        가격    : <span id="cost">{{data.price}}원</span><br>
+        상품상태 : <span id="status">{{data.status}}</span><br>     
+        판매자  : <span id="seller">{{data.seller}}</span><br>
+        판매지역 : <span id="sell_area">{{data.addr}}</span><br>
+        전달방식 : <span id="sell_way">{{data.send}}</span><br>
+        </div>
+        
+        <div>
+                    <!--<button onclick="location.href='/reg_review_init/{{name}}/';">리뷰등록</button>-->
+                    <i class="fas fa-heart" id="heart" ></i>
                 </div>
                 
-            </div>
         </div>
-        <br><br><br>
+    </div>
+    <br><br><br>
     </section>
     
     
@@ -60,16 +239,52 @@
     <div class="down_section">  
     <div class="bold_title" style="margin-right:auto;">상품정보</div>
          <form>
-            <button class="btn_right" style="display:inline-block; margin-right:0px;"><a href="/review"> 리뷰보기 </a></button>
-            <button class="btn_right" style="display:inline-block;" onclick="realbuying()"><a> 구매하기 </a></button>   
+            <button type="button" class="btn_right" style="display:inline-block; margin-right:0px;"><a href="/review"> 리뷰보기 </a></button>
+             {% if session['id']==data.seller %}
+                 <button type="button" class="btn_right" disabled style="background-color: #CCCCCC; cursor: not-allowed; 
+                                        color: #fff; cursor: pointer;">구매하기</button>
+             {% else %}
+                <button type="button" class="btn_right" id="modal-open" style="display:inline-block;"><a> 구매하기 </a></button>
+             {% endif %}
         </form>
     </div>
         
     <div id="down_section_box">
         <pre>
-철회로 인해 한번도 안썼습니다..
+{{data.explain}}
         </pre>
     </div>
     </section>
+    
+    <!--팝업 만들기-->
+
+    <div class="container">
+      <div class="popup-wrap" id="popup">
+        <div class="popup">
+          <div class="popup-head">
+              <span class="head-title">잠깐!</span>
+          </div>
+          <div class="popup-body">
+            <div class="body-content">
+              <div class="body-titlebox">
+                <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="로고1" style="width:25%; margin:10px;" >
+
+              </div>
+                 <br><br><br>
+              <div class="body-contentbox">
+                <p>구매를 확정하시겠습니까?</p>
+              </div>
+            </div>
+          </div>
+          <div class="popup-foot">
+            <span class="pop-btn confirm" id="confirm">예</span>
+            <span class="pop-btn close" id="close">아니오</span>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
+
+
 {% endblock section %}
+
