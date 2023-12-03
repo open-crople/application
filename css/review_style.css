@@ -11,11 +11,14 @@
 .table_review {
     padding: 20px;
 }
-.all_review > td,
-th {
-    border: none;
-
+.all_review {
+    border-collapse: collapse;
+    border: 1px solid #00462a;
+    margin: 10px;
 } 
+.all-review th, td{
+    border: none;
+}
 /*
 .twoline {
     width:45%;
@@ -67,4 +70,17 @@ th {
 
 .rate-label {
     color: #F0D74A; /* Change the star color to yellow */
+}
+
+.sort_active {
+    color: #6F4F28;
+    font-weight:bold;
+
+    text-decoration: underline;
+      
+}
+.sorting{
+padding:10px; 
+text-decoration:none;
+    color: black;
 }
