@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='./style.css')}}" />
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         $(document).ready(function(){
@@ -19,29 +19,28 @@
             }
         });
 </script>
-    <!--script type="text/javascript" defer src="{{ url_for('static', filename='main.js') }}"></script-->
 </head>
 <body>
     <nav class="navbar" style="margin-left: 10%; margin-right:10%; border-bottom: 2px solid #00462A; font-family:'SOYO Maple Bold">
         <div class="navbar__logo1">
-            <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="로고1" style="width:70%; margin-left: 0; margin-bottom: 5%; padding: 0; float: left;"></a>
+            <a href="/"><img src="{{ url_for('static', filename='images/logo2.png') }}" alt="로고1" style="width:45%; margin-left: 0; margin-right:-30px; padding: 0; float: left;"></a>
         </div>
-        <ul class="navbar__menu" style="margin=0">
-            <li><a href="/" style="margin-left:0;padding: 0; font-size: 25px; font-weight:bolder;">상품구매</a></li>
+        <ul class="navbar__menu" style="margin=0;">
+            <li><a href="/" style="margin-left:0;padding:0; font-size: 25px; font-weight:bolder;">상품구매</a></li>
             <li><a href="/rent_items_list" style="padding: 0; font-size: 25px; font-weight:bolder;">물건대여</a></li>
-            <li><a href="/review_testing" style="padding: 0; font-size: 25px; font-weight:bolder;">리뷰보기</a></li>
+            <li><a href="/review" style="padding: 0; font-size: 25px; font-weight:bolder;">리뷰보기</a></li>
         </ul>
-        <div class="navbar__search" style="margin-left:14%; display:flex; align-items:center;">
+        <div class="navbar__search" style="margin-left:8%; margin-right:2%; display:flex; align-items:center;">
             <input type="text" placeholder="검색어 입력" style="font-size: 15px; width: 180px; height:30px; margin-right: 5px;">
             <a href="/list">
             <button type="submit" style="display: flex; align-items: center; font-size: 15px; width: 70px; height: 30px; justify-content: center;">검색</button>
             </a>
         </div>
-         <ul class="navbar__menu" style="margin:0; float:left;">
+         <ul class="navbar__menu" style="margin:0; float:left; display: block;">
             {% if session['id'] %}    
-             <li>{{session['id']}}님 반갑습니다!<a href="/logout" style="margin-left:0;padding: 0; font-size: 13px; font-weight:bolder;"><br><br>로그아웃</a></li>
+             <li>{{session['id']}}님 반갑습니다!</li><li><a href="/logout" style="margin-left:30%;padding: 0; font-size: 13px; font-weight:bolder; float:left;"><br><br>로그아웃</a></li>
             {% else %}
-            <li><a href="/login" style="margin-left:0;padding: 0; font-size: 25px; font-weight:bolder;">로그인</a></li>
+            <li><a href="/login" style="margin-left:0;padding: 0; font-size: 24px; font-weight:bolder;">로그인</a></li>
             {% endif %}
         </ul>
         <div class="navbar__logo2">
