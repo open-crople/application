@@ -16,18 +16,20 @@
     display: none;
 }
 
-.rate-label{
+.rate-label {
     font-size: 2.5em;
-    color: transparent;
+    color: #D3D3D3; /* Light gray color for default */
     text-shadow: 0 0 0 #f0f0f0;
+    transition: color 0.3s; /* Smooth transition for color change */
 }
 
-.rate-label:hover{
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99); 
+
+.rate-label:hover {
+    color: rgba(250, 208, 0, 0.99); /* Yellow color on hover */
 }
 
-.rate-label:hover ~ .rate-label{
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99); 
+.rate-label:hover ~ .rate-label {
+    color: rgba(250, 208, 0, 0.99); /* Yellow color on hover for adjacent stars */
 }
 
 #myform input[type=radio]:checked ~ .rate-label{
@@ -97,22 +99,21 @@ resize: none; }
             font-size: 24px;
             font-weight: bold;
         }
-
- .star-rating .star img {
+ 
+.star-rating .star img {
     width: 7%;
     height: 7%;
     object-fit: contain;
     padding: 0.5%;
     margin-top: 2%;
-    filter: grayscale(1);
+    filter: brightness(0%);
 }
 
 .star-rating .star img:hover,
 .star-rating .star.active img {
-    filter: grayscale(0);
+    filter: brightness(0%);
 }
 
-    
 .review-table {
           width: 80%;
           margin: 0 auto;
@@ -159,14 +160,14 @@ resize: none; }
             
             <p>{{name}}</p><br>
             
-           <fieldset>
-                <!-- <span class="text-bold">별점을 선택해주세요</span> -->
-                <input type="radio" name="reviewStar" value="5" id="rate1" /><label for="rate1" class="rate-label">★</label>
-                <input type="radio" name="reviewStar" value="4" id="rate2" /><label for="rate2" class="rate-label">★</label>
-                <input type="radio" name="reviewStar" value="3" id="rate3" /><label for="rate3" class="rate-label">★</label>
-                <input type="radio" name="reviewStar" value="2" id="rate4" /><label for="rate4" class="rate-label">★</label>
-                <input type="radio" name="reviewStar" value="1" id="rate5" /><label for="rate5" class="rate-label">★</label>
-            </fieldset>
+<fieldset>
+    <input type="radio" name="reviewStar" value="5" id="rate1" /><label for="rate1" class="rate-label">★</label>
+    <input type="radio" name="reviewStar" value="4" id="rate2" /><label for="rate2" class="rate-label">★</label>
+    <input type="radio" name="reviewStar" value="3" id="rate3" /><label for="rate3" class="rate-label">★</label>
+    <input type="radio" name="reviewStar" value="2" id="rate4" /><label for="rate4" class="rate-label">★</label>
+    <input type="radio" name="reviewStar" value="1" id="rate5" /><label for="rate5" class="rate-label">★</label>
+</fieldset>
+
         </div>
     </div>
         
@@ -201,6 +202,7 @@ resize: none; }
 </div>   
 </form>
    
+
 <script>
     var cancelButton = document.getElementById("cancelReview");
 
@@ -212,13 +214,41 @@ resize: none; }
             history.back();
         }
     });
-
+    
+    var submitButton = document.getElementById("submitReview");
 
     submitButton.addEventListener("click", function() {
-        
-        alert("리뷰가 입력되었습니다.");}
+        // 리뷰가 입력되었으니 해당 상품의 이름을 localStorage에 저장합니다.
+        var itemName = "{{ name }}"; // 상품 이름을 설정합니다.
+        localStorage.setItem('reviewSubmittedForItem', itemName);
+        alert("리뷰가 입력되었습니다.");
 
+        // 리뷰 작성 시 해당 버튼을 비활성화합니다.
+        disableButton(itemName);
+    });
+    
+    function disableButton(item) {
+        var reviewButton = document.getElementById("review_" + item);
+        if (reviewButton && !reviewButton.disabled) { // 이미 비활성화된 버튼인지 확인
+            reviewButton.disabled = true;
+            reviewButton.style.backgroundColor = '#CCCCCC';
+            reviewButton.style.cursor = 'not-allowed';
+            // 이미 비활성화된 버튼에 대해서만 추가적인 비활성화가 실행되지 않도록 합니다.
+            localStorage.setItem('disabledReviewButton_' + item, 'disabled');
+        }
+    }
+    
+    window.onload = function() {
+        var reviewSubmittedForItem = localStorage.getItem('reviewSubmittedForItem');
+        var disabledButton = document.getElementById("review_" + reviewSubmittedForItem);
 
+        // 저장된 상품 리뷰가 있을 경우 해당 상품 버튼을 비활성화합니다.
+        if (reviewSubmittedForItem) {
+            disableButton(reviewSubmittedForItem);
+        }
+    };
 </script>
+
+
     
 {% endblock section %}
