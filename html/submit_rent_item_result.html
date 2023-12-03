@@ -3,30 +3,72 @@
 {% block section %}
 <div class="container"> 
 <h1>상품 등록이 완료되었습니다.</h1><br>
+<img src="{{img_path}}"/><br><br>
 <p>
     상품명: {{data.name}}<br><br>
     가격: {{data.price}}원<br><br>
-    상품 이미지
 </p>
-<img src="{{img_path}}"/><br><br>
+
 <p>
-    전달장소: {{data.addr}}<br><br>
+    대여지역: {{data.addr}}<br><br>
+    전달방식: {{data.send}}<br><br>
     상품키워드: {{data.keyword}}<br><br>
     대여가능기간: {{ data['period-start'] }} ~ {{ data['period-end'] }}<br><br>
-    판매방식: {{data.send}}
-    <br><br>
     상세 설명: {{data.explain}}<br><br>
 </p>
 </div>
 <style>
-    .container{
+.container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.container img {
+    max-width: 50%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.container h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.container p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Specific styling for certain elements */
+.container p:first-child {
+    margin-top: 30px;
+}
+
+/* Style the headings for item details */
+.container p > strong {
+    font-weight: bold;
+    color: #000;
+}
+
+/* Additional styling for specific details */
+.container p > .detail {
+    font-style: italic;
+    color: #777;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .container img {
         width: 80%;
-        justify-content: center;
-        margin-left: 35%;
     }
-    img{
-        width: 40%;
-        
-    }
+}
+
+
 </style>
 {% endblock section %}
