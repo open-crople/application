@@ -2,7 +2,7 @@
 
 <img src="https://github.com/open-crople/application/blob/main/images/logo_fin.png" width="20%" height="20%">
 
-![bedge](https://img.shields.io/badge/BaekkochSangjeom-CROPLE-fed041)
+![bedge](https://img.shields.io/badge/BS-CROPLE-fed041)
 ![bedge](https://img.shields.io/badge/version-1.1.0-143e68)
 
 ### <b>이화 마켓 웹어플리케이션, "배꽃상점"</b>
