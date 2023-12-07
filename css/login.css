@@ -3,9 +3,10 @@
     height: 10%;
     text-align: left;
     margin: 0 0 15px;
-  }
+    margin-bottom: 0;
+}
 
-  .input {
+.input {
     width: 50%;
     height: 40px; 
     text-align: center;
@@ -13,45 +14,43 @@
     justify-content: center;
     align-items: center;
     display: flex;
-   
-  }
+}
 
-  .input.password {
+.input.password {
     width: auto;
     border: 2px solid gray;
     border-top-width: 1px;
     border-radius: 10px;
     margin-top: 0;
     margin-bottom: 10px;
-  }
+}
 
-  .input.id {
+.input.id {
     width: auto;
     border: 2px solid gray;
     border-bottom-width: 1px;
     border-radius: 10px;
     align-self: auto;
-  }
+}
 
-  body{
+
+body {
     display: flex;
     justify-content: center; 
     align-items: center;
     height: 100vh; 
     margin: 0; 
-  }
+}
 
-  .loginsubmit {
+.loginsubmit {
     width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     display: flex;
-  }
+}
 
-  
-
-  .submit-button {
+.submit-button {
     width: 100%;
     min-width: 0;
     background-color: #00462a;
@@ -59,38 +58,47 @@
     margin: 20px 0 10px;
     padding: 12px 0; 
     color: white;
-  }
+}
 
-  .image {
+.image {
     width: 25px;
     margin-right: 10px;
     margin-left: 10px;
-  }
+}
 
-  .logo-image {
-    width: 100px;
-    margin-bottom: 20px;
-  }
-    .text-block {
+.logo-image {
+    width: 200px;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.text-block {
     margin: 10px;
-  }
-    .loginbottom {
-      display: flex;
+}
+
+.loginbottom {
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-  }
-
-  .text-field {
-  width: 300px;
-  min-width: 300px;
-  border: none;
-  margin: 0 10px;
-  padding-top: 0;
-  padding-bottom: 0;
 }
 
-  .text-block a {
+.loginbottom a {
   color: black;
-  text-decoration: none; /* 밑줄 제거 */
+  text-decoration: none;
+}
+
+.text-field {
+    width: 300px;
+    min-width: 300px;
+    border: none;
+    margin: 0 10px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.text-block a {
+    color: black;
+    text-decoration: none; /* 밑줄 제거 */
 }
