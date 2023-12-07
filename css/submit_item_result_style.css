@@ -23,24 +23,20 @@
     color: #555;
 }
 
-/* Specific styling for certain elements */
 .container p:first-child {
     margin-top: 30px;
 }
 
-/* Style the headings for item details */
 .container p > strong {
     font-weight: bold;
     color: #000;
 }
 
-/* Additional styling for specific details */
 .container p > .detail {
     font-style: italic;
     color: #777;
 }
 
-/* Adjustments for smaller screens */
 @media (max-width: 768px) {
     .container img {
         width: 80%;
