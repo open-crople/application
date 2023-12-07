@@ -99,7 +99,8 @@
         }
         #heart {
             color: grey;
-            font-size: 100px;
+            font-size: 50px;
+            margin-top: 10%;
         }
 
         #heart.red {
