@@ -1,98 +1,163 @@
-.mypage-table:not(.profile-table){
-	width: 80%;
-	border-collapse: collapse;
-	margin: 0 auto;
+/* Styles for mypage table */
+.mypage-table:not(.profile-table) {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 0 auto;
 }
 
-.mypage-table #logout, .mypage-table #show_review, .seller #pause_rent, .buyer #review{
-	float: right;
-	background-color: #00462A;
-	width: 100px;
-	height: 40px;
-	border-radius: 3px;
-	color: #fff;
-	font-size: 15px;
-	border: none;
-	cursor: pointer;
-}
-.mypage-table #show_review{
-	margin-top: 20px;
-}
-.mypage-table #next{
-	float: right;
-	width: 10%;
-	border: none;
-	background: none;
-	cursor: pointer;
+.mypage-table #logout,
+.mypage-table #show_review,
+.seller #pause_rent,
+.buyer #review {
+    float: right;
+    background-color: #00462A;
+    width: 100px;
+    height: 40px;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
 }
 
-.mypage-table #next img{
-	width: 40px;
+.mypage-table #show_review {
+    margin-top: 20px;
 }
 
-.mypage-table .user{
-	font-size: 30px;
-	padding: 10px;
+.mypage-table #next {
+    float: right;
+    width: 10%;
+    border: none;
+    background: none;
+    cursor: pointer;
 }
 
-.mypage-table th, .mypage-table td{
-	text-align: left;
+.mypage-table #next img {
+    width: 40px;
+}
+
+.mypage-table .user {
+    font-size: 30px;
+    padding: 10px;
+}
+
+.mypage-table .user a {
+	color:white;
+	text-decoration:none;
+}
+
+.mypage-table th,
+.mypage-table td {
+    text-align: left;
     padding: 10px;
     border-bottom: 1px solid #ccc;
 }
 
-.mypage-table th:not(.profile-table th){
-	font-size: 25px;
-	vertical-align: top;
-	padding-top: 20px;
+.mypage-table th:not(.profile-table th) {
+    font-size: 25px;
+    vertical-align: top;
+    padding-top: 20px;
+    width: 20%;
 }
 
-.profile-table{
-	width: 80%;
-	height: 200px;
-	float: left;
-	border: 2px solid #00462A;
-	border-radius: 10px;
-	margin-bottom: 20px;
-	margin-top: 20px;
+.mypage-table h3{
+	text-align:center;
 }
 
-.profile-table img{
-	height: 20px;
-	width: 20px;
+/* Styles for profile table */
+.profile-table {
+    width: 80%;
+    height: 200px;
+    float: left;
+    border: 2px solid #00462A;
+    border-radius: 10px;
 }
 
-.seller, .buyer{
-	box-sizing: border-box;
-	width: 80%;
-	height: 250px;
-	border: 2px solid #00462A;
-	border-radius: 10px;
-	padding-right: 30px;
+.profile-table th,
+.profile-table td {
+	border-bottom:none;
+}
+
+.profile-table img {
+    height: 20px;
+    width: 20px;
+}
+
+.profile-table a {
+	text-decoration:none;
+}
+
+/* Styles for seller and buyer */
+.seller,
+.buyer {
+    box-sizing: border-box;
+    width: 80%;
+    height: 250px;
+    border: 2px solid #00462A;
+    border-radius: 10px;
+    padding-right: 30px;
     padding-left: 30px;
-	margin-bottom: 20px;
-	margin-top: 20px;
-	float: left;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    float: left;
 }
 
-.seller #status, .buyer #status{
-	font-size: 20px;
-	font-weight: bold;
+.seller #status,
+.buyer #status {
+    font-size: 20px;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
 }
 
-.seller #date, .buyer #date{
-	color: #8f8f8f;
+.seller #date,
+.buyer #date {
+    color: #8f8f8f;
+    margin-bottom: 15px;
 }
 
-.seller #name, .seller #price,
-.buyer #name, .buyer #price{
-	font-size: 20px;
-	line-height: 50%;
+.seller #name,
+.seller #price,
+.buyer #name,
+.buyer #price {
+    font-size: 20px;
+    line-height: 50%;
+    margin-bottom: 15px;
 }
 
-.seller img, .buyer img{
-	float: left;
-	width: 100px;
-	height: 150px;
-	margin-right: 20px;
+.seller img,
+.buyer img {
+    float: left;
+    width: 100px;
+    height: 150px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+/* Styles for scroll container */
+.scroll-container {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.review-button {
+  float: right;
+  width: 100px;
+  height: 40px;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.review-button[disabled] {
+  background-color: #CCCCCC;
+  cursor: not-allowed;
+}
+
+.review-button:not([disabled]) {
+  background-color: #00462A;
 }
