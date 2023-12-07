@@ -6,48 +6,36 @@
     <title>Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='./style.css')}}" />
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $(".navbar__menu li a").click(function(){
-                $(".navbar__menu li a").removeClass("active");
-                $(this).addClass("active");
-                sessionStorage.setItem('activeLink', $(this).attr('href'));
-            });
-            var activeLink = sessionStorage.getItem('activeLink');
-            if (activeLink) {
-                $(".navbar__menu li a[href='" + activeLink + "']").addClass("active");
-            }
-        });
-</script>
+    <script src="JavaScript/index.js"></script>
 </head>
 <body>
-    <nav class="navbar" style="margin-left: 10%; margin-right:10%; border-bottom: 2px solid #00462A; font-family:'SOYO Maple Bold">
+    <nav class="navbar">
         <div class="navbar__logo1">
-            <a href="/"><img src="{{ url_for('static', filename='images/logo2.png') }}" alt="로고1" style="width:45%; margin-left: 0; margin-right:-30px; padding: 0; float: left;"></a>
+            <a href="/" ><img src="{{ url_for('static', filename='images/logo2.png') }}" alt="로고1"></a>
         </div>
-        <ul class="navbar__menu" style="margin=0;">
-            <li><a href="/" style="margin-left:0;padding:0; font-size: 25px; font-weight:bolder;">상품구매</a></li>
-            <li><a href="/rent_items_list" style="padding: 0; font-size: 25px; font-weight:bolder;">물건대여</a></li>
-            <li><a href="/review" style="padding: 0; font-size: 25px; font-weight:bolder;">리뷰보기</a></li>
+        <ul class="navbar__menu">
+            <li><a href="/" id="home">상품구매</a></li>
+            <li><a href="/rent_items_list">물건대여</a></li>
+            <li><a href="/review">리뷰보기</a></li>
         </ul>
-        <div class="navbar__search" style="margin-left:8%; margin-right:2%; display:flex; align-items:center;">
-            <input type="text" placeholder="검색어 입력" style="font-size: 15px; width: 180px; height:30px; margin-right: 5px;">
+        <div class="navbar__search">
+            <input type="text" placeholder="검색어 입력">
             <a href="/list">
-            <button type="submit" style="display: flex; align-items: center; font-size: 15px; width: 70px; height: 30px; justify-content: center;">검색</button>
+            <button type="submit">검색</button>
             </a>
         </div>
-         <ul class="navbar__menu" style="margin:0; float:left; display: block;">
+         <ul class="navbar__menu">
             {% if session['id'] %}    
-             <li>{{session['id']}}님 반갑습니다!</li><li><a href="/logout" style="margin-left:30%;padding: 0; font-size: 13px; font-weight:bolder; float:left;"><br><br>로그아웃</a></li>
+             <li>{{session['id']}}님 💚</li><li><a href="/logout"><br>로그아웃</a></li>
             {% else %}
-            <li><a href="/login" style="margin-left:0;padding: 0; font-size: 24px; font-weight:bolder;">로그인</a></li>
+            <li><a href="/login">로그인</a></li>
             {% endif %}
         </ul>
         <div class="navbar__logo2">
             {% if session['id'] %}
-            <a href="/mypage"><img src="{{ url_for('static', filename='images/mypage.png') }}" alt="로고2" style="width:60%; float: left;"></a>
+            <a href="/mypage"><img src="{{ url_for('static', filename='images/mypage.png') }}" alt="로고2"></a>
             {% else %}
-            <a href="/login"><img src="{{ url_for('static', filename='images/mypage.png') }}" alt="로고2" style="width:60%; float: left;"></a>
+            <a href="/login"><img src="{{ url_for('static', filename='images/mypage.png') }}" alt="로고2"></a>
             {% endif %}
         </div>
     </nav>
