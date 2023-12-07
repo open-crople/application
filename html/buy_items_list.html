@@ -1,60 +1,17 @@
 {% extends "index.html" %}
 {% block section %}
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            //alert("{{category}}");
-            $('#category option:contains("{{current_category}}")').prop("selected",true);
-        });
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="JavaScript/buy_items_list.js"></script>
     <title>Buy List</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='buy_items_list_style.css')}}">
-    <style>
-        body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-}
-.date-selection {
-    display: flex;
-    justify-content:left;
-    margin-left: 150px;
-}
-.borrowingDate {
-    margin-left: 30px;
-    margin-right: 5px;
-}
-label {
-    margin-right:5px;
-    margin-left:5px;
-}
-
-        
-        #search{
-    margin-left: 10px; 
-    border-radius: 5px; 
-    background-color: #00462A; 
-    color: white; 
-    display: right; 
-    align-items: center; 
-    font-size: 15px; 
-    width: 70px; 
-    height: 30px; 
-    justify-content: center; 
-    text-decoration: none;
-    transition: background-color 0.3s;
-    box-decoration-break: clone;
-    }
-
-    </style>
 </head>
 <body>
     <h2>상품 목록</h2>
     <br>
     <!--정렬 옵션-->
-    
     <form id="rentForm" action="{{ url_for('view_list') }}" method="GET">
-    <div class="date-selection" style="margin-left:11%;">
+    <div class="date-selection">
         <select id="category" name="category">
             <option value="all" {% if current_category == 'all' %}selected{% endif %}>정렬</option>
             <option value="abc" {% if current_category == 'abc' %}selected{% endif %}>가나다 순</option>
@@ -85,7 +42,7 @@ label {
         <br>
         <!--상품등록시 로그인되지 않은 경우, login페이지로 이동하도록-->
         <form>
-            <button class="addProductButton" onClick="handleButtonClick()" style="float:right; margin-right: 10%;">
+            <button class="addProductButton" onClick="handleButtonClick()">
             {% if session['id'] %}
                 <a href="/reg_items">+ 상품등록</a>
             {% else %}
@@ -109,20 +66,5 @@ label {
         <p>등록된 상품이 없습니다. </p>
     {% endif %}
         <br>
-         <script>
-            function handleButtonClick() {
-                {% if not session['id'] %}
-                    alert('로그인을 먼저하세요!');
-                {% else %}
-                    window.location.href = '/reg_items';
-                {% endif %}
-            }
-       
-    function submitForm() {
-        document.getElementById('rentForm').submit();
-    }
-
-        </script>
-
 </body>
 {% endblock section %}
