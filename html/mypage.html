@@ -1,263 +1,133 @@
-{% extends "index.html" %}
-
-{% block section %}
-<style>
-.mypage-table:not(.profile-table){
-	width: 80%;
-	border-collapse: collapse;
-	margin: 0 auto;
-}
-
-.mypage-table #logout, .mypage-table #show_review, .seller #pause_rent {
-	float: right;
-	background-color: #00462A;
-	width: 100px;
-	height: 40px;
-	border-radius: 3px;
-	color: #fff;
-	font-size: 15px;
-	border: none;
-	cursor: pointer;
-}
-.mypage-table #show_review{
-	margin-top: 20px;
-}
-.mypage-table #next{
-	float: right;
-	width: 10%;
-	border: none;
-	background: none;
-	cursor: pointer;
-}
-
-.mypage-table #next img{
-	width: 40px;
-}
-
-.mypage-table .user{
-	font-size: 30px;
-	padding: 10px;
-}
-
-.mypage-table th, .mypage-table td{
-	text-align: left;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-}
-
-.mypage-table th:not(.profile-table th){
-	font-size: 25px;
-	vertical-align: top;
-	padding-top: 20px;
-    width: 20%;
-}
-
-.profile-table{
-	width: 80%;
-	height: 200px;
-	float: left;
-	border: 2px solid #00462A;
-	border-radius: 10px;
-	/*margin-bottom: 20px;
-	margin-top: 20px;*/
-}
-
-.profile-table img{
-	height: 20px;
-	width: 20px;
-}
-
-.seller, .buyer{
-	box-sizing: border-box;
-	width: 80%;
-	height: 250px;
-	border: 2px solid #00462A;
-	border-radius: 10px;
-	padding-right: 30px;
-    padding-left: 30px;
-	margin-bottom: 20px;
-	margin-top: 20px;
-	float: left;
-}
-
-.seller #status, .buyer #status{
-	font-size: 20px;
-	font-weight: bold;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-}
-
-.seller #date, .buyer #date{
-	color: #8f8f8f;
-    margin-bottom: 15px;
-}
-
-.seller #name, .seller #price,
-.buyer #name, .buyer #price{
-	font-size: 20px;
-	line-height: 50%;
-    margin-bottom: 15px;
-}
-
-.seller img, .buyer img{
-	float: left;
-	width: 100px;
-	height: 150px;
-	margin-right: 20px;
-    cursor: pointer;
-}
-.scroll-container {
-        max-height: 300px; 
-        overflow-y: auto;
-    }
-</style>
-
-    <link rel="stylesheet" href="../static/mypage_style.css">
-        <!--로그인한 사용자 정보를 출력하는 박스
+{% extends "index.html" %} {% block section %}
+<link rel="stylesheet" href="../static/mypage_style.css">
+<script src="JavaScript/mypage.js"></script>
+<!--로그인한 사용자 정보를 출력하는 박스
         회원가입시 기입한 내용인 이메일주소, 오픈채팅방 링크, 단과대학 등을 출력한다 -->
-		<table class="mypage-table">
-			<tr>
-                {% if session['id'] %}
-				<td colspan="2"><spark class="user">{{session['id']}}</spark> 님 반가워요
-                    <button id="logout"><a href="/logout" style="color:white; text-decoration:none;">로그아웃</a></button></td>
-			</tr>
-			<tr>
-				<th>정보</th>
-				<td>
-					<table class="profile-table">
-						<tr>
-                            <th><img src="../static/images/userid.png"> 아이디</th>
-							<td>{{session['id']}}</td>
-						</tr>
-						<tr>
-							<th><img src="../static/images/email.png"> 이메일 주소</th>
-							<td><a href="mailto:{{ session['email'] }}" style="text-decoration:none;">{{ session['email'] }}</a></td>
-						</tr>
-						<tr>
-							<th><img src="../static/images/phone.png"> 오픈채팅방 링크</th>
-							<td><a href="{{session['openkakao']}}" style="text-decoration:none;">{{session['openkakao']}}</a></td>
-						</tr>
-						<tr>
-							<th style="border-bottom:none;"><img src="../static/images/member.png"> 단과대학 및 학과</th>
-							<td style="border-bottom:none;">{{session['department']}}</td>
-						</tr>
-					</table>
-                    
-                        <button id="show_review"><a href="/review" style=" color: white; text-decoration: none;">리뷰보기</a></button>
-				</td>
-			</tr>
-            <!--만일 로그인하지 않은 상태로 마이페이지 접속을 시도한다면, 아래와 같이 표시되며, 로그인페이지로 이동한다-->
-            {% else %}
-            <h3 style="text-align:center;">
-                 원활한 마이페이지 이용을 위해, 로그인을 먼저 해주시기 바랍니다.
-                </h3>
-            {% endif %}
-            
-            <!--사용자가 판매하려고 등록한 상품을 데이터베이스에서 불러와 출력한다-->
-			<tr>
-				<th>판매물품</th>
-				<td>
-                    <div  class="scroll-container">
-                    {% for key, value in datas %}
-                        {% if value.seller==session['id'] %}
-					        <div class="seller">
-					            <br><br>
-                                <a onclick="location.href='/buy_detail/{{key}}';">
-						            <img src="{{ url_for('static', filename='images/' + value.img_path) }}" alt="image">
-                                </a>
-                                <p id="name">{{key}}</p>
-						        <p id="price">{{value.price}}원</p>
-					        </div>
-                        {% endif %}
-        
-                    {% endfor %}
-                    </div>
-				</td>
-			</tr>
-            <!--사용자가 차여(lent)하려고 등록한 상품을 데이터베이스에서 불러와 출력한다-->
-			<tr>
-				<th>대여물품</th>
-				<td>
-                    <div class="scroll-container">
-                    {% for key, value in rent_datas %}   
-                        {% if value.seller==session['id'] %}
-					        <div class="buyer">
-						        <br><br>
-                                <a onclick="location.href='/rent_detail/{{key}}';">
-						            <img src="{{ url_for('static', filename='images/' + value.img_path) }}" alt="image">
-                                </a>
-						        <p id="name">{{key}}</p>
-						        <p id="price">{{value.price}}원</p>
-					        </div>
-                        {% endif %}
-    
-                    {% endfor %}
-                    </div>
-				</td>
-			</tr>
-            <!--사용자가 대여(rent)하려고 등록한 상품을 데이터베이스에서 불러와 출력한다-->
-            <tr>
-				<th>대여내역</th>
-				<td>
-                    <div class="scroll-container">
-                     {% for key, value in rent_list_datas %}   
-                    
-					    <div class="buyer">
-                            <br><br>
-                            <img src="{{ url_for('static', filename='images/' + value.img_path) }}" alt="image">
-                            <p id="name">{{ key }}</p>
-                            <p id="price">{{ value.price }}원</p><br><br><br>
-                            {% if value.review=="Y" %}
-                            
-                                <button id="review_{{ key }}" class="review-button" disabled style="background-color: #CCCCCC; cursor: not-allowed; 
-                                                                                                    float: right; width: 100px; height: 40px; border-radius: 3px; color: #fff;
-                                                                                                    font-size: 15px; border: none; cursor: pointer;">리뷰쓰기</button>
-                           {% else %}
-                                <a href="/reg_review_init/{{ key }}/"><button id="review_{{ key }}" class="review-button" data-item-id="{{ key }}" style="background-color: #00462A; cursor: not-allowed; 
-                                                                                                    float: right; width: 100px; height: 40px; border-radius: 3px; color: #fff;
-                                                                                                    font-size: 15px; border: none; cursor: pointer;">리뷰쓰기</button></a>
-
-                            {% endif %}
-                        </div>
-
-                        {% endfor %}
-                    </div>
-				</td>
-			</tr>
+<table class="mypage-table">
+<tr>
+	 {% if session['id'] %}
+	<td colspan="2">
+		<spark class="user">{{session['id']}}</spark> 님 반가워요 <button id="logout"><a href="/logout">로그아웃</a></button>
+	</td>
+</tr>
+<tr>
+	<th>정보</th>
+	<td>
+		<table class="profile-table">
+		<tr>
+			<th><img src="../static/images/userid.png"> 아이디 </th>
+			<td>{{session['id']}}</td>
+		</tr>
+		<tr>
+			<th><img src="../static/images/email.png"> 이메일 주소 </th>
+			<td><a href="mailto:{{ session['email'] }}">{{ session['email'] }}</a></td>
+		</tr>
+		<tr>
+			<th><img src="../static/images/phone.png"> 오픈채팅방 링크 </th>
+			<td><a href="{{session['openkakao']}}">{{session['openkakao']}}</a></td>
+		</tr>
+		<tr>
+			<th>
+				<img src="../static/images/member.png"> 단과대학 및 학과
+			</th>
+			<td>{{session['department']}}</td>
+		</tr>
 		</table>
-<script>
-    /*
-window.onload = function() {  
-    var reviewButtons = document.querySelectorAll('.review-button');
-    reviewButtons.forEach(function(button) {
-        var itemId = button.getAttribute('data-item-id');
-        var storedState = localStorage.getItem('reviewSubmittedForItem_' + itemId);
-
-        if (storedState === 'true') {
-            button.disabled = true;
-            button.style.backgroundColor = '#CCCCCC';
-            button.style.cursor = 'not-allowed';
-        }
-
-        
-        button.addEventListener('click', function() {
-            localStorage.setItem('reviewSubmittedForItem_' + itemId, 'true');
-            disableReviewButton(itemId);
-        });
-    });
-
-    
-    function disableReviewButton(itemId) {
-        var button = document.getElementById("review_" + itemId);
-        if (button) {
-            button.disabled = true;
-            button.style.backgroundColor = '#CCCCCC';
-            button.style.cursor = 'not-allowed';
-        }
-    }
-};
-*/
-</script>
-
+		<button id="show_review"><a href="/review_for_mypage">리뷰보기</a></button>
+	</td>
+</tr>
+<!--만일 로그인하지 않은 상태로 마이페이지 접속을 시도한다면, 아래와 같이 표시되며, 로그인페이지로 이동한다-->
+ {% else %}
+<h3>
+원활한 마이페이지 이용을 위해, 로그인을 먼저 해주시기 바랍니다. </h3>
+ {% endif %} 
+<!--사용자가 판매하려고 등록한 상품을 데이터베이스에서 불러와 출력한다-->
+<tr>
+	<th>판매물품</th>
+	<td>
+		<div class="scroll-container">
+			 {% for key, value in datas %} {% if value.seller==session['id'] %}
+			<div class="seller"><br><br>
+				<a onclick="location.href='/buy_detail/{{key}}';">
+				<img src="{{ url_for('static', filename='images/' + value.img_path) }}" alt="image"></a>
+				<p id="name">{{key}}</p>
+				<p id="price">{{value.price}}원</p>
+			</div>
+			 {% endif %} {% endfor %}
+		</div>
+	</td>
+</tr>
+<!--사용자가 차여(lent)하려고 등록한 상품을 데이터베이스에서 불러와 출력한다-->
+<tr>
+	<th>대여물품</th>
+	<td>
+		<div class="scroll-container">
+			 {% for key, value in rent_datas %} {% if value.seller==session['id'] %}
+			<div class="buyer"><br><br>
+				<a onclick="location.href='/rent_detail/{{key}}';">
+				<img src="{{ url_for('static', filename='images/' + value.img_path) }}" alt="image"></a>
+				<p id="name">{{key}}</p>
+				<p id="price">{{value.price}}원</p>
+			</div>
+			 {% endif %} {% endfor %}
+		</div>
+	</td>
+</tr>
+<tr>
+	<th>구매내역</th>
+	<td>
+		<div class="scroll-container">
+			 {% for key, value in buy_list_datas.items() %}
+			<div class="buyer"><br><br>
+				<a href="/buy_detail/{{ key }}">
+				<img src="{{ url_for('static', filename='images/' + value.img_path) }}" alt="image"></a>
+				<p id="name">{{ key }}</p>
+				<p id="price">{{ value.price }}원</p><br><br><br>
+			</div>
+			 {% endfor %}
+		</div>
+	</td>
+</tr>
+<!--사용자가 대여(rent)하려고 등록한 상품을 데이터베이스에서 불러와 출력한다-->
+<tr>
+	<th>대여내역</th>
+	<td>
+		<div class="scroll-container">
+			 {% for key, value in rent_list_datas %}
+			<div class="buyer"><br><br>
+				<a href="/rent_detail/{{ key }}">
+				<img src="{{ url_for('static', filename='images/' + value.img_path) }}" alt="image"></a>
+				<p id="name">{{ key }}</p>
+				<p id="price">{{ value.price }}원</p><br><br><br>
+				 {% if value.review=="Y" %} <button id="review_{{ key }}" class="review-button" disabled>리뷰쓰기</button>
+				{% else %} <a href="/reg_review_init/{{ key }}/">
+				<button id="review_{{ key }}" class="review-button" data-item-id="{{ key }}">리뷰쓰기</button></a>
+				{% endif %}
+			</div>
+			 {% endfor %}
+		</div>
+	</td>
+</tr>
+<tr>
+	<th>좋아요 내역</th>
+	<td>
+		<div class="scroll-container">
+			 {% if hearted %} {% for key, data in hearted %}
+			<div class="buyer"><br><br>
+				 {% for i in range(data['img_paths']|length) %} {% if data['where'][i] == 1 %} <a href="/buy_detail/{{ key }}">
+				<img src="{{ url_for('static', filename='images/' + data['img_paths'][i]) }}" alt="image">
+				</a>
+				<p id="name">{{ key }}</p>
+				<p id="price">판매용 상품</p><br><br><br>
+				 {% elif data['where'][i] == 0 %} <a href="/rent_detail/{{ key }}">
+				<img src="{{ url_for('static', filename='images/' + data['img_paths'][i]) }}" alt="image"></a>
+				<p id="name">{{ key }}</p>
+				<p id="price">대여용 상품</p><br><br><br>
+				 {% endif %} {% endfor %}
+			</div>
+			 {% endfor %} {% else %} {% endif %}
+		</div>
+	</td>
+</tr>
+</table>
 {% endblock section %}
