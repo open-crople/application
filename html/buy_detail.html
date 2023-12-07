@@ -5,181 +5,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='buy_detail_style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-        
-     
-    $(document).ready(function () {
-        checkConfirmStatus();
-    });
-
-    function checkConfirmStatus() {
-        // AJAX를 사용하여 confirm 값을 가져옴
-        $.ajax({
-            type: 'GET',
-            url: '/get_confirm/{{name}}/', // confirm 값을 가져오는 API 엔드포인트 URL
-            success: function (response) {
-                let confirmValue = response['confirm'];
-
-                // confirm 값이 1이면 버튼을 비활성화
-                if (confirmValue === 1) {
-                    disableButton();
-                }
-            }
-        });
-    }
-
-    function disableButton() {
-        $('#modal-open').prop('disabled', true);
-    }    
-        
-        
-    function btnDisabled()  {
-      const target = document.getElementById('modal-open');
-      target.disabled = true;
-    }
-     function realbuying() {
-          $.ajax({
-            type: 'POST',
-            url: '/update_buy/{{name}}/',
-            data: {
-                price : '{{data.price}}',
-                seller: '{{data.seller}}',
-                img_path: '{{data.img_path}}',
-                isBuy: "Y"
-                },
-                success: function (response) {    
-                    changeConfirm(name);
-                    btnDisabled();
-                    disableScroll();
-                    window.open("{{data.openkakao}}"); 
-                    
-            }
-          });    
-        }
-        
-        
-    function changeConfirm() {
-          $.ajax({
-            type: 'POST',
-            url: '/confirm_buying/{{name}}/'
-            
-          });    
-        }
-     
-     function disableScroll() {
-    // body 요소의 overflow를 hidden으로 변경하여 스크롤 비활성화
-        document.body.style.overflow = 'hidden';
-    }
-
-     function enableScroll() {
-        // body 요소의 overflow를 다시 visible로 변경하여 스크롤 활성화
-         document.body.style.overflow = 'visible';
-        }   
-        
-     $(function(){
-      $("#confirm").click(function(){
-          realbuying();//모달 닫기 함수 호출
-          modalClose();
-          btnDisabled();
-          disableScroll();
-          //컨펌 이벤트 처리
-      });
-      $("#modal-open").click(function(){        
-          {% if session['id'] %}
-              $("#popup").css('display','flex').hide().fadeIn();
-              //팝업을 flex속성으로 바꿔준 후 hide()로 숨기고 다시 fadeIn()으로 효과
-              disableScroll();
-           {% else %}
-               alert('로그인을 먼저하세요!');
-               window.location.href='/login';
-           {% endif %}
-      });
-      $("#close").click(function(){
-          modalClose(); //모달 닫기 함수 호출
-          disableScroll();
-      });
-      function modalClose(){
-          $("#popup").fadeOut(); //페이드아웃 효과
-      }
-      $("#img-bigger").click(function(){        
-         $("#img-popup").css('display','flex').hide().fadeIn();
-         disableScroll();
-          //팝업을 flex속성으로 바꿔준 후 hide()로 숨기고 다시 fadeIn()으로 효과
-      });
-      $("#img-close").click(function(){
-          imgmodalClose(); //모달 닫기 함수 호출
-          enableScroll();
-      });
-      function imgmodalClose(){
-          $("#img-popup").fadeOut(); //페이드아웃 효과
-      }
-    });
-        
-      function showHeart() {
-        $.ajax({
-            type: 'GET',
-            url: '/show_heart/{{name}}/',
-            data: {},
-            success: function (response){
-                let my_heart = response['my_heart'];
-                if (my_heart['interested'] == 'Y'){
-                    $("#heart").css("color", "red");
-                    $("#heart").attr("onclick", "unlike()");
-                }
-                else {
-                    $("#heart").css("color", "grey");
-                    $("#heart").attr("onclick", "like()");
-                }
-                //alert("showheart!")
-            }
-        });
-    }
-        
-    function like(){
-        $.ajax({
-            type: 'POST',
-            url: '/like/{{name}}/',
-            data: {
-                interested : "Y"
-            },
-            success: function (response) {
-                alert(response['msg']);
-                window.location.reload()
-            }
-        });
-    }
-        
-     function unlike(){
-        $.ajax({
-            type: 'POST',
-            url: '/unlike/{{name}}/',
-            data: {
-                interested : "N"
-            },
-            success: function (response) {
-                alert(response['msg']);
-                window.location.reload()
-            }
-        });
-    }
-    
-    $(document).ready(function () {
-        showHeart();
-    });
-        
-    </script>
-    <style>
-     #heart {
-            color: grey;
-            font-size: 50px;
-            margin-top: 10%;
-        }
-
-        #heart.red {
-            color: red;
-        }
-        
-    </style>
+    <script src="JavaScript/buy_detail.js"></script>
 </head>
 
 <body>
@@ -207,11 +33,10 @@
           </div>
         </div>
         
-
     <div class="buy_detail_info info">
         <div class="upper_right_upper" style="display:flex;">
-            <div class="item_name bold_title" style="float:left; margin-right:8px; margin-top: 10%;">{{ name }}</div>
-            <div style="float:left; margin-top: 10%;"><sub>#{{data.keyword}}</sub></div>
+            <div class="item_name bold_title" style="float:left; margin-right:8px; margin-top: 2%;">{{ name }}</div>
+            <div style="float:left; margin-top: 2.5%;"><sub>#{{data.keyword}}</sub></div>
         </div>
         <br>
         <div class="buy_detail_content">
@@ -223,15 +48,13 @@
         </div>
         
         <div>
-                    <!--<button onclick="location.href='/reg_review_init/{{name}}/';">리뷰등록</button>-->
                     <i class="fas fa-heart" id="heart" ></i>
                 </div>
                 
         </div>
     </div>
-    <br><br><br>
+    <br>
     </section>
-    
     
     <section>
     <hr size="5px" align="center" color="#00462A" padding="20px">
@@ -240,7 +63,7 @@
     <div class="bold_title" style="margin-right:auto;">상품정보</div>
          <form>
             <button type="button" class="btn_right" style="display:inline-block; margin-right:0px;"><a href="/review"> 리뷰보기 </a></button>
-             {% if session['id']==data.seller %}
+             {% if session['id']==data.seller or data.confirm==1 %}
                  <button type="button" class="btn_right" disabled style="background-color: #CCCCCC; cursor: not-allowed; 
                                         color: #fff; cursor: pointer;">구매하기</button>
              {% else %}
@@ -257,7 +80,6 @@
     </section>
     
     <!--팝업 만들기-->
-
     <div class="container">
       <div class="popup-wrap" id="popup">
         <div class="popup">
