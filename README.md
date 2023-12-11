@@ -67,3 +67,7 @@ https://ewhacroplemarket-website.run.goorm.io/list
 4. **상품 세부화면에서 사진 확대 가능**
     - 상품 세부 화면에서 사진을 확대할 수 있는 기능을 추가하여 사용자들은 제품의 세부적인 부분까지 자세히 살펴볼 수 있습니다.
     - buy_detail.html
+  
+
+![image](https://github.com/open-crople/application/assets/100745018/ae976507-1808-4665-b404-189ef97478d2)
+
