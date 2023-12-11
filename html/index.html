@@ -18,12 +18,14 @@
             <li><a href="/rent_items_list">물건대여</a></li>
             <li><a href="/review">리뷰보기</a></li>
         </ul>
-        <div class="navbar__search">
-            <input type="text" placeholder="검색어 입력">
+        <form action="https://search.shopping.naver.com/search/all?where=all&frm=NVSCTAB" method="get">
+        <div class="navbar__search" style="margin-left:14%; display:flex; align-items:center;">
+            <input type="text" name="query" placeholder="네이버 가격 비교" style="font-size: 15px; width: 180px; height:30px; margin-right: 5px;">
             <a href="/list">
-            <button type="submit">검색</button>
+            <button type="submit" style="display: flex; align-items: center; font-size: 15px; width: 70px; height: 30px; justify-content: center;">검색</button>
             </a>
         </div>
+        </form>
          <ul class="navbar__menu">
             {% if session['id'] %}    
              <li>{{session['id']}}님 💚</li><li><a href="/logout"><br>로그아웃</a></li>
