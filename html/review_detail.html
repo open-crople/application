@@ -1,67 +1,38 @@
 {% extends "index.html" %}
 {% block section %}
-<style>
-    .rate-label {
-    font-size: 25px; 
-    color: #F0D74A; 
-    margin-top: -5px; 
-}
-    </style>
-  <table class="review_detail" style="padding:100px;">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='review_detail_style.css')}}">
+
+<table class="review_detail" style="padding:100px; background-color:rgba(0,72,42,0.1);">
     <tr>
-      <td class="review_img" style="text-align:center;"><img height="580" width="580" style="background-color:#D9D9D9;" src="{{ url_for('static', filename='images/' + data.img_path) }}"></td>
-      <td class="review_text">
-        <table style="padding:20px;" width="100%">
-          <tr>
-            <td width="10%" style="text-align:left;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
-            <td colspan="2">
-              <button class="close"><a href="/review">x</a></button>
-              {% set rate_as_int = data.rate | int %}
-                {% for _ in range(rate_as_int) %}
-                    <label class="rate-label" for="rate{{ loop.index }}">★</label>
-                {% endfor %} 
-            <span style="font-size:25px;"><b> {{data.rate}}</b></span><br>
-              아이디명ㅣ {{data.writer}}  <span style="font-size:13px; color: #9f9f9f;">{{data.date}}</span><br><br>
-            </td>
-          <tr><td colspan="3"><hr></td></tr>
-          <tr>
-            <td colspan="3" style="padding:20px;">상품명: {{data.item}}<br><br>제목: {{data.title}}</td>
-          </tr>
-          <tr><td colspan="3"><hr></td></tr>
-          <tr>
-            <td height="300px" colspan="3" style="padding:20px; text-align:left; vertical-align:top;">{{data.text}}</td>
-          </tr>
-          <tr><td colspan="3"><hr></td></tr>
-          <tr>
-            <td colspan="2" style="padding:20px;">리뷰가 도움이 되었나요?</td>
-            <td width="15%" style="padding:20px;"><img src="{{ url_for('static', filename='images/thumbsup.png') }}" alt="추천 버튼"><span style="font-size:20px;"><b> 2</b></span></td>
-        </table>
-      </td>
+        <!-- 리뷰 상세 보기 화면의 배경화면 색 설정 -->
+        <td class="review_img" style="text-align:center; background-color:white;"><img height="580" width="580" style="background-color:white;" src="{{ url_for('static', filename='images/' + data.img_path) }}"></td>
+        <td class="review_text">
+            <table style="padding:10%; background-color:white;" width="100%">
+                <tr>
+                    <!-- 리뷰 작성자가 작성한 내용 보여줌(작성자가 올린 이미지, 별점, 아이디, 제목, 상세 내용) -->
+                    <td width="10%" style="text-align:left;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
+                    <td colspan="2">
+                        <button class="close"><a href="javascript:history.back();" style="color: black;">x</a></button>
+                        {% set rate_as_int = data.rate | int %}
+                        {% for _ in range(rate_as_int) %}
+                        <label class="rate-label" for="rate{{ loop.index }}">★</label>
+                        {% endfor %} 
+                        <span style="font-size:25px;"><b> {{data.rate}}</b></span><br>
+                        아이디명ㅣ {{data.writer}}  <span style="font-size:13px; color: #9f9f9f;">{{data.date}}</span><br><br>
+                    </td>
+                <tr><td colspan="3"><hr></td></tr>
+                <tr>
+                    <td colspan="3" style="padding:20px;">상품명: {{data.item}}<br><br>제목: {{data.title}}</td>
+                </tr>
+                <tr><td colspan="3"><hr></td></tr>
+                <tr>
+                    <td height="300px" colspan="3" style="padding:20px; text-align:left; vertical-align:top;">{{data.text}}</td>
+                </tr>
+                <tr><td colspan="3"><hr></td></tr>
+                <tr>
+            </table>
+        </td>
     </tr>
-  </table>
-<style>
-    table.review_detail{
-        width: 80%;
-        margin-left: 10%;
-    }
-    td.review_img{
-        width: 50%;
-        border: 1px solid #00462A;
-    }
-    td.review_text{
-        width: 50%;
-        border: 1px solid #00462A;
-    }
-    button.close{
-        float: right;
-	    width: 10%;
-	    border: none;
-	    background: none;
-	    cursor: pointer;
-    }
-    button.close a{
-        font-size: 30px;
-        text-decoration: none;
-    }
-</style>
+</table>
 {% endblock section %}
