@@ -1,127 +1,68 @@
 {% extends "index.html" %}
 
 {% block section %}
-  <style>
-    #submitButtonContainer {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
-    #submitButton {
-      background-color: #00462A;
-      width: 60%;
-      height: 40px;
-      border-radius: 5px;
-      color: #fff;
-      font-size: 20px;
-      border: none;
-      cursor: pointer;
-    }
-
-    .form-table {
-      width: 80%;
-      height: 700px;
-      margin: 0 auto;
-      border-collapse: collapse;
-    }
-
-    .form-table th, .form-table td {
-      text-align: left;
-      padding: 10px;
-      border-bottom: 1px solid #ccc;
-    }
-
-    .form-table th {
-      font-size: 20px;
-    }
-
-    .form-table input[type="text"],
-    .form-table textarea,
-    .form-table select {
-      width: 100%;
-      height: 40px;
-      border-radius: 3px;
-      border: 1px solid #ccc;
-      padding: 5px;
-    }
-    
-    .form-table label[for="new"],
-    .form-table label[for="lnew"],
-    .form-table label[for="used"]{
-	    margin-right: 40px;
-    }
-
-    .form-table label[for="direct"],
-    .form-table label[for="delivery"]{
-	    margin-right: 40px;
-    }
-
-    .form-table textarea {
-      height: 80px;
-    }
-  </style>
-
-  <form action="/submit_item_post" enctype="multipart/form-data" method="post">
+<link rel="stylesheet" href="../static/reg_items_style.css">
+<form action="/submit_item_post" enctype="multipart/form-data" method="post">
+    <!-- 등록할 상품 관련 정보 입력 -->
     <table class="form-table">
-      <tr>
-        <th><label for="name">상품명</label></th>
-        <td><input type="text" name="name" id="name" placeholder="상품명을 입력해주세요" required /></td>
-      </tr>
-      <tr>
-        <th><label for="price">가격</label></th>
-        <td><input type="text" name="price" id="price" placeholder="가격을 입력해주세요 ex) 1000" required /></td>
-      </tr>
-      <tr>
-        <th><label for="img">상품 이미지</label></th>
-        <td><input type="file" name="file" /></td>
-      </tr>
-      <tr>
-        <th><label for="keyword">상품 키워드 </label></th>
-        <td><input type="text" name="keyword" id="keyword" placeholder="상품 키워드를 1개 입력해주세요 ('#' 사용금지)" required /></td>
-      </tr>
-      <tr>
-        <th>
-          <label for="status">상태</label>
-        </th>
-        <td>
-          <input type="radio" id="new" name="status" value="새 상품" required />
-		  <label for="new">새 상품</label>
-		  <input type="radio" id="lnew" name="status" value="미개봉 중고" required />
-		  <label for="lnew">미개봉 중고</label>
-		  <input type="radio" id="used" name="status" value="중고" required />
-          <label for="used">중고</label>
-        </td>
-      </tr>
-      <tr>
-        <th><label for="explan">상세 설명 </label></th>
-        <td><textarea id="explain" name="explain" rows="4" cols="80" placeholder="상세 설명을 입력해주세요"></textarea></td>
-      </tr>
-      <tr>
-        <th><label for="addr">판매지역</label></th>
-        <td><input type="text" name="addr" id="addr" placeholder="판매 지역을 입력해주세요 ex) 이화여대, 북아현동" required /></td>
-      </tr>
         <tr>
-				<th>
-				  <label for="send" id="send">전달 방식</label>
-				</th>
-				<td>
-				  <input type="radio" id="direct" name="send" value="직거래" required />
-				  <label for="direct">직거래</label>
-				  <input type="radio" id="delivery" name="send" value="배송" required />
-				  <label for="delivery">배송</label>
-				</td>
-			  </tr>
+            <!-- 상품명 -->
+            <th><label for="name">상품명</label></th>
+            <td><input type="text" name="name" id="name" placeholder="상품명을 입력해주세요" required /></td>
+        </tr>
+        <tr>
+            <!-- 상품 가격 -->
+            <th><label for="price">가격</label></th>
+            <td><input type="text" name="price" id="price" placeholder="가격을 입력해주세요 ex) 1000" required /></td>
+        </tr>
+        <tr>
+            <!-- 상품 이미지 -->
+            <th><label for="img">상품 이미지</label></th>
+            <td><input type="file" name="file" /></td>
+        </tr>
+        <tr>
+            <!-- 상품 키워드 -->
+            <th><label for="keyword">상품 키워드 </label></th>
+            <td><input type="text" name="keyword" id="keyword" placeholder="상품 키워드를 1개 입력해주세요 ('#' 사용금지)" required /></td>
+        </tr>
+        <tr>
+            <!-- 상품 상태(새상품, 미개봉 중고, 중고 중 선택 가능) -->
+            <th><label for="status">상태</label></th>
+            <td>
+                <input type="radio" id="new" name="status" value="새 상품" required />
+                <label for="new">새 상품</label>
+                <input type="radio" id="lnew" name="status" value="미개봉 중고" required />
+                <label for="lnew">미개봉 중고</label>
+                <input type="radio" id="used" name="status" value="중고" required />
+                <label for="used">중고</label>
+            </td>
+        </tr>
+        <tr>
+            <!-- 상품에 대한 상세 설명 -->
+            <th><label for="explan">상세 설명 </label></th>
+            <td><textarea id="explain" name="explain" rows="4" cols="80" placeholder="상세 설명을 입력해주세요"></textarea></td>
+        </tr>
+        <tr>
+            <!-- 판매 가능 지역 -->
+            <th><label for="addr">판매지역</label></th>
+            <td><input type="text" name="addr" id="addr" placeholder="판매 지역을 입력해주세요 ex) 이화여대, 북아현동" required /></td>
+        </tr>
+        <tr>
+            <!-- 전달 방식(직거래, 배송 중 선택가능) -->
+            <th><label for="send" id="send">전달 방식</label></th>
+			<td>
+			    <input type="radio" id="direct" name="send" value="직거래" required />
+			    <label for="direct">직거래</label>
+			    <input type="radio" id="delivery" name="send" value="배송" required />
+			    <label for="delivery">배송</label>
+			</td>
+        </tr>
     </table>
-      <input id="openkakao" name="openkakao" style="visibility: visible; opacity: 0;" value="{{session['openkakao']}}" />
+    <!-- 등록하는 사람의 오픈챗 주소 넘겨줌 -->
+    <input id="openkakao" name="openkakao" style="visibility: visible; opacity: 0;" value="{{session['openkakao']}}" />
+    <!-- 상품 등록 완료 -->
     <div id="submitButtonContainer">
-      <input id="submitButton" type="submit" value="등록하기" />
+        <input id="submitButton" type="submit" value="등록하기" />
     </div>
-  </form>
+</form>
 {% endblock section %}
-
-
-
-
-
-
