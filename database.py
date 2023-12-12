@@ -1,7 +1,6 @@
 import pyrebase
 import json
 
-
 class DBhandler:
     def __init__(self):
         with open('./authentication/firebase_auth.json') as f:
@@ -33,9 +32,6 @@ class DBhandler:
         self.db.child("item").child(name).update({"confirm":1})
         return True
     
-    def get_confirm_value(name):
-        confirm = self.db.child("item").child(name).child("confirm").get()
-        return confirm
 
     # 대여해줄 물건 rent_item 아래에 등록
     def insert_rent_item(self, name, data, img_path, sessionid):
@@ -144,6 +140,17 @@ class DBhandler:
             if key_value == user_id:
                 target_value = res.val()
         return target_value
+    
+    # 구매상품 사용자 아이디로 찾기
+    def get_buy_list_byid(self, user_id):
+        items = self.db.child("buy_list").get()
+        target_value = ""
+        print("###########", user_id)
+        for res in items.each():
+            key_value = res.key()
+            if key_value == user_id:
+                target_value = res.val()
+        return target_value
 
     # 리뷰내용 review 아래에 상품이름별로 등록
     def reg_review(self, data, img_path, current_time):
@@ -223,3 +230,13 @@ class DBhandler:
         }
         self.db.child("heart").child(user_id).child(item).set(heart_info)
         return True
+
+    def get_heart(self, user_id):
+        hearted = self.db.child("heart").child(user_id).get().val()
+        
+        if hearted is None:
+            return {}
+
+        filtered_hearted = {key: value for key, value in hearted.items() if value.get('interested') != 'N'}
+
+        return filtered_hearted
