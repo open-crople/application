@@ -1,19 +1,22 @@
 {% extends "index.html" %}
 {% block section %}
 
-    <title>Rent List</title>
-    <link rel="stylesheet" href="../static/rent_items_list_style.css">
+<title>Rent List</title>
+<link rel="stylesheet" href="../static/rent_items_list_style.css">
+<script src="JavaScript/rent_items_list.js"></script>
 
-    <h2>상품 목록</h2>
-    <br>
-    
-    <form id="rentForm" action="{{ url_for('view_rent_list') }}" method="GET">
-    <div class="date-selection" style="margin-left:8%; font-family: sans-serif; align-items:center; font-size:17px;">
+<!-- 등록된 모든 상품 보여줌 -->
+<h2>상품 목록</h2>
+<br>
+<form id="rentForm" action="{{ url_for('view_rent_list') }}" method="GET">
+    <div class="date-selection" style="margin-left:8%; align-items:center; font-size:17px;">
+        <!-- 희망 대여기간 기준으로 검색 -->
         <h4 class="borrowingDate">&#91;희망 대여기간&#93;</h4>
         <label for="startDate">시작:</label>
         <input type="date" name="period_start" id="startDate" required>
         <label for="endDate">끝:</label>
         <input type="date" name="period_end" id="endDate" required>
+        <!-- 가나다, 가격 기준으로 상품 재정렬 -->
         <label for="category">정렬:</label>
         <select id="category" name="category">
             <option value="all" {% if current_category == 'all' %}selected{% endif %}>정렬</option>
@@ -25,60 +28,44 @@
     </div>
 </form>
 
-<script>
-    function submitForm() {
-        document.getElementById('rentForm').submit();
-    }
-</script>
-
-
-    
-    {% if total > 0 %}
-        <div class="product-container">
-            {% for key, value in datas %}
-                <div class="product">
-                    <a onclick="location.href='/rent_detail/{{key}}';">
-                        <img src="{{ url_for('static', filename='images/' + value.img_path) }}" alt="상품 1">
-                    </a>
-                    <div class="product-name">{{ key }}</div>
-                </div>
-            {% endfor %}              
-        </div>
-        
-        <br><br>
-        <form>
-            <button class="addProductButton" onClick="handleButtonClick()" style="float:right; margin-right: 10%;">
-            {% if session['id'] %}
-                <a href="/reg_rent_items">+ 상품등록</a>
-            {% else %}
-                <a href="/login">+ 상품등록</a>
-            {% endif %}
-            </button>
-        </form>
+<!-- 상품이 있으면 동록된 상품 모두 출력 -->
+{% if total > 0 %}
+<div class="product-container">
+    {% for key, value in datas %}
+    <div class="product">
+        <a onclick="location.href='/rent_detail/{{key}}';">
+            <img src="{{ url_for('static', filename='images/' + value.img_path) }}" alt="상품 1"></a>
+        <div class="product-name">{{ key }}</div>
+    </div>
+    {% endfor %}              
+</div>
+<br><br>
+<form>
+    <!-- 새 상품 등록 -->
+    <button class="addProductButton" onClick="handleButtonClick()" style="float:right; margin-right: 10%;">
+        {% if session['id'] %}
+        <a href="/reg_rent_items">+ 상품등록</a>
+        {% else %}
+        <a href="/login">+ 상품등록</a>
+        {% endif %}
+    </button>
+</form>
 <br><br><br>
-
-        <div class="page-wrap" >
-            <div class="page-nation">
-                <ul>
-                    <li>
-                    {% for i in range(page_count)%}
-                        <a href="{{url_for('view_rent_list', page=i, category=current_category)}}" color="black">{{i+1}}</a>
-                    {% endfor %} </li>
-                </ul>
-            </div>
-        </div>
+<!-- 페이지네이션 -->
+<div class="page-wrap" >
+    <div class="page-nation">
+        <ul>
+            <li>
+                {% for i in range(page_count)%}
+                <a href="{{url_for('view_rent_list', page=i, category=current_category)}}" color="black">{{i+1}}</a>
+                {% endfor %}
+            </li>
+        </ul>
+    </div>
+</div>
 <br>
-    {% else %}
-        <p>등록된 상품이 없습니다. </p>
-    {% endif %}
-        <script>
-            function handleButtonClick() {
-                {% if not session['id'] %}
-                    alert('로그인을 먼저하세요!');
-                {% else %}
-                    window.location.href = '/reg_items';
-                {% endif %}
-            }
-        </script>
-         
+<!-- 등록된 상품이 하나도 없는 경우 -->
+{% else %}
+<p>등록된 상품이 없습니다. </p>
+{% endif %}
 {% endblock section %}
