@@ -1,122 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>signup_page</title>
-    <link rel="stylesheet" href="../static/signup.css">
-<style>
-
-
-
-</style>
+    <meta charset="utf-8">
+    <title>signup_page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup.css')}}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
+
 <body>
-  <div>
-      
-      {% with mesg = get_flashed_messages() %}
+    <div>
+        {% with mesg = get_flashed_messages() %}
         {% if mesg !=[] %}
         <script>alert("{{ mesg[0] }}")</script>
         {% endif %}
         {% endwith %}
-      
-    <form name="signup" method="POST" class="signup-form" action="/signup_post">
-      <div class="logoblock"><a href="/">
-        <img src="../static/images/logo.png" class="logoimage">
-          </a>
-      </div>
-      <div class="formblock">
-          <!--아이디 입력 박스-->
-        <div class="inputblock id signup">
-          <img src="../static/images/userid.png" class="image">
-          <input type="text" class="text-field" name="id" placeholder="아이디"  required>
-          <div class="div-block"></div>
-        </div>
-          <!--비밀번호 입력 박스-->
-        <div class="inputblock password signup">
-          <img src="../static/images/userpassword.png" class="image">
-          <input type="password" class="text-field"  name="pw" id="password" placeholder="비밀번호" required="">
-          <img src="../static/images/eyeblock.png" onclick="togglePasswordVisibility('password')" class="eyeblockpassword image">
-        </div>
-          <!--비밀번호 재입력 박스-->
-        <div class="inputblock password signup third">
-          <img src="../static/images/security.png" alt="" class="image">
-          <input type="text" class="text-field"  name="password_check" id="password_check" placeholder="비밀번호 재입력" required>
-         <img src="../static/images/eyeblock.png" onclick="togglePasswordVisibility('password_check')" class="eyeblockpassword_check image">
-          
-        </div>
-      </div>
-      <div class="formblock" style="margin-top: 20px;">
-          <!--이메일 입력 박스-->
-        <div class="inputblock id signup email">
-          <img src="../static/images/email.png"  class="image">
-          <input type="text" class="text-field signup_emailtext"  name="email" placeholder="이메일 주소" required>
-          <div class="div-block"></div>
-        </div>
-          <!--카카오톡 채팅방 링크 입력 박스-->
-        <div class="inputblock password signup">
-          <img src="../static/images/phone.png" class="image">
-          <input type="text" class="text-field" name="openkakao" placeholder="오픈 채팅 카카오톡 링크" required>
-          <div class="div-block"></div>
-        </div>
-          <!--단과대학 및 학과 입력 박스-->
-        <div class="inputblock password signup third">
-          <img src="../static/images/member.png" class="image">
-          <input type="text" class="text-field"  name="department" placeholder="단과대학 및 학과">
-          <div class="div-block"></div>
-        </div>
-      </div>
-        <!--제출 버튼 박스-->
-      <div class="formblock">
-        <div id="logo_submitbtn" class="submitblock">
-          <input type="submit" value="회원 가입" id="signup_submit" class="submit-button">
-          </div>
-      </div>
-    </form>
-    
-  </div>
-  
-
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    
-    <!--아이디 중복 확인-->
-    $(document).ready(function () {
-        $("#button-duplicate").click(function () {
-            var user_id = $("input[name='id']").val();
-
-            $.ajax({
-                type: "POST",
-                url: "/check_duplicate_id",
-                data: { id: user_id },
-                success: function (response) {
-                    if (response.status === 'duplicate') {
-                        alert("이미 사용 중인 아이디입니다.");
-                    } else {
-                        alert("사용 가능한 아이디입니다.");
-                    }
-                }
-            });
-        });
-    });
-    
-          <!--비밀번호를 *으로 숨기거나, 숫자로 표시하도록 하는 함수-->
-        function togglePasswordVisibility(id) {
-            var passwordField = document.getElementById(id);
-            var eyeIcons = document.querySelectorAll('.eyeblock'+id);
+        
+        <form name="signup" method="POST" class="signup-form" action="/signup_post">
+            <div class="logoblock"><a href="/">
+                <img src="../static/images/logo2.png" class="logoimage"></a>
+            </div>
             
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                eyeIcons.forEach(function (icon) {
-                    icon.src = '../static/images/eyeopen.png';
-                });
-            } else {
-                passwordField.type = 'password';
-                eyeIcons.forEach(function (icon) {
-                    icon.src = '../static/images/eyeblock.png';
-                });
-            }
-        }
-  
-</script>
-</body>
+            <div class="formblock">
+                <!--아이디 입력 박스-->
+                <div class="inputblock id signup">
+                    <img src="../static/images/userid.png" class="image">
+                    <input type="text" class="text-field" name="id" placeholder="아이디"  required>
+                    <div class="div-block"></div>
+                </div>
+                <!--비밀번호 입력 박스-->
+                <div class="inputblock password signup">
+                    <img src="../static/images/userpassword.png" class="image">
+                    <input type="password" class="text-field"  name="pw" id="password" placeholder="비밀번호" required="">
+                    <img src="../static/images/eyeblock.png" onclick="togglePasswordVisibility('password')" class="eyeblockpassword image">
+                </div>
+                <!--비밀번호 재입력 박스-->
+                <div class="inputblock password signup third">
+                    <img src="../static/images/security.png" alt="" class="image">
+                    <input type="text" class="text-field"  name="password_check" id="password_check" placeholder="비밀번호 재입력" required>
+                    <img src="../static/images/eyeblock.png" onclick="togglePasswordVisibility('password_check')" class="eyeblockpassword_check image">
+                </div>
+            </div>
+            <div class="formblock" style="margin-top: 20px;">
+                <!--이메일 입력 박스-->
+                <div class="inputblock id signup email">
+                    <img src="../static/images/email.png"  class="image">
+                    <input type="text" class="text-field signup_emailtext"  name="email" placeholder="이메일 주소" required>
+                    <div class="div-block"></div>
+                </div>
+                <!--카카오톡 채팅방 링크 입력 박스-->
+                <div class="inputblock password signup">
+                    <img src="../static/images/phone.png" class="image">
+                    <input type="text" class="text-field" name="openkakao" placeholder="카카오톡 오픈채팅 링크" required>
+                    <div class="div-block"></div>
+                </div>
+                <!--단과대학 및 학과 입력 박스-->
+                <div class="inputblock password signup third">
+                    <img src="../static/images/member.png" class="image">
+                    <input type="text" class="text-field"  name="department" placeholder="단과대학 및 학과">
+                    <div class="div-block"></div>
+                </div>
+            </div>
+            <!--제출 버튼 박스-->
+            <div class="formblock">
+                <div id="logo_submitbtn" class="submitblock">
+                    <input type="submit" value="회원 가입" id="signup_submit" class="submit-button">
+                </div>
+            </div>
+        </form>
+    </div>
+    </body>
 </html>
