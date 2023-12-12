@@ -1,4 +1,3 @@
-
 .full {
     padding: 0;
     margin: 0;
@@ -7,29 +6,27 @@
 .menu {
     text-decoration: none;
     font-size: 40px;
-} /* 바디 구성 */
+}
+
 .table_review {
     padding: 20px;
 }
+
 .all_review {
     border-collapse: collapse;
     border: 1px solid #00462a;
     margin: 10px;
-} 
+}
+
 .all-review th, td{
     border: none;
 }
-/*
-.twoline {
-    width:45%;
-    margin:3%;
-}
-*/
-/* 화면 구성 */
+
 .full {
     width: 100%;
     text-align:center;
 }
+
 #screen {
     width: 100%;
     height: auto;
@@ -37,21 +34,22 @@
     margin: 0 auto;
 }
 
-
-
 .page-nation li {
     list-style: none;
 }
+
 .page-wrap {
     text-align: center;
     font-size: 0;
 }
+
 .page-nation {
     display: inline-block;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
 }
+
 .page-nation a {
     display: block;
     margin: 0 3px;
@@ -69,7 +67,7 @@
 }
 
 .rate-label {
-    color: #F0D74A; /* Change the star color to yellow */
+    color: #F0D74A;
 }
 
 .sort_active {
@@ -79,6 +77,7 @@
     text-decoration: underline;
       
 }
+
 .sorting{
 padding:10px; 
 text-decoration:none;
