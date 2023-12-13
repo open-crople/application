@@ -1,264 +1,279 @@
    * {
-        box-sizing: border-box;
-        }
+       box-sizing: border-box;
+}
+
+section {
+    margin-bottom:0;
+    margin-left:5.5%;
+    margin-right:5.5%;
+}
         
-        section {
-            margin-bottom:0;
-            margin-left:5.5%;
-            margin-right:5.5%;
-        }
+.item_img {
+    position:relative;
+    border:2px solid #ccc;
+    padding:5px;
+    border-radius:5px;
+    margin-right:15px;
+}
         
-        .item_img {
-            position:relative;
-            border:2px solid #ccc;
-            padding:5px;
-            border-radius:5px;
-            margin-right:15px;
-        }
+.bold_title {
+    font-size:25px;
+    font-weight:bold;
+}
         
-        .bold_title {
-            font-size:25px;
-            font-weight:bold;
-        }
+.buy_detail_info {
+    float:left;
+    display:inline-block;
+}
         
-        .buy_detail_info {
-            float:left;
-            display:inline-block;
-        }
+.buy_detail_info sub {
+    color:gray;
+}    
         
-        .buy_detail_info sub {
-            color:gray;
-        }    
+.info {
+    margin-right:10px;
+    margin-left:40px;
+}
         
-        .info {
-            margin-right:10px;
-            margin-left:40px;
-        }
+.buy_detail_content {
+    line-height:200%;
+}
         
-        .buy_detail_content {
-            line-height:200%;
-        }
+.upper_section{
+    display:inline-block;
+    width:900px;
+}
         
-        .upper_section{
-            display:inline-block;
-            width:900px;
-        }
-        
-        .down_section {
-            display:flex;
-            align-items:center;
-            padding:5px;
-        }
+.down_section {
+    display:flex;
+    align-items:center;
+    padding:5px;
+}
        
-        .btn_right {
-            display: inline-block;
-            background-color: #00462A;
-            color: #fff;
-            padding: 10px 20px;
-            margin: 0 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            text-align: center;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
+.btn_right {
+    display: inline-block;
+    background-color: #00462A;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
         
-        .btn_right:hover {
-            background-color: #6F4F28;
-        }
+.btn_right:hover {
+    background-color: #6F4F28;
+}
 
-        .btn_right a {
-            color: white;
-            text-decoration: none;
-        }
+.btn_right a {
+    color: white;
+    text-decoration: none;
+}
         
-        #down_section_box {
-            width:border-box;
-            height:300px;
-            border:2px solid #00462A;
-            padding:10px;
-            margin-bottom:2%;
-            overflow:scroll;
-            font-size:15px;
-        }
+#down_section_box {
+    width:border-box;
+    height:300px;
+    border:2px solid #00462A;
+    padding:10px;
+    margin-bottom:2%;
+    overflow:scroll;
+    font-size:17px;
+}
         
-          .big_picture {
-            /* background: url("images/big_picture.jpeg") no-repeat; */
-            position:absolute;
-            width:25px;
-            height:25px;
-            bottom:3%;
-            right:3%;
-            font-size:10px;
-            color:#ffffff;
-            border-radius:12px;
-            border:none;
-            background-color:#00462A;
-        }
-        #heart {
-            color: grey;
-            font-size: 50px;
-            margin-top: 5%;
-        }
+.big_picture {
+    position:absolute;
+    width:25px;
+    height:25px;
+    bottom:3%;
+    right:3%;
+    font-size:10px;
+    color:#ffffff;
+    border-radius:12px;
+    border:none;
+    background-color:#00462A;
+}
 
-        #heart.red {
-            color: red;
-        }
+#heart {
+    color: grey;
+    font-size: 50px;
+    margin-top: 5%;
+}
+
+#heart.red {
+    color: red;
+}
   
 /* 팝업창 */
-        p.body-contentbox{
-          margin-top:10px;
-        }
-        .container{
-          width:100%;
-          margin:0;
-          padding:0;
-          box-sizing: border-box;
-        }
-        .modal-btn-box{
-          width:100%;
-          text-align:center;
-        }
-        .modal-btn-box button{
-          display:inline-block;
-          width:150px;
-          height:50px;
-          background-color:#ffffff;
-          border:1px solid #ffffff;
-          cursor:pointer;
-          padding-top:8px;
-        }
-        .popup-wrap{
-          background-color:rgba(0,0,0,.6);
-          justify-content:center;
-          align-items:center;
-          position:fixed;
-          top:0;
-          left:0;
-          right:0;
-          bottom:0;
-          display:none;
-          padding:15px;
-        }
-        .popup{
-          width:100%;
-          max-width:400px;
-          background-color:#ffffff;
-          border-radius:10px;
-          overflow:hidden;
-          background-color:#00462A;
-          box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
-        }
-        .popup-head{
-          width:100%;
-          height:50px;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          color:#ffffff;
-        }
-        .head-title {
-            font-size: 28px;
-            font-weight: 400;
-            letter-spacing: -3px;
-            text-align: center;
-      
-        }
-        .popup-body{
-          width:100%;
-          background-color:#ffffff;
-        }
-        .body-content{
-          width:100%;
-          padding:30px;
-        }
-        .body-titlebox{
-          text-align:center;
-          width:100%;
-          height:40px;
-          margin-bottom:10px;
-        }
-        .body-contentbox{
-          word-break:break-word;
-          overflow-y:auto;
-          min-height:50px;
-          max-height:200px;
-          text-align:center;
-        }
-        .popup-foot{
-          width:100%;
-          height:50px;
-        }
-        .pop-btn{
-          display:inline-flex;
-          width:50%;
-          height:100%;
-          float:left;
-          justify-content:center;
-          align-items:center;
-          color:#ffffff;
-          cursor:pointer;
-        }
-        .pop-btn.confirm{
-          border-right:1px solid #ffffff;
-        }
+p.body-contentbox{
+    margin-top:10px;
+}
+
+.container{
+    width:100%;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.modal-btn-box{
+    width:100%;
+    text-align:center;
+}
+
+.modal-btn-box button{
+    display:inline-block;
+    width:150px;
+    height:50px;
+    background-color:#ffffff;
+    border:1px solid #ffffff;
+    cursor:pointer;
+    padding-top:8px;
+}
+
+.popup-wrap{
+    background-color:rgba(0,0,0,.6);
+    justify-content:center;
+    align-items:center;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    display:none;
+    padding:15px;
+}
+
+.popup{
+    width:100%;
+    max-width:400px;
+    background-color:#ffffff;
+    border-radius:10px;
+    overflow:hidden;
+    background-color:#00462A;
+    box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
+}
+
+.popup-head{
+    width:100%;
+    height:50px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#ffffff;
+}
+
+.head-title {
+    font-size: 28px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.popup-body{
+    width:100%;
+    background-color:#ffffff;
+}
+
+.body-content{
+    width:100%;
+    padding:30px;
+}
+
+.body-titlebox{
+    text-align:center;
+    width:100%;
+    height:40px;
+    margin-bottom:10px;
+}
+
+.body-contentbox{
+    word-break:break-word;
+    overflow-y:auto;
+    min-height:50px;
+    max-height:200px;
+    text-align:center;
+}
+
+.popup-foot{
+    width:100%;
+    height:50px;
+}
+
+.pop-btn{
+    display:inline-flex;
+    width:50%;
+    height:100%;
+    float:left;
+    justify-content:center;
+    align-items:center;
+    color:#ffffff;
+    cursor:pointer;
+}
+
+.pop-btn.confirm{
+    border-right:1px solid #ffffff;
+}
 
 /* 이미지 팝업창 */
 .img-wrap{
-  background-color:rgba(0,0,0,.7);
-  justify-content:center;
-  align-items:center;
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  display:none;
-  padding:15px;
+    background-color:rgba(0,0,0,.7);
+    justify-content:center;
+    align-items:center;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    display:none;
+    padding:15px;
 }
+
 .img-popup{
-  width:100%;
-  max-width:1000px;
-  max-height:700px;
-  background-color:#ffffff;
-  border-radius:10px;
-  overflow:hidden;
-  background-color:#00462A;
-  box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
+    width:100%;
+    max-width:1000px;
+    max-height:700px;
+    background-color:#ffffff;
+    border-radius:10px;
+    overflow:hidden;
+    background-color:#00462A;
+    box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
 }
+
 .img-popup-head{
-  width:100%;
-  height:30px;
-  color:#ffffff;
+    width:100%;
+    height:30px;
+    color:#ffffff;
     align-items:center;
     font-size: 28px;
     font-weight: 400;
     text-align: right; /* 텍스트를 오른쪽으로 정렬 */
     justify-content: center;
 }
+
 .img-close {
     padding-right: 15px;
 }
 
 .img-popup-body{
-  width:100%;
-max-width:100%;
+    width:100%;
+    max-width:100%;
     height:auto;
     overflow:hidden;
-  background-color:#ffffff;
-  align-items:center;
-  display: flex; /* 가로 방향으로 아이템을 정렬하기 위해 flex 설정 추가 */
-  justify-content: center; /* 가로 중앙 정렬 */
+    background-color:#ffffff;
+    align-items:center;
+    display: flex; /* 가로 방향으로 아이템을 정렬하기 위해 flex 설정 추가 */
+    justify-content: center; /* 가로 중앙 정렬 */
 }
 
- .img-popup-body img {
+.img-popup-body img {
     max-width: 100%;
     max-height: 70%;
     width: 90%;
     height: auto;
     object-fit: contain;
-     margin-top:1%; 
-     margin-bottom:1%;
-  }
+    margin-top:1%; 
+    margin-bottom:1%;
+}

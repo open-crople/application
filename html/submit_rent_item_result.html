@@ -3,30 +3,18 @@
 {% block section %}
 <div class="container"> 
 <h1>상품 등록이 완료되었습니다.</h1><br>
+<img src="{{img_path}}"/><br><br>
 <p>
     상품명: {{data.name}}<br><br>
     가격: {{data.price}}원<br><br>
-    상품 이미지
 </p>
-<img src="{{img_path}}"/><br><br>
+
 <p>
-    전달장소: {{data.addr}}<br><br>
+    대여지역: {{data.addr}}<br><br>
+    전달방식: {{data.send}}<br><br>
     상품키워드: {{data.keyword}}<br><br>
     대여가능기간: {{ data['period-start'] }} ~ {{ data['period-end'] }}<br><br>
-    판매방식: {{data.send}}
-    <br><br>
     상세 설명: {{data.explain}}<br><br>
 </p>
 </div>
-<style>
-    .container{
-        width: 80%;
-        justify-content: center;
-        margin-left: 35%;
-    }
-    img{
-        width: 40%;
-        
-    }
-</style>
 {% endblock section %}

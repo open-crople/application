@@ -3,56 +3,58 @@
 {% block section %}
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='buy_detail_style.css')}}">
-    <script>
-        
-     function openBigPicture() {
-        window.open("big_picture.html", "_blank");
-    }
-        
-     function realbuying() {
-         if (confirm("구매를 확정하시겠습니까?")) {
-                alert("구매가 확정되었습니다.");
-            } else {
-                alert("구매가 취소되었습니다.");
-            }
-     }
-        
-    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="JavaScript/buy_detail.js"></script>
 </head>
 
 <body>
     <section>
     <div class="upper_section">
-            
-        <div class="buy_detail_info item_img">
-            <img src="{{ url_for('static', filename='images/ex_calculator.jpeg')}}" alt="상품 이미지" style="width:200px height:200px">
-          <form>
-                <input type="button" class="big_picture" onclick="big_picture()">
-            </form>
+        
+        <div class="buy_detail_info item_img" style = "width: 40%; height: 300px; margin-left: 0; margin-right: 0; margin-bottom: 5%; position: relative; overflow: hidden; align-items: center;">
+            <img src="{{ url_for('static', filename='images/' + data.img_path) }}" alt="{{ key }}" style="width: 100%; max-height: 100%; object-fit: contain; position: abosolute;" >
+             <form>
+                  <button type="button" class="big_picture" id="img-bigger";>확대</button>
+                </form>
         </div>
-      <!-- 
-        <img src="{{ url_for('static', filename='images/big_picture.jpeg')}}" id="big_picture" onclick="openBigPicture()">-->
-
-
-            <div class="buy_detail_info info">
-                <div class="upper_right_upper" style="display:flex;">     
-                    <div class="item_name bold_title" style="float:left; margin-right:8px;">공학용 계산기</div>
-                    <div style="float:left;"><sub>#공대 #계산기</sub></div>
-                </div><br>
-
-                <div class="buy_detail_content">
-                가격    : <span id="cost">1000원</span><br>
-                상품상태 : <span id="status">새상품</span><br>
-                판매자  : <span id="seller">차</span><br>
-                판매지역 : <span id="sell_area">이화여대</span><br>
-                전달방식 : <span id="sell_way">직거래</span><br><br>
+        
+    <!--사진 확대창 -->    
+        <div class="container">
+          <div class="img-wrap" id="img-popup">
+            <div class="img-popup">
+              <div class="img-popup-head">
+                   <span class="img-close" id="img-close">X</span>
+              </div>
+              <div class="img-popup-body">
+                    <img src="{{ url_for('static', filename='images/' + data.img_path) }}" alt="{{ key }}" style="max-height:70vh;">     
+              </div>
+            </div>
+          </div>
+        </div>
+        
+    <div class="buy_detail_info info">
+        <div class="upper_right_upper" style="display:flex;">
+            <div class="item_name bold_title" style="float:left; margin-right:8px; margin-top: 2%;">{{ name }}</div>
+            <div style="float:left; margin-top: 2.5%;"><sub>#{{data.keyword}}</sub></div>
+        </div>
+        <br>
+        <div class="buy_detail_content">
+        가격    : <span id="cost">{{data.price}}원</span><br>
+        상품상태 : <span id="status">{{data.status}}</span><br>     
+        판매자  : <span id="seller">{{data.seller}}</span><br>
+        판매지역 : <span id="sell_area">{{data.addr}}</span><br>
+        전달방식 : <span id="sell_way">{{data.send}}</span><br>
+        </div>
+        
+        <div>
+                    <i class="fas fa-heart" id="heart" ></i>
                 </div>
                 
-            </div>
         </div>
-        <br><br><br>
+    </div>
+    <br>
     </section>
-    
     
     <section>
     <hr size="5px" align="center" color="#00462A" padding="20px">
@@ -60,16 +62,51 @@
     <div class="down_section">  
     <div class="bold_title" style="margin-right:auto;">상품정보</div>
          <form>
-            <button class="btn_right" style="display:inline-block; margin-right:0px;"><a href="/review"> 리뷰보기 </a></button>
-            <button class="btn_right" style="display:inline-block;" onclick="realbuying()"><a> 구매하기 </a></button>   
+            <button type="button" class="btn_right" style="display:inline-block; margin-right:0px;"><a href="/review"> 리뷰보기 </a></button>
+             {% if session['id']==data.seller or data.confirm==1 %}
+                 <button type="button" class="btn_right" disabled style="background-color: #CCCCCC; cursor: not-allowed; 
+                                        color: #fff; cursor: pointer;">구매하기</button>
+             {% else %}
+                <button type="button" class="btn_right" id="modal-open" style="display:inline-block;"><a> 구매하기 </a></button>
+             {% endif %}
         </form>
     </div>
         
     <div id="down_section_box">
         <pre>
-철회로 인해 한번도 안썼습니다..
+{{data.explain}}
         </pre>
     </div>
     </section>
+    
+    <!--팝업 만들기-->
+    <div class="container">
+      <div class="popup-wrap" id="popup">
+        <div class="popup">
+          <div class="popup-head">
+              <span class="head-title">잠깐!</span>
+          </div>
+          <div class="popup-body">
+            <div class="body-content">
+              <div class="body-titlebox">
+                <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="로고1" style="width:25%; margin:10px;" >
+
+              </div>
+                 <br><br><br>
+              <div class="body-contentbox">
+                <p>구매를 확정하시겠습니까?</p>
+              </div>
+            </div>
+          </div>
+          <div class="popup-foot">
+            <span class="pop-btn confirm" id="confirm">예</span>
+            <span class="pop-btn close" id="close">아니오</span>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
+
+
 {% endblock section %}
+

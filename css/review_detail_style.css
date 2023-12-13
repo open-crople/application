@@ -1,0 +1,35 @@
+.rate-label {
+    font-size: 25px; 
+    color: #F0D74A; 
+    margin-top: -5px; 
+}
+
+table.review_detail{
+    width: 80%;
+    margin-left: 10%;
+}
+
+td.review_img{
+    width: 50%;
+    border: 1px solid #00462A;
+}
+
+td.review_text{
+    width: 50%;
+    border: 1px solid #00462A;
+}
+
+button.close{
+    float: right;
+	width: 10%;
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+button.close a{
+    font-size: 30px;
+    text-decoration: none;
+    font-family: none;
+    color: black;
+}

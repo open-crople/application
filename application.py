@@ -17,21 +17,50 @@ def hello():
     return redirect(url_for('view_list'))
 
 
+
+@application.route("/confirm_buying/<name>/", methods=['POST'])
+def confirm_buying(name):
+    # database.py에 정의된 confirm_buying 함수 호출
+    result = DB.confirm_buying(name)
+    return jsonify({'confirm': result})
+
+@application.route("/get_confirm/<name>/", methods=['GET'])
+def get_confirm(name):
+    # 'name'에 해당하는 confirm 값을 가져와서 반환
+    confirm_value = DB.get_confirm_value(name)  # DB에서 confirm 값을 가져오는 함수
+    return jsonify({'confirm': confirm_value})
+
 @application.route("/list")
 def view_list():
     page = request.args.get("page", 0, type=int)
     per_page = 8
-    start_idx = per_page*page
-    end_idx = per_page*(page+1)
+    start_idx = per_page * page
+    end_idx = per_page * (page + 1)
     data = DB.get_items()
+    category = request.args.get("category", "all")
+    data = {key: value for key, value in data.items() if not value['confirm']}
+    try:
+        if category=='all':
+            data=data
+        elif category == 'abc':
+            data = dict(sorted(data.items(), key=lambda x: str(x[0]), reverse=False)) #가나다순
+        elif category == 'highcost':
+            data = dict(sorted(data.items(), key=lambda x: int(x[1]['price']), reverse=True))  # 가격 높은순
+        elif category == 'lowcost':
+            data = dict(sorted(data.items(), key=lambda x: int(x[1]['price']), reverse=False))  # 가격 낮은순
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
     item_count = len(data)
     total = item_count
     data = dict(list(data.items())[start_idx:end_idx])
-
     return render_template(
         "buy_items_list.html", datas=data.items(),
+        current_category=category, 
         limit=per_page, page=page,
-        page_count=int((item_count/per_page)+1), total=item_count)
+        page_count=int((item_count / per_page) + 1), total=item_count
+    )
+
 
 """
 @application.route("/rent")
@@ -59,20 +88,34 @@ def view_rent_list():
     per_page = 8
     start_idx = per_page * page
     end_idx = per_page * (page + 1)
-
+    category = request.args.get("category", "all")
     startdate = request.args.get("period_start")
     enddate = request.args.get("period_end")
 
     data = DB.get_rent_items()
 
-    # Filter items based on the rental period if dates are provided
+    
+
     if startdate and enddate:
         start_date = datetime.strptime(startdate, "%Y-%m-%d").date()
         end_date = datetime.strptime(enddate, "%Y-%m-%d").date()
-        
-        
+
         data = {key: value for key, value in data.items() if start_date >= datetime.strptime(value['period-start'], "%Y-%m-%d").date() and end_date <= datetime.strptime(value['period-end'], "%Y-%m-%d").date()}
-        print(data)
+
+    # Apply sorting after date filtering
+    data = dict(sorted(data.items(), key=lambda x: (x[1]['period-start']), reverse=False))
+    try:
+        if category == 'all':
+            data = data
+        elif category == 'abc':
+            data = dict(sorted(data.items(), key=lambda x: (str(x[0])), reverse=False))  # 가나다순
+        elif category == 'highcost':
+            data = dict(sorted(data.items(), key=lambda x: (int(x[1]['price'])), reverse=True))  # 가격 높은순
+        elif category == 'lowcost':
+            data = dict(sorted(data.items(), key=lambda x: (int(x[1]['price'])), reverse=False))  # 가격 낮은순
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
     item_count = len(data)
     total = item_count
     data = dict(list(data.items())[start_idx:end_idx])
@@ -80,7 +123,9 @@ def view_rent_list():
     return render_template(
         "rent_items_list.html", datas=data.items(),
         limit=per_page, page=page,
+        current_category=category,
         page_count=int((item_count / per_page) + 1), total=item_count)
+
 
 
 @application.route("/rent_items_list")
@@ -159,51 +204,51 @@ def reg_review():
     image_file = request.files["reviewImage"]
     image_file.save("static/images/{}".format(image_file.filename))
     data = request.form
-    DB.reg_review(data, image_file.filename)
+    current_time = datetime.now()
+    DB.reg_review(data, image_file.filename, str(current_time.date()))
     return redirect(url_for('view_review'))
 
 
+
+#review_testing이름을 바꿈
 @application.route("/review")
 def view_review():
     page = request.args.get("page", 0, type=int)
-    per_page = 3  # item count to display per page
-    per_row = 1  # item count to display per row
-    row_count = int(per_page/per_row)
-    start_idx = per_page*page
-    end_idx = per_page*(page+1)
-    data = DB.get_reviews()  #read the table
-    item_counts = len(data)
-    data = dict(list(data.items())[start_idx:end_idx])
-    tot_count = len(data)
-    for i in range(row_count):  #last row
-        if (i == row_count-1) and (tot_count % per_row != 0):
-            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:])
-        else:
-            locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:(i+1)*per_row])
-    return render_template(
-        "review.html",
-        datas=data.items(),
-        row1=locals()['data_0'].items(),
-        row2=locals()['data_1'].items(),
-        row3=locals()['data_2'].items(),
-        limit=per_page, page=page,
-        page_count=int((item_counts/per_page)+1),
-        total=item_counts)
-
-
-
-"""return render_template("/review.html")"""
-
-
-@application.route("/review_testing")
-def view_review_testing():
-    page = request.args.get("page", 0, type=int)
+    sort_by = request.args.get('sort', 'latest')
     per_page = 6  # item count to display per page
     per_row = 2  # item count to display per row
     row_count = int(per_page/per_row)
     start_idx = per_page*page
     end_idx = per_page*(page+1)
     data = DB.get_reviews()  #read the table
+    
+    try:
+        if sort_by == 'latest':
+            data = dict(sorted(data.items(), key=lambda x: x[1]['date'], reverse=True))  # 최신순
+        elif sort_by == 'highest':
+            data = dict(sorted(data.items(), key=lambda x: int(x[1]['rate']), reverse=True))  # 별점 높은순
+        elif sort_by == 'lowest':
+            data = dict(sorted(data.items(), key=lambda x: int(x[1]['rate']), reverse=False))  # 별점 낮은순
+        elif sort_by == 'photo':  
+            per_page = 8
+            start_idx = per_page * page
+            end_idx = per_page * (page + 1)
+            data = dict(sorted(data.items(), key=lambda x: x[1].get('photo', ''), reverse=False))
+            item_counts = len(data)
+            data = dict(list(data.items())[start_idx:end_idx])
+            tot_count = len(data)
+            return render_template(
+            "review_by_photo.html",
+            datas=data.items(),
+            limit=per_page,
+            page=page,
+            current_sort=sort_by,
+            page_count=int((item_counts / per_page) + 1),
+            total=item_counts
+        )
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    
     item_counts = len(data)
     data = dict(list(data.items())[start_idx:end_idx])
     tot_count = len(data)
@@ -213,26 +258,19 @@ def view_review_testing():
         else:
             locals()['data_{}'.format(i)] = dict(list(data.items())[i*per_row:(i+1)*per_row])
     return render_template(
-        "review_testing.html",
-        datas=data.items(),
-        row1=locals()['data_0'].items(),
-        row2=locals()['data_1'].items(),
-        row3=locals()['data_2'].items(),
-        limit=per_page, page=page,
-        page_count=int((item_counts/per_page)+1),
-        total=item_counts)
+            "review.html",
+            datas=data.items(),
+            row1=locals()['data_0'].items(),
+            row2=locals()['data_1'].items(),
+            row3=locals()['data_2'].items(),
+            limit=per_page,
+            page=page,
+            current_sort=sort_by,
+            page_count=int((item_counts / per_page) + 1),
+            total=item_counts
+        )
 
-"""
-return render_template(
-        "review_testing.html",
-        datas=data.items(),
-        row1=locals()['data_0'].items(),
-        row2=locals()['data_1'].items(),
-        row3=locals()['data_2'].items(),
-        limit=per_page, page=page,
-        page_count=int((item_counts/per_page)+1),
-        total=item_counts)
-"""
+
 
 
 @application.route("/view_review_detail/<name>/")
@@ -301,8 +339,8 @@ def check_duplicate_id():
         return jsonify({'status': 'duplicate'})
     else:
         return jsonify({'status': 'ok'})
-    
-    
+
+
 
 @application.route("/buy_detail")
 def view_buy_detail():
@@ -314,7 +352,7 @@ def view_item_detail(name):
     print("###name:", name)
     data = DB.get_item_byname(str(name))
     print("####data:", data)
-    return render_template("/buy_detail_testing.html", name=name, data=data)
+    return render_template("/buy_detail.html", name=name, data=data)
 
 
 @application.route("/rent_detail")

@@ -1,183 +1,121 @@
 {% extends "index.html" %}
-
-
 {% block section %} 
-    <title>Review</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='review_style.css')}}">
-    <style>
-    .rate-label {
-    font-size: 25px; /* Increase the star size */
-    color: #F0D74A; /* Set star color to yellow */
-    margin-top: -5px; /* Move stars upward by adjusting margin */
-}
-    </style>
-    <div id="full">
-      <div id="screen_left">
-        <article><br><br>
-          <h2>판매자 리뷰</h2><br>
-          <table class="table_review" style="background-color:#D9D9D9; text-align:center;">
-            <tr class="center">
-              <th>사용자 총 평점</th>
-              <th width="130px">전체 리뷰 수</th>
-              <th>정보</th>
-            </tr>
-            <tr height="30px">
-              <td class="center"><img src="{{ url_for('static', filename='images/star.png') }}"></td>
-              <td class="center"><img src="{{ url_for('static', filename='images/reviewicon.png') }}"></td>
-              <td style="padding:10px;" rowspan="2">
-                <ul style="list-style:none; text-align:left;">
-                  <li><b>이메일: </b><a href="mailto:example@ewhain.net">example@ewhain.net</a></li>
-                  <li><b>오픈채팅: </b><a href="https://open.kakao.com/o/gDArYOMf">https://open.kakao.com/o/gDArYOMf</a></li>
-                  <li><b>학과: </b>엘텍공과대학 - 컴퓨터공학과</li>
-                </ul>
-              </td>
-            </tr>
-            <tr height="30px" class="center">
-              <td><b>4.8</b>/5</td>
-              <td><b>13</b></td>
-            </tr>
-          </table>
-        </article>
-        <br><br>
-        <!--BEST 리뷰-->
-        <article><br>
-          <h2>BEST 리뷰</h2><br>
-          <table border="1" class="best_review">
-            <tr>
-              <td width="70px" style="text-align:center; vertical-align:top;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
-              <td>
-                <img src="{{ url_for('static', filename='images/realstar.png') }}"><span style="font-size:25px;"><b> 5</b></span><br>
-                아이디명 23.08.23.<br>
-                제목: 채고에요
-              </td>
-              <td rowspan="4"><iframe height="150" width="150"></iframe></td>
-            </tr>
-            <tr>
-              <td style="padding:20px; text-align:left; vertical-align:top;" height="100px" width="500px" colspan="2">상품 상태도 너무 좋고 판매자도 친절합니다!</td>
-            </tr>
-          </table><br>
-          <table border="1" class="best_review">
-            <tr>
-              <td width="70px" style="text-align:center; vertical-align:top;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
-              <td>
-                <img src="{{ url_for('static', filename='images/realstar.png') }}"><span style="font-size:25px;"><b> 5</b></span><br>
-                아이디명 23.08.23.<br>
-                제목: 채고에요
-              </td>
-              <td rowspan="4"><iframe height="150" width="150"></iframe></td>
-            </tr>
-            <tr>
-              <td style="padding:20px; text-align:left; vertical-align:top;" height="100px" width="500px" colspan="2">상품 상태도 너무 좋고 판매자도 친절합니다!</td>
-            </tr>
-          </table>
-        </article>
-      </div>
-      </div>
-      <div id="screen_right">
-        <br><br>
-          {% if total > 0 %}
-        <table>
-          <tr>
-              <td width=250px style="font-size:20px;"><b>리뷰 {{total}}건</b></td>
-            <td style="padding:10px;"><a href=""><b>랭킹순</b></a></td>
-            <td style="padding:10px;">최신순</td>
-            <td style="padding:10px;">평점 높은순</td>
-            <td style="padding:10px;">평점 낮은순</td>
-          </tr>
-        </table><br>
-        <table>
-          <tr>
-            <td><a href="" style="padding:0px 40px 0px 40px; text-decoration-color:black;"><b>전체보기</b></a></td>
-            <td>포토/동영상</td>
-            <td style="padding:0px 40px 0px 40px;" style="padding:0px 40px 0px 40px;">한달사용리뷰</td>
-            <td style="padding:0px 40px 0px 40px;">재구매</td>
-          </tr>
-        </table><br>
-        {% for key, value in row1 %}
-        <table border="1" class="all_review" >
-          <tr>
-            <td width="70px" style="text-align:center; vertical-align:top;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
-            <td>
-                {% set rate_as_int = value.rate | int %}
-                {% for _ in range(rate_as_int) %}
-                    <label class="rate-label" for="rate{{ loop.index }}">★</label>
-                {% endfor %}
-                <span style="font-size:25px;"><b> {{value.rate}}</b></span><br>
-              아이디명: {{value.writer}}<br>
-              제목: {{value.title}}
-            </td>
-              
-            <td rowspan="2" onclick="location.href='/view_review_detail/{{key}}/';"><img height="120" width="120" src="{{ url_for('static', filename='images/' + value.img_path) }}"></td>
-            <td style="padding:0px 10px 0px 10px;" rowspan="2" ><img src="{{ url_for('static', filename='images/thumbsup.png') }}" alt="추천 버튼"><span style="font-size:20px;"><b> 2</b></span></td>
-          </tr>
-          <tr>
-            <td style="padding:20px; text-align:left; vertical-align:top;" height="100px" width="380px" colspan="2">{{value.text}}</td>
-          </tr>
-        </table><br>
-          {% endfor %}
-          
-          {% for key, value in row2 %}
-        <table border="1" class="all_review" >
-          <tr>
-            <td width="70px" style="text-align:center; vertical-align:top;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
-            <td>
-                {% set rate_as_int = value.rate | int %}
-                {% for _ in range(rate_as_int) %}
-                    <label class="rate-label" for="rate{{ loop.index }}">★</label>
-                {% endfor %}
-                <span style="font-size:25px;"><b> {{value.rate}}</b></span><br>
-              아이디명: {{value.writer}}<br>
-              제목: {{value.title}}
-            </td>
-              
-            <td rowspan="2" onclick="location.href='/view_review_detail/{{key}}/';"><img height="120" width="120" src="{{ url_for('static', filename='images/' + value.img_path) }}"></td>
-            <td style="padding:0px 10px 0px 10px;" rowspan="2" ><img src="{{ url_for('static', filename='images/thumbsup.png') }}" alt="추천 버튼"><span style="font-size:20px;"><b> 2</b></span></td>
-          </tr>
-          <tr>
-            <td style="padding:20px; text-align:left; vertical-align:top;" height="100px" width="380px" colspan="2">{{value.text}}</td>
-          </tr>
-        </table><br>
-          {% endfor %}
-          {% for key, value in row3 %}
-        <table border="1" class="all_review" >
-          <tr>
-            <td width="70px" style="text-align:center; vertical-align:top;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
-            <td>
-                {% set rate_as_int = value.rate | int %}
-                {% for _ in range(rate_as_int) %}
-                    <label class="rate-label" for="rate{{ loop.index }}">★</label>
-                {% endfor %}
-                <span style="font-size:25px;"><b> {{value.rate}}</b></span><br>
-              아이디명: {{value.writer}}<br>
-              제목: {{value.title}}
-            </td>
-              
-            <td rowspan="2" onclick="location.href='/view_review_detail/{{key}}/';"><img height="120" width="120" src="{{ url_for('static', filename='images/' + value.img_path) }}"></td>
-            <td style="padding:0px 10px 0px 10px;" rowspan="2" ><img src="{{ url_for('static', filename='images/thumbsup.png') }}" alt="추천 버튼"><span style="font-size:20px;"><b> 2</b></span></td>
-          </tr>
-          <tr>
-            <td style="padding:20px; text-align:left; vertical-align:top;" height="100px" width="380px" colspan="2">{{value.text}}</td>
-          </tr>
-        </table><br>
-          {% endfor %}
-          <div class="page-wrap">
-         <div class="page-nation">
-         <ul>
-         <li>
-         {% for i in range(page_count)%}
-         <a href="{{url_for('view_review', page=i)}}" color="black">{{i+1}}</a>
-         {% endfor %}
-         </li>
-         </ul>
-         </div>
-        </div>
-        {% else %}
-        <p>
-         등록된 리뷰가 없습니다.
-        </p>
-        {% endif %}
+
+<title>Review</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='review_style.css')}}">
+
+<div class="full">
+    <table style="margin: 0 auto">
+        <tr>
+            <!-- 총 리뷰 글 갯수 -->
+            <td width=30% style="font-size:20px;"><b>리뷰 {{total}}건</b></td>
+            <!-- 사진, 별점, 가격 기준 리뷰 재정렬 -->
+            <td><a href="{{ url_for('view_review', page=page, sort='photo') }}" class="sorting {% if current_sort == 'photo' %}sort_active{% endif %}">포토/동영상</a></td>
+            <td><a href="{{ url_for('view_review', page=page, sort='latest') }}" class="sorting {% if current_sort == 'latest' %}sort_active{% endif %}">최신순</a></td>
+            <td><a href="{{ url_for('view_review', page=page, sort='highest') }}" class="sorting {% if current_sort == 'highest' %}sort_active{% endif %}">평점 높은순</a></td>
+            <td><a href="{{ url_for('view_review', page=page, sort='lowest') }}" class="sorting {% if current_sort == 'lowest' %}sort_active{% endif %}">평점 낮은순</a></td>
+        </tr>
+    </table>
 </div>
 
+<div id="screen">
+<br><br><br>
+    <!-- 리뷰 내용 보여줌 2 X 3 -->
+    <div style="display: flex; flex-wrap: wrap;
+                justify-content: center; width:100%; padding-right:10%; padding-left:10%;">    
+        {% if total > 0 %}
+        {% for key, value in row1 %}
+        <div style="width:40% margin:10px;" >
+            <!-- 대여 물건에 대한 별점, 작성자 아이디, 제목, 내용 보여줌 -->
+            <table border="1" class="all_review" style="float:left;" >
+                <tr>
+                    <td width="70px" style="text-align:center; vertical-align:center;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
+                    <td>
+                        {% set rate_as_int = value.rate | int %}
+                        {% for _ in range(rate_as_int) %}
+                        <label class="rate-label" for="rate{{ loop.index }}" style="color:#F0D74A">★</label>
+                        {% endfor %} 
+                        <span style="font-size:25px;"><b> {{value.rate}}</b></span><br>
+                        아이디명: {{value.writer}} <span style="font-size:13px; color: #9f9f9f;">{{value.date}}</span><br>
+                        제목: {{value.title}}
+                    </td>
+                    <td rowspan="2" onclick="location.href='/view_review_detail/{{key}}/';"><img height="120" width="120" style="padding=0px 10px 0px 10px; margin-right:20px;" src="{{ url_for('static', filename='images/' + value.img_path) }}"></td>
+                </tr>
+                <tr>
+                    <td style="padding:20px; text-align:left; vertical-align:top;" height="100px" width="380px" colspan="2"><hr>{{value.text}}</td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        {% endfor %}
+        <br>
+        {% for key, value in row2 %}
+        <div style="width:40% margin:10px;" >
+            <!-- 대여 물건에 대한 별점, 작성자 아이디, 제목, 내용 보여줌 -->
+            <table border="1" class="all_review" style="float:left;" >
+                <tr>
+                    <td width="70px" style="text-align:center; vertical-align:center;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
+                    <td>
+                        {% set rate_as_int = value.rate | int %}
+                        {% for _ in range(rate_as_int) %}
+                        <label class="rate-label" for="rate{{ loop.index }}" style="color:#F0D74A">★</label>
+                        {% endfor %} 
+                        <span style="font-size:25px;"><b> {{value.rate}}</b></span><br>
+                        아이디명: {{value.writer}} <span style="font-size:13px; color: #9f9f9f;">{{value.date}}</span><br>
+                        제목: {{value.title}}
+                    </td>
+                    <td rowspan="2" onclick="location.href='/view_review_detail/{{key}}/';"><img height="120" width="120" style="margin-right:20px;" src="{{ url_for('static', filename='images/' + value.img_path) }}"></td>
+                </tr>
+                <tr>
+                    <td style="padding:20px; text-align:left; vertical-align:top;" height="100px" width="380px" colspan="2"><hr>{{value.text}}</td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        {% endfor %}
+        <br>
+        {% for key, value in row3 %}
+        <div style="width:40% margin:10px;" >
+            <!-- 대여 물건에 대한 별점, 작성자 아이디, 제목, 내용 보여줌 -->
+            <table border="1" class="all_review" style="float:left;" >
+                <tr>
+                    <td width="70px" style="text-align:center; vertical-align:center;"><img src="{{ url_for('static', filename='images/user.png') }}"></td>
+                    <td>
+                        {% set rate_as_int = value.rate | int %}
+                        {% for _ in range(rate_as_int) %}
+                        <label class="rate-label" for="rate{{ loop.index }}" style="color:#F0D74A">★</label>
+                        {% endfor %} 
+                        <span style="font-size:25px;"><b> {{value.rate}}</b></span><br>
+                        아이디명: {{value.writer}} <span style="font-size:13px; color: #9f9f9f;">{{value.date}}</span><br>
+                        제목: {{value.title}}
+                    </td>
+                    <td rowspan="2" onclick="location.href='/view_review_detail/{{key}}/';"><img height="120" width="120" style="margin-right:20px;" src="{{ url_for('static', filename='images/' + value.img_path) }}"></td>
+                </tr>
+                <tr>
+                    <td style="padding:20px; text-align:left; vertical-align:top;" height="100px" width="380px" colspan="2"><hr>{{value.text}}</td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+    <!-- 페이지네이션 -->
+    <div class="page-wrap">
+        <div class="page-nation">
+            <ul>
+                <li>
+                    {% for i in range(page_count)%}
+                    <a href="{{url_for('view_review', page=i, sort=current_sort)}}" color="black" {% if page==i %}class="active"{% endif %}>{{i+1}}</a>
+                    {% endfor %}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 등록된 리뷰가 하나도 없는 경우 -->
+    {% else %}
+    <p>
+        등록된 리뷰가 없습니다.
+    </p>
+    {% endif %}
+</div>
 {% endblock section %}
-
-  

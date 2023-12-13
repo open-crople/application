@@ -1,62 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-<link rel="stylesheet" href="../static/login.css">
-  <title>login_page</title>
-     
-
-
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../static/login.css">
+    <script src="JavaScript/login.js"></script>
+    <title>login_page</title>
 </head>
 <body>
-  <div class="loginblock">
-      <!--교수님꺼 보고 추가함-->
-       {% with mesg = get_flashed_messages() %}
-      {% if mesg != [] %}
+    <div class="loginblock">
+        {% with mesg = get_flashed_messages() %}
+        {% if mesg != [] %}
         <script>alert("{{ mesg[0] }}")</script>
-      {% endif %}
-    {% endwith %}
-    <form action="/login_confirm" method="POST"> <!--action#은 교수님꺼 보고 추가함-->
-      <div class="logoblock"><a href="/">
-          <img src="../static/images/logo.png" class="logo-image"></a></div>
-      <div class="input id">
-        <img src="../static/images/userid.png"class="image">
-        <input type="text" class="text-field" name="id" placeholder="아이디" required>
-        <img src="../static/images/eyeopen.png" style="display: hidden; opacity: 0;"class="image">
-        <div class="div-block"></div>
-      </div>
-      <div class="input password">
-        <img src="../static/images/userpassword.png"   class="image"> 
-        <input type="password" class="text-field" placeholder="비밀번호" name="pw" id="password" required>
-        <img src="../static/images/eyeopen.png" onclick="togglePasswordVisibility()" class="eyeblock image">
-      </div>
-      <div class="loginsubmit">
-        <input type="submit" value="로그인"  class="submit-button">
-      </div>
-      <div class="loginbottom">
-        <p class="text-block">아이디 찾기</p>
-        <p class="text-block">비밀번호 찾기</p>
-        <p class="text-block"><a href="/signup" style=" color: black; text-decoration: none;">회원가입</a></p>
-      </div>
-    </form>
-  </div>
-    <script>
-        function togglePasswordVisibility() {
-            var passwordField = document.getElementById('password');
-            var eyeIcons = document.querySelectorAll('.eyeblock');
-
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                eyeIcons.forEach(function (icon) {
-                    icon.src = '../static/images/eyeopen.png';
-                });
-            } else {
-                passwordField.type = 'password';
-                eyeIcons.forEach(function (icon) {
-                    icon.src = '../static/images/eyeblock.png';
-                });
-            }
-        }
-    </script>
+        {% endif %}
+        {% endwith %}
+        <form action="/login_confirm" method="POST">
+            <div class="logoblock"><a href="/">
+                <img src="../static/images/logo2.png" class="logo-image">
+            </a></div>
+            <!--아이디 입력 박스-->
+            <div class="input id">
+                <img src="../static/images/userid.png" class="image">
+                <input type="text" class="text-field" name="id" placeholder="아이디" required>
+                <img src="../static/images/eyeopen.png" style="display: hidden; opacity: 0;" class="image">
+                <div class="div-block"></div>
+            </div>
+            <!--비밀번호 입력 박스-->
+            <div class="input password">
+                <img src="../static/images/userpassword.png" class="image"> 
+                <input type="password" class="text-field" placeholder="비밀번호" name="pw" id="password" required>
+                <img src="../static/images/eyeopen.png" onclick="togglePasswordVisibility()" class="eyeblock image">
+            </div>
+            <!--제출 버튼 박스-->
+            <div class="loginsubmit">
+                <input type="submit" value="로그인" class="submit-button">
+            </div>
+            <!--하단 링크-->
+            <div class="loginbottom">
+                <p class="text-block">아이디 찾기</p>
+                <p class="text-block">비밀번호 찾기</p>
+                <p class="text-block"><a href="/signup">회원가입</a></p>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

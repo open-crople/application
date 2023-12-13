@@ -1,1 +1,111 @@
+li a:hover {
+    color: #6F4F28;
+}
+
+.navbar__menu li a.active {
+    color: #6F4F28 !important;
+}
+
+.navbar {
+    border-bottom: 2px solid #00462A;  
+    display: flex;
+    color: #00462A;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.navbar__menu {
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    margin-left:-20%;
+}
+
+.navbar__menu li {
+    margin-right: 20px;
+}
+
+.navbar__menu li:last-child {
+    margin-right: 0;
+}
+
+.navbar__menu a {
+    text-decoration: none; 
+    color: #00462A;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.navbar__search input[type="text"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.navbar__search button[type="submit"] {
+    background-color: #00462A;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.centered-table {
+    text-align: center;
+}
+
+.buy_items_table {
+    border: 1px solid #ccc;
+    margin: 0 auto;
+}
+
+.buy_items_table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.horizontal-container img {
+    margin-right: 10px; 
+}
+
+.horizontal-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; 
+    text-align: center;
+    margin: 30px auto; 
+}
+
+.horizontal-container form button[type="button"] {
+    width: 120px; 
+    height: 40px; 
+    background-color: #00462A;
+    color: white;
+}
+
+.navbar__logo1 a {
+    font-size: 20px; 
+}
+
+.navbar__menu a {
+    font-size: 20px; 
+    padding: 10px 20px; 
+}
+
+.navbar__search input[type="text"] {
+    width: 300px; 
+    height: 40px; 
+    padding: 10px; 
+    font-size: 18px; 
+}
+
+.navbar__search button[type="submit"] {
+    width: 120px; 
+    height: 40px; 
+    padding: 10px 20px; 
+    font-size: 18px; 
+}
 

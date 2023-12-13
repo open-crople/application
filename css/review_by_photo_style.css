@@ -1,29 +1,12 @@
 body {
+    font-family: Arial, sans-serif;
     text-align: center;
 }
-
-.date-selection {
-    display: flex;
-    justify-content:left;
-    margin-left: 150px;
-}
-
-.borrowingDate {
-    margin-left: 30px;
-    margin-right: 5px;
-}
-
-label {
-    margin-right:5px;
-    margin-left:5px;
-}
-
 .product-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
-
 .product {
     width: 18%;
     height:150px;
@@ -34,24 +17,22 @@ label {
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
-
 .product img {
     max-width: 100%;
     height: 100%;
 }
-
 .product-name {
     font-size: 18px;
     font-weight: bold;
     margin: 10px 0;
 }
-
 .addProductButton {
-    display: inline-block;
+    float: right;
+    display:flex;
     background-color: #00462A;
     color: #fff;
     padding: 10px 20px;
-    margin: 0 80px;
+    margin-right: 10%;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -59,17 +40,6 @@ label {
     text-align: center;
     text-decoration: none;
     transition: background-color 0.3s;
-}
-
-.pagenationAndButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.pagenation img {
-    display: block;
-    margin: 0 auto;
 }
 
 .addProductButton:hover {
@@ -84,13 +54,11 @@ label {
 .page-nation li{
      list-style: none;
 }
-
 .page-wrap{
      text-align: center;
      font-size: 0;
      
 }
-
 .page-nation{
      display: inline-block;
      justify-content: center;
@@ -114,18 +82,41 @@ label {
      font-weight:bold;
 }
 
-#search{
-    margin-left: 10px; 
-    border-radius: 5px; 
-    background-color: #00462A; 
-    color: white; 
-    display: right; 
-    align-items: center; 
-    font-size: 15px; 
-    width: 70px; 
-    height: 30px; 
-    justify-content: center; 
+
+.full {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align:center;
+}
+
+.menu {
     text-decoration: none;
-    transition: background-color 0.3s;
-    box-decoration-break: clone;
+    font-size: 40px;
+} /* 바디 구성 */
+.table_review {
+    padding: 20px;
+}
+.all_review > td,
+th {
+    border: none;
+
+} 
+
+
+.rate-label {
+    color: #F0D74A; /* Change the star color to yellow */
+}
+
+.sort_active {
+    color: #6F4F28;
+    font-weight:bold;
+
+    text-decoration: underline;
+      
+}
+.sorting{
+padding:10px; 
+text-decoration:none;
+    color: black;
 }
