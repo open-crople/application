@@ -1,4 +1,3 @@
-/* Styles for mypage table */
 .mypage-table:not(.profile-table) {
     width: 80%;
     border-collapse: collapse;
@@ -161,3 +160,4 @@
 .review-button:not([disabled]) {
   background-color: #00462A;
 }
+
