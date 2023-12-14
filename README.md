@@ -29,7 +29,7 @@ https://ewhacroplemarket-website.run.goorm.io/list
 <br>
 
 
-## 기술 블로그
+## 크로플's Notion
 
 https://happy-polonium-765.notion.site/fda1ce8556cf41c68aac749818c59046
 <br>
