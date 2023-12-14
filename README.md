@@ -8,6 +8,8 @@
 
 > 이화여자대학교 컴퓨터공학전공 오픈SW플랫폼 : 2023-9~2023-12
 
+<br>
+
 ### 기술 블로그
 
 https://happy-polonium-765.notion.site/fda1ce8556cf41c68aac749818c59046
